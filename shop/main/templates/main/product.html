@@ -24,7 +24,7 @@
                     </li>
                     {% endfor %}
                     <li class="menu_item">
-                        <a href="{% url 'faq' %}">FAQ</a>
+                        <a href="">FAQ</a>
                     </li>
                 </ul>
             </div>
@@ -57,7 +57,6 @@
         <script src="{% static 'main/js/main.js' %}"></script>
     </header>
     <main>
-        {% for product in goods %}
         <div class="content">
             <ul class="content__items">
                 <li class="items">
@@ -82,12 +81,10 @@
                             {% endif %}
 
                         <p>id товара:{{product.display_id}}</p>
-                        <a href="{% url 'product' product.slug %}" style="color:black">ПОДРОБНЕЕ</a>
                     </div>
                 </li>
             </ul>
         </div>
-        {% endfor %}
     </main>
     <footer>
         <p>МОЯ КОМПАНИЯ</p>

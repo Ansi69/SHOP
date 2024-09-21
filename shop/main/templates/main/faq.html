@@ -18,42 +18,19 @@
         <div class="menu">
             <div class="menu1">
                 <ul class="menu__nav">
+                    {% for category in categories %}
                     <li class="menu_item">
-                        <a href="">КРОСЫ</a>
+                        <a href="{% url 'category' category.slug %}">{{category.name}}</a>
                     </li>
-                    <li class="menu_item">
-                        <a href="">ФУТБОЛКИ</a>
-                    </li>
-                    <li class="menu_item">
-                        <a href="">ХУДИ</a>
-                    </li>
-                    <li class="menu_item">
-                        <a href="">ШОРТЫ</a>
-                    </li>
-                    <li class="menu_item">
-                        <a href="">КЕПКИ</a>
-                    </li>
-                    <li class="menu_item">
-                        <a href="">ТРУСЫ</a>
-                    </li>
-                    <li class="menu_item">
-                        <a href="">ШТАНЫ</a>
-                    </li>
-                    <li class="menu_item">
-                        <a href="">РЮКЗАКИ</a>
-                    </li>
+                    {% endfor %}
                     <li class="menu_item">
                         <a href="">FAQ</a>
                     </li>
-                    
                 </ul>
             </div>
         </div>
         <div class="options">
             <ul class="options__nav">
-                <li class="options__item">
-                    <a href=""><img src="{% static 'main/img/lan.svg' %}" width="30" height="30"></a>
-                </li>
                 <li class="options__item">
                     <a href=""><img src="{% static 'main/img/cart.svg' %}" width="30" height="30"></a>
                 </li>
