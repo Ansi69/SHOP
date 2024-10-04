@@ -1,0 +1,86 @@
+[
+    {
+        "model": "main.products",
+        "pk": 1,
+        "fields": {
+            "product_name": "МЕГА МАЙКА",
+            "description": "ТОПОВАЯ МАЙКА",
+            "img": "images/1_594q6qI.jpg",
+            "product_price": "999.00",
+            "discount": "10.00",
+            "quantity": 47,
+            "slug": "mega-majka",
+            "category": 5
+        }
+    },
+    {
+        "model": "main.products",
+        "pk": 2,
+        "fields": {
+            "product_name": "КРУТЫЕ ШТАНЫ",
+            "description": "МЕГА ШТАНЫ",
+            "img": "images/2_i2p220k.jpg",
+            "product_price": "4999.99",
+            "discount": "35.00",
+            "quantity": 54,
+            "slug": "krutye-shtany",
+            "category": 3
+        }
+    },
+    {
+        "model": "main.products",
+        "pk": 3,
+        "fields": {
+            "product_name": "ТОПОВЫЕ ТРУСЫ",
+            "description": "БОЛЬШИЕ ТРУСЫ",
+            "img": "images/6_fJvreDj.jpg",
+            "product_price": "1999.99",
+            "discount": "0.00",
+            "quantity": 99,
+            "slug": "topovye-trusy",
+            "category": 6
+        }
+    },
+    {
+        "model": "main.products",
+        "pk": 4,
+        "fields": {
+            "product_name": "ХУДИ",
+            "description": "ТОП",
+            "img": "images/3_TJXWLer.jpg",
+            "product_price": "3999.99",
+            "discount": "0.00",
+            "quantity": 415,
+            "slug": "hudi",
+            "category": 2
+        }
+    },
+    {
+        "model": "main.products",
+        "pk": 5,
+        "fields": {
+            "product_name": "ХУДИ2.0",
+            "description": "ОГО",
+            "img": "images/4_BqhEDGr.jpg",
+            "product_price": "9999.99",
+            "discount": "0.00",
+            "quantity": 3,
+            "slug": "hudi20",
+            "category": 2
+        }
+    },
+    {
+        "model": "main.products",
+        "pk": 6,
+        "fields": {
+            "product_name": "КРУТАЯ СУПЕР КЕПКА",
+            "description": "КЕПКАААА",
+            "img": "images/5_LRIBiFw.jpg",
+            "product_price": "499.99",
+            "discount": "0.00",
+            "quantity": 426,
+            "slug": "krutaya-super-kepka",
+            "category": 10
+        }
+    }
+]

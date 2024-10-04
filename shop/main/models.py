@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 class categories(models.Model):
     name = models.CharField('Категория', max_length=100, unique=True)
@@ -27,7 +28,7 @@ class products(models.Model):
         return self.product_name
     
     def display_id(self):
-        return f"{self.id:05}"
+        return f"{self.id:03}"
     
     def sell_price(self):
         if self.discount:
@@ -39,3 +40,16 @@ class products(models.Model):
         db_table = 'products'
         verbose_name = 'Товар'
         verbose_name_plural = 'Товары'
+
+
+class User(AbstractUser):
+    image = models.ImageField('Аватар', upload_to='images', blank=True, null=True)
+    phone_number = models.CharField(max_length=10, blank=True, null=True)
+
+    def __str__(self):
+        return self.username
+    
+    class Meta:
+        db_table = 'user'
+        verbose_name = 'Пользователя'
+        verbose_name_plural = 'Пользователи'

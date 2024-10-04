@@ -1,0 +1,88 @@
+{% load static %}
+{% load carts_tags %}
+
+{% user_carts request as carts %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{% static 'main/css/home.css' %}">
+</head>
+<body>
+    <header class="header">
+        <div class="home">
+            <a href="{% url 'home' %}">
+                <img src="{% static 'main/img/cart.svg' %}" width="30" height="30">
+            </a>
+        </div>
+        <div class="menu">
+            <div class="menu1">
+                <ul class="menu__nav">
+                    {% for category in categories %}
+                    <li class="menu_item">
+                        <a href="{% url 'category' category.slug %}" >{{category.name}}</a>
+                    </li>
+                    {% endfor %}
+                    <li class="menu_item">
+                        <a href="{% url 'faq' %}">FAQ</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="options">
+            <ul class="options__nav">
+                {% if not user.is_authenticated %}
+                    <li class="options__item">
+                        {% block loginBtn %}{% endblock  %}
+                    </li>     
+                {% else %}
+                    {% if not order %}
+                        <li class="options__item">
+                            {% block cartBtn %}{% endblock  %}
+                        </li>
+                    {% endif %}
+                    <li class="options__item">
+                        <a href="{% url 'logout' %}"><img src="{% static 'main/img/exit.svg' %}" width="30" height="30"></a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+        <form id="cart_items_container" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeCart()">×</span>
+                    <h2>Корзина</h2>
+                    <div id="cart_items">
+                        {% include "carts/includes/included_cart.html" %}
+                    </div>
+            </div>
+        </form>
+        
+        {% block login %}{% endblock  %}
+        <script src="{% static 'main/js/jquery/jquery-3.7.1.min.js' %}"></script>
+        <script src="{% static 'main/js/jquery-ajax.js' %}"></script>
+        <script src="{% static 'main/js/main.js' %}"></script>
+        <script src="{% static 'main/js/cart.js' %}"></script>
+    </header>
+    <main>
+        {% block content %}{% endblock  %}
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.tags == 'success' %}
+                    <div id="jq-notification" class="message">
+                        {{ message }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <div id="jq-notification" class="message"></div>
+        {% endif %}
+    </main>
+    <footer>
+        <p>МОЯ КОМПАНИЯ</p>
+    </footer>
+</body>
+</html>
+

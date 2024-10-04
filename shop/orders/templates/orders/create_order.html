@@ -1,0 +1,129 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% load carts_tags %}
+
+{% block cartBtn %}
+    <a class="cartBtn" onclick="showCart()">
+        <img src="{% static 'main/img/cart.svg' %}" width="30" height="30">
+    </a>
+    <span id="goods-in-cart-count">{{ carts.total_quantity }}</span>
+{% endblock  %}
+
+
+{% block loginBtn %}
+    <button onclick="showLogin()" class="regBtn">
+    <img src="{% static 'main/img/profile.svg' %}" width="30" height="30">
+    </button>
+{% endblock  %}
+
+{% block login %}
+    <form method="post" id="loginModal" class="modal">
+        <div class="modal-content">
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+            <p>{{ form.non_field_errors }}</p>
+            {% endif %}
+            <span class="close" onclick="closeLogin()">×</span>
+            <h2>Вход в аккаунт</h2>
+            <label for="id_username" class="form-label">Имя пользователя</label>
+            <input type="text" class="form-control"
+            value="{% if form.username.value %}{{ form.username.value }}{% endif %}" 
+            name="username" id="id_username"
+            placeholder="Имя пользователя"
+            required>
+            <label for="id_password" class="form-label">Пароль</label>
+            <input type="password" class="form-control" name="password" placeholder="Пароль" id="id_username" required>
+            <button>Войти</button>
+            <p>Нет аккаунта? <a href="{% url 'registration' %}" style=color:black;>Зарегистрироваться</a></p>
+        </div>
+    </form>
+{% endblock  %}
+{% block content %}
+    <h3 class="text-center mb-4">Выбранные товары</h3>
+    <div id="cart_items">
+        {% user_carts request as carts %}
+
+        {% include "carts/includes/included_cart.html" %}
+    </div>
+    <div class="container">
+    <h3 class="text-center">Детали заказа</h3>
+        <form action="{% url "orders:create_order" %}" method="post" id="create_order_form">
+            {% csrf_token %}
+            <div>
+                <div>
+                    <label for="id_first_name" class="form-label">Имя*:</label>
+                    <input type="text" class="form-control" id="id_first_name"
+                        value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}"
+                        name="first_name" required>
+                    {% if form.first_name.errors %}
+                        <div>{{form.first_name.errors}}</div>
+                    {% endif %}
+                </div>
+                <div>
+                    <label for="id_last_name" class="form-label">Фамилия*:</label>
+                    <input type="text" class="form-control" id="id_last_name" name="last_name"
+                    value="{% if form.last_name.value %}{{ form.last_name.value }}{% endif %}"
+                    required>
+                    {% if form.last_name.errors %}
+                        <div>{{form.last_name.errors}}</div>
+                    {% endif %}
+                </div>
+                <div>
+                    <label for="id_phone_number" class="form-label">Номер телефона*:</label>
+                    <input type="text" class="form-control" id="id_phone_number" name="phone_number"
+                        value="{% if form.phone_number.value %}{{ form.phone_number.value }}{% endif %}"
+                        placeholder="(000) 000-0000"
+                        required>
+                    {% if form.phone_number.errors %}
+                        <div>{{form.phone_number.errors}}</div>
+                    {% endif %}
+                    <div style="display: none" id="phone_number_error">Неверный формат номера</div>
+                </div>
+                <div>
+                    <label for="delivery" class="form-label">Способ доставки: </label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="requires_delivery"
+                            id="id_requires_delivery" value="1" checked>
+                        <label class="form-check-label" for="id_requires_delivery">Нужна
+                            доставка</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="requires_delivery"
+                            id="id_requires_delivery" value="0">
+                        <label class="form-check-label" for="id_requires_delivery">Самовывоз</label>
+                    </div>
+                </div>
+                <div class="mb-3" id="deliveryAddressField">
+                    <label for="id_delivery_address" class="form-label">Адрес
+                        доставки*:</label>
+                    <textarea class="form-control" id="id_delivery_address"
+                        value="{% if form.delivery_address.value %}{{ form.delivery_address.value }}{% endif %}"
+                        name="delivery_address" rows="2"></textarea>
+                    {% if form.delivery_address.errors %}
+                        <div>{{form.delivery_address.errors}}</div>
+                    {% endif %}
+                </div>
+                <div>
+                    <label class="form-label">Способ оплаты: </label>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="payment_on_get"
+                            id="id_payment_on_get" value="0" checked>
+                        <label class="form-check-label" for="id_payment_on_get">Оплата
+                            картой</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="payment_on_get"
+                            id="id_payment_on_get" value="1">
+                        <label class="form-check-label" for="id_payment_on_get">Наличными/картой
+                            при плучении</label>
+                        {% if form.payment_on_get.errors %}
+                            <div>{{form.payment_on_get.errors}}</div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-dark">Оформить заказ</button>
+        </form>
+    </div>
+{% endblock  %}
+

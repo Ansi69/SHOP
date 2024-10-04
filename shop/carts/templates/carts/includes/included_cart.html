@@ -1,0 +1,29 @@
+{% load static %}
+{% load carts_tags %}
+
+{% user_carts request as carts %}
+
+{% for cart in carts %}
+    <p>{{ cart.product.product_name }}</p>
+    <p>{{ cart.quantity }} шт.* {{ cart.product.sell_price }} = {{ cart.products_price }} руб. </p>
+    {% if not order %}
+        <a href="{% url "cart:cart_remove" %}"
+        class="remove-from-cart"
+        data-cart-id="{{ cart.id }}">
+            {% csrf_token %}
+            <img src="{% static 'main/img/delete.svg' %}" width="30" height="30">
+        </a>
+    {% else %}
+    {% endif %}
+{% endfor %}
+{% if carts and not order %}
+    <h2>Итого: {{ carts.total_quantity }} товаров на сумму {{ carts.total_price }} руб.</h2>
+    <a href="{% url 'orders:create_order' %}" style=color:black;>Оформить заказ</a>
+    <a href="{% url 'orders:order' %}" style=color:black;>Мои заказы</a>
+{% elif carts and order %}
+    <h2>Итого: {{ carts.total_quantity }} товаров на сумму {{ carts.total_price }} руб.</h2>
+{% else %}
+    <h2>Корзина пуста-_-</h2>
+    <a href="{% url 'orders:order' %}" style=color:black;>Мои заказы</a>
+{% endif %}
+

@@ -1,17 +1,25 @@
-var modal = document.getElementById("registerModal");
-var btn = document.getElementById("registerBtn");
-var span = document.getElementsByClassName("close")[0];
-
-btn.onclick = function() {
-    modal.style.display = "block";
+function showLogin() {
+    document.getElementById('loginModal').style.display = 'block';
 }
 
-span.onclick = function() {
-    modal.style.display = "none";
+function closeLogin() {
+    document.getElementById('loginModal').style.display = 'none';
+}
+
+function showRegister() {
+    document.getElementById('registerModal').style.display = 'block';
+    document.getElementById('loginModal').style.display = 'none';
+}
+
+function closeRegister() {
+    document.getElementById('registerModal').style.display = 'none';
 }
 
 window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
+    if (event.target == loginModal) {
+        loginModal.style.display = "none";
+    }
+    if (event.target == registerModal) {
+        registerModal.style.display = "none";
     }
 }

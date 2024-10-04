@@ -1,97 +1,56 @@
+{% extends "main/base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}</title>
-    <link rel="stylesheet" href="{% static 'main/css/home.css' %}">
-    <script src="{% static 'myapp/js/main.js' %}"></script>
-</head>
-<body>
-    <header class="header">
-        <div class="home">
-            <a href="{% url 'home' %}">
-                <img src="{% static 'main/img/cart.svg' %}" width="30" height="30">
-            </a>
-        </div>
-        <div class="menu">
-            <div class="menu1">
-                <ul class="menu__nav">
-                    {% for category in categories %}
-                    <li class="menu_item">
-                        <a href="{% url 'category' category.slug %}">{{category.name}}</a>
-                    </li>
-                    {% endfor %}
-                    <li class="menu_item">
-                        <a href="{% url 'faq' %}">FAQ</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="options">
-            <ul class="options__nav">
-                <li class="options__item">
-                    <a href=""><img src="{% static 'main/img/cart.svg' %}" width="30" height="30"></a>
-                </li>
-                <li class="options__item">
-                    <button id="registerBtn" class="regBtn"class="button-class"><img src="{% static 'main/img/profile.svg' %}" width="30" height="30"></button>
-                </li>
-            </ul>
-        </div>
-        <div id="registerModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Регистрация</h2>
-                <form>
-                    <label for="username">Имя пользователя:</label>
-                    <input type="text" id="username" required><br>
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" required><br>
-                    <label for="password">Пароль:</label>
-                    <input type="password" id="password" required><br>
-                    <button type="submit">Подтвердить</button>
-                </form>
-            </div>
-        </div>
-        <script src="{% static 'main/js/main.js' %}"></script>
-    </header>
-    <main>
-        {% for product in goods %}
-        <div class="content">
-            <ul class="content__items">
-                <li class="items">
-                    <div class="products">
-                        {% if product.img %}
-                            <img src="{{ product.img.url }}" alt="">
-                        {% else %}
-                            <img src="{% static 'main/img/cart.svg' %}" width="30" height="30" alt="">
-                        {% endif %}
-                        <p>{{product.product_name}}</p>
-                        <hr>
-                        <p>{{product.description}}</p>
-                        <hr>
-                        <p>Осталось:{{product.quantity}}</p>
 
-                            {% if product.discount %}
-                                <p><s>{{product.product_price}}</s>  $</p>
-                                <p><strong>{{ product.sell_price }}  $</strong></p>
-                                <p>Скидка:{{product.discount}}%</p>
-                            {% else %}
-                                <p>{{product.product_price}} $</p>
-                            {% endif %}
+{% block cartBtn %}
+    <button onclick="showCart()" class="cartBtn">
+        <img src="{% static 'main/img/cart.svg' %}" width="30" height="30">
+    </button>
+    <span id="goods-in-cart-count">{{ carts.total_quantity }}</span>
+{% endblock  %}
 
-                        <p>id товара:{{product.display_id}}</p>
-                        <a href="{% url 'product' product.slug %}" style="color:black">ПОДРОБНЕЕ</a>
-                    </div>
-                </li>
-            </ul>
+
+{% block loginBtn %}
+    <button onclick="showLogin()" class="regBtn">
+    <img src="{% static 'main/img/profile.svg' %}" width="30" height="30">
+    </button>
+{% endblock  %}
+
+
+{% block cart %}
+    <form id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeCart()">×</span>
+            <h2>cart</h2>
+            <a href="{% url 'order' %}" style=color:black;>Оформить заказ</a>
         </div>
-        {% endfor %}
-    </main>
-    <footer>
-        <p>МОЯ КОМПАНИЯ</p>
-    </footer>
-</body>
-</html>
+    </form>
+{% endblock  %}
+
+
+{% block login %}
+    <form method="post" id="loginModal" class="modal">
+        <div class="modal-content">
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+            <p>{{ form.non_field_errors }}</p>
+            {% endif %}
+            <span class="close" onclick="closeLogin()">×</span>
+            <h2>Вход в аккаунт</h2>
+            <label for="id_username" class="form-label">Имя пользователя</label>
+            <input type="text" class="form-control"
+            value="{% if form.username.value %}{{ form.username.value }}{% endif %}" 
+            name="username" id="id_username"
+            placeholder="Имя пользователя"
+            required>
+            <label for="id_password" class="form-label">Пароль</label>
+            <input type="password" class="form-control" name="password" placeholder="Пароль" id="id_username" required>
+            <button>Войти</button>
+            <p>Нет аккаунта? <a href="{% url 'registration' %}" style=color:black;>Зарегистрироваться</a></p>
+        </div>
+    </form>
+{% endblock  %}
+
+{% block content %}
+    main
+{% endblock  %}
 
