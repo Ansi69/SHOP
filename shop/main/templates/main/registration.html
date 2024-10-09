@@ -2,14 +2,14 @@
 {% load static %}
 
 {% block content %}
-    <form method="post" id="registerModal" class="modal1">
+    <form method="post" id="registerModal">
         <div class="modal-content">
             {% csrf_token %}
             {% if form.non_field_errors %}
             <p>{{ form.non_field_errors }}</p>
             {% endif %}
             <span class="close" onclick="closeRegister()">×</span>
-            <h2>Регистрация</h2>
+            <div class="headName">Регистрация</div>
             <label for="id_username" class="form-label">Имя пользователя</label>
             <input type="text" class="form-control" id="id_username"
                 value="{% if form.username.value %}{{ form.username.value }}{% endif %}" 
@@ -37,7 +37,7 @@
                 <div>{{ form.password2.errors }}</div>
                 {% endif %}
                 
-            <button>Зарегистрироваться</button>
+            <button class="enterLogin">Продолжить</button>
         </div>
     </form>
 {% endblock  %}

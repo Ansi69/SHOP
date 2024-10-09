@@ -3,13 +3,13 @@
 
 {% block cartBtn %}
     <button onclick="showCart()" class="cartBtn">
-        <img src="{% static 'main/img/cart.svg' %}" width="30" height="30">
+        <img src="{% static 'main/img/cart.svg' %}">
     </button>
     <span id="goods-in-cart-count">{{ carts.total_quantity }}</span>
 {% endblock  %}
 {% block loginBtn %}
-    <button onclick="showLogin()" class="regBtn">
-    <img src="{% static 'main/img/profile.svg' %}" width="30" height="30">
+    <button onclick="showLogin()" class="loginBtn">
+    <img src="{% static 'main/img/profile.svg' %}">
     </button>
 {% endblock  %}
 {% block cart %}
@@ -24,12 +24,8 @@
 {% block login %}
     <form method="post" id="loginModal" class="modal">
         <div class="modal-content">
-            {% csrf_token %}
-            {% if form.non_field_errors %}
-            <p>{{ form.non_field_errors }}</p>
-            {% endif %}
-            <span class="close" onclick="closeLogin()">×</span>
-            <h2>Вход в аккаунт</h2>
+            <div class="close" onclick="closeLogin()">×</div>
+            <div class="headName">Вход в аккаунт</div>
             <label for="id_username" class="form-label">Имя пользователя</label>
             <input type="text" class="form-control"
             value="{% if form.username.value %}{{ form.username.value }}{% endif %}" 
@@ -38,8 +34,12 @@
             required>
             <label for="id_password" class="form-label">Пароль</label>
             <input type="password" class="form-control" name="password" placeholder="Пароль" id="id_username" required>
-            <button>Войти</button>
-            <p>Нет аккаунта? <a href="{% url 'registration' %}" style=color:black;>Зарегистрироваться</a></p>
+            <button class="enterLogin">Войти</button>
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+            <p>{{ form.non_field_errors }}</p>
+            {% endif %}
+            <div id="downRegistr">Нет аккаунта? <a href="{% url 'registration' %}";>Зарегистрироваться</a></div>
         </div>
     </form>
 {% endblock  %}

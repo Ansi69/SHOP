@@ -4,26 +4,28 @@
 {% user_carts request as carts %}
 
 {% for cart in carts %}
-    <p>{{ cart.product.product_name }}</p>
-    <p>{{ cart.quantity }} шт.* {{ cart.product.sell_price }} = {{ cart.products_price }} руб. </p>
+<div class="productArea">
+    <div class="productName">{{ cart.product.product_name }}</div>
+    <div class="productCountAndPrice">{{ cart.quantity }} шт.* {{ cart.product.sell_price }} = {{ cart.products_price }} руб. </div>
     {% if not order %}
         <a href="{% url "cart:cart_remove" %}"
         class="remove-from-cart"
         data-cart-id="{{ cart.id }}">
             {% csrf_token %}
-            <img src="{% static 'main/img/delete.svg' %}" width="30" height="30">
+            <img src="{% static 'main/img/delete.svg' %}">
         </a>
     {% else %}
     {% endif %}
+</div>
 {% endfor %}
 {% if carts and not order %}
-    <h2>Итого: {{ carts.total_quantity }} товаров на сумму {{ carts.total_price }} руб.</h2>
-    <a href="{% url 'orders:create_order' %}" style=color:black;>Оформить заказ</a>
-    <a href="{% url 'orders:order' %}" style=color:black;>Мои заказы</a>
+    <div class="totalPrice"><span>Итого:</span> {{ carts.total_quantity }} товаров на сумму {{ carts.total_price }} руб.</div>
+    <a class="placeAnOrder" href="{% url 'orders:create_order' %}" style=color:red;>Оформить заказ</a>
+    <a class="myOrders" href="{% url 'orders:order' %}" style=color:red;>Мои заказы</a>
 {% elif carts and order %}
-    <h2>Итого: {{ carts.total_quantity }} товаров на сумму {{ carts.total_price }} руб.</h2>
+    <div class="totalPrice">Итого: {{ carts.total_quantity }} товаров на сумму {{ carts.total_price }} руб.</div>
 {% else %}
-    <h2>Корзина пуста-_-</h2>
-    <a href="{% url 'orders:order' %}" style=color:black;>Мои заказы</a>
+    <div>Корзина пуста-_-</div>
+    <a class="myOrders" href="{% url 'orders:order' %}" style=color:red;>Мои заказы</a>
 {% endif %}
 

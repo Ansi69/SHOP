@@ -52,7 +52,7 @@ def category(request, category_slug):
 
     categori = categories.objects.all()
     
-    data = {'title': 'MegaShop',
+    data = {'title': 'Category',
             'form': form,
             'categories': categori,
             'product': product,

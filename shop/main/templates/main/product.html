@@ -10,7 +10,7 @@
 
 
 {% block loginBtn %}
-    <button onclick="showLogin()" class="regBtn">
+    <button onclick="showLogin()" class="loginBtn">
     <img src="{% static 'main/img/profile.svg' %}" width="30" height="30">
     </button>
 {% endblock  %}
@@ -43,16 +43,15 @@
             <li class="items">
                 <div class="products">
                     {% if product.img %}
-                        <img src="{{ product.img.url }}" alt="">
+                        <img src="{{ product.img.url }}">
                     {% else %}
-                        <img src="{% static 'main/img/cart.svg' %}" width="30" height="30" alt="">
+                        <img src="{% static 'main/img/cart.svg' %}">
                     {% endif %}
                     <p>{{product.product_name}}</p>
                     <hr>
                     <p>{{product.description}}</p>
                     <hr>
-                    <p>Осталось:{{product.quantity}}</p>
-                
+                    {% if product.quantity == 0 %}
                         {% if product.discount %}
                             <p><s>{{product.product_price}}</s>  $</p>
                             <p><strong>{{ product.sell_price }}  $</strong></p>
@@ -60,17 +59,27 @@
                         {% else %}
                             <p>{{product.product_price}} $</p>
                         {% endif %}
-                
-                    <p>id товара:{{product.display_id}}</p>
-                    {% if not user.is_authenticated %}     
+                        <p>Товара нет в наличии</p>    
                     {% else %}
-                        <a href="{% url "cart:cart_add" %}"
-                        class="add-to-cart"
-                        data-product-id="{{ product.id }}"
-                        style=color:black;>
-                        {% csrf_token %}
-                        Добавить в корзину</a>
+                            {% if product.discount %}
+                                <p><s>{{product.product_price}}</s>  $</p>
+                                <p><strong>{{ product.sell_price }}  $</strong></p>
+                                <p>Скидка:{{product.discount}}%</p>
+                            {% else %}
+                                <p>{{product.product_price}} $</p>
+                            {% endif %}
+                        {% if not user.is_authenticated %}     
+                        {% else %}
+                            <a href="{% url "cart:cart_add" %}"
+                            class="add-to-cart"
+                            data-product-id="{{ product.id }}"
+                            style=color:black;>
+                            {% csrf_token %}
+                            Добавить в корзину</a>
+                        {% endif %}
+                            
                     {% endif %}
+                        
                 </div>
             </li>
         </ul>

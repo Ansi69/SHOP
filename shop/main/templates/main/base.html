@@ -10,12 +10,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
     <link rel="stylesheet" href="{% static 'main/css/home.css' %}">
+    {% block css %}{% endblock  %}
 </head>
 <body>
     <header class="header">
         <div class="home">
             <a href="{% url 'home' %}">
-                <img src="{% static 'main/img/cart.svg' %}" width="30" height="30">
+                <img src="{% static 'main/img/cart.svg' %}">
             </a>
         </div>
         <div class="menu">
@@ -45,7 +46,7 @@
                         </li>
                     {% endif %}
                     <li class="options__item">
-                        <a href="{% url 'logout' %}"><img src="{% static 'main/img/exit.svg' %}" width="30" height="30"></a>
+                        <a href="{% url 'logout' %}"><img src="{% static 'main/img/exit.svg' %}"></a>
                     </li>
                 {% endif %}
             </ul>
@@ -53,7 +54,7 @@
         <form id="cart_items_container" class="modal">
             <div class="modal-content">
                 <span class="close" onclick="closeCart()">×</span>
-                    <h2>Корзина</h2>
+                    <div class="headName">Корзина</div>
                     <div id="cart_items">
                         {% include "carts/includes/included_cart.html" %}
                     </div>
