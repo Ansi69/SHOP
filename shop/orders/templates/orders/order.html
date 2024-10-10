@@ -1,13 +1,6 @@
 {% extends "main/base.html" %}
 {% load static %}
 
-{% block cartBtn %}
-    <a class="cartBtn" onclick="showCart()">
-        <img src="{% static 'main/img/cart.svg' %}">
-    </a>
-    <span id="goods-in-cart-count">{{ carts.total_quantity }}</span>
-{% endblock  %}
-
 {% block content %}
     <div class="accordion" id="accordionExample">
         {% for order in orders %}

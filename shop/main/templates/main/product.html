@@ -1,46 +1,6 @@
 {% extends "main/base.html" %}
 {% load static %}
 
-{% block cartBtn %}
-    <a class="cartBtn" onclick="showCart()">
-        <img src="{% static 'main/img/cart.svg' %}">
-    </a>
-    <span id="goods-in-cart-count">{{ carts.total_quantity }}</span>
-{% endblock  %}
-
-
-{% block loginBtn %}
-    <button onclick="showLogin()" class="loginBtn">
-    <img src="{% static 'main/img/profile.svg' %}">
-    </button>
-{% endblock  %}
-
-{% block login %}
-    <form method="post" id="loginModal" class="modal">
-        <div class="modal-content">
-            <div class="close" onclick="closeLogin()">×</div>
-            <div class="headName">Вход в аккаунт</div>
-            <div class="field-holdeer">
-                <input type="text" class="form-control"
-                value="{% if form.username.value %}{{ form.username.value }}{% endif %}" 
-                name="username" id="id_username" required>
-                <label for="id_username" class="form-label">Имя пользователя</label>
-            </div>
-            <div class="field-holdeer">
-                <input type="password" class="form-control" 
-                value="{% if form.password.value %}{{ form.password.value }}{% endif %}" 
-                name="password" id="id_password" required>
-                <label for="id_password" class="form-label">Пароль</label>
-            </div>
-            <button class="enterLogin">Войти</button>
-            {% csrf_token %}
-            {% if form.non_field_errors %}
-            <p>{{ form.non_field_errors }}</p>
-            {% endif %}
-            <div id="downRegistr">Нет аккаунта? <a href="{% url 'registration' %}";>Зарегистрироваться</a></div>
-        </div>
-    </form>
-{% endblock  %}
 {% block content %}
     <div class="content">
         <ul class="content__items">
@@ -51,10 +11,10 @@
                     {% else %}
                         <img src="{% static 'main/img/cart.svg' %}">
                     {% endif %}
-                    <p>{{product.product_name}}</p>
-                    <hr>
-                    <p>{{product.description}}</p>
-                    <hr>
+                        <p>{{product.product_name}}</p>
+                        <hr>
+                        <p>{{product.description}}</p>
+                        <hr>
                     {% if product.quantity == 0 %}
                         {% if product.discount %}
                             <p><s>{{product.product_price}}</s>  $</p>
@@ -65,13 +25,14 @@
                         {% endif %}
                         <p>Товара нет в наличии</p>    
                     {% else %}
-                            {% if product.discount %}
-                                <p><s>{{product.product_price}}</s>  $</p>
-                                <p><strong>{{ product.sell_price }}  $</strong></p>
-                                <p>Скидка:{{product.discount}}%</p>
-                            {% else %}
-                                <p>{{product.product_price}} $</p>
-                            {% endif %}
+                        {% if product.discount %}
+                            <p><s>{{product.product_price}}</s>  $</p>
+                            <p><strong>{{ product.sell_price }}  $</strong></p>
+                            <p>Скидка:{{product.discount}}%</p>
+                        {% else %}
+                            <p>{{product.product_price}} $</p>
+                        {% endif %}
+
                         {% if not user.is_authenticated %}     
                         {% else %}
                             <a href="{% url "cart:cart_add" %}"
@@ -83,7 +44,6 @@
                         {% endif %}
                             
                     {% endif %}
-                        
                 </div>
             </li>
         </ul>

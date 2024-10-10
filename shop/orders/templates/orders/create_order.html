@@ -2,47 +2,10 @@
 {% load static %}
 {% load carts_tags %}
 
-{% block cartBtn %}
-    <a class="cartBtn" onclick="showCart()">
-        <img src="{% static 'main/img/cart.svg' %}" width="30" height="30">
-    </a>
-    <span id="goods-in-cart-count">{{ carts.total_quantity }}</span>
-{% endblock  %}
-
-
-{% block loginBtn %}
-    <button onclick="showLogin()" class="regBtn">
-    <img src="{% static 'main/img/profile.svg' %}" width="30" height="30">
-    </button>
-{% endblock  %}
-
-{% block login %}
-    <form method="post" id="loginModal" class="modal">
-        <div class="modal-content">
-            {% csrf_token %}
-            {% if form.non_field_errors %}
-            <p>{{ form.non_field_errors }}</p>
-            {% endif %}
-            <span class="close" onclick="closeLogin()">×</span>
-            <h2>Вход в аккаунт</h2>
-            <label for="id_username" class="form-label">Имя пользователя</label>
-            <input type="text" class="form-control"
-            value="{% if form.username.value %}{{ form.username.value }}{% endif %}" 
-            name="username" id="id_username"
-            placeholder="Имя пользователя"
-            required>
-            <label for="id_password" class="form-label">Пароль</label>
-            <input type="password" class="form-control" name="password" placeholder="Пароль" id="id_username" required>
-            <button>Войти</button>
-            <p>Нет аккаунта? <a href="{% url 'registration' %}" style=color:black;>Зарегистрироваться</a></p>
-        </div>
-    </form>
-{% endblock  %}
 {% block content %}
     <h3 class="text-center mb-4">Выбранные товары</h3>
     <div id="cart_items">
         {% user_carts request as carts %}
-
         {% include "carts/includes/included_cart.html" %}
     </div>
     <div class="container">
@@ -126,4 +89,3 @@
         </form>
     </div>
 {% endblock  %}
-

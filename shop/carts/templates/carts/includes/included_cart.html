@@ -4,45 +4,44 @@
 {% user_carts request as carts %}
 
 {% for cart in carts %}
-<div class="productArea">
-    <div class="productName">{{ cart.product.product_name }}</div>
-    
-    {% if not order %}
-        <div class="productCountAndPrice">
-
-        <button type="button" class="btn decrement"
-        data-cart-id="{{ cart.id }}"
-        data-cart-change-url="{% url "cart:cart_change" %}">
-        {% csrf_token %}
-        -</button>
-
-        <input type="text" class="number" value="{{ cart.quantity }}" readonly>
+    <div class="productArea">
+        <div class="productName">{{ cart.product.product_name }}</div>
         
-        <button type="button" class="btn increment"
-        data-cart-id="{{ cart.id }}"
-        data-cart-change-url="{% url "cart:cart_change" %}">
-        {% csrf_token %}
-        +</button>
+        {% if not order %}
+            <div class="productCountAndPrice">
 
-        <p>шт.* {{ cart.product.sell_price }} = {{ cart.products_price }} руб.</p>
-        </div>
-    {% else %}
-        <p>{{ cart.quantity }} шт.* {{ cart.product.sell_price }} = {{ cart.products_price }} руб.</p>
-    {% endif %}
-
-    {% if not order %}
-        <a href="{% url "cart:cart_remove" %}"
-        class="remove-from-cart"
-        data-cart-id="{{ cart.id }}">
+            <button type="button" class="btn decrement"
+            data-cart-id="{{ cart.id }}"
+            data-cart-change-url="{% url "cart:cart_change" %}">
             {% csrf_token %}
-            <img src="{% static 'main/img/delete.svg' %}">
-        </a>
-    {% else %}
-    {% endif %}
-</div>
+            -</button>
+
+            <input type="text" class="number" value="{{ cart.quantity }}" readonly>
+            
+            <button type="button" class="btn increment"
+            data-cart-id="{{ cart.id }}"
+            data-cart-change-url="{% url "cart:cart_change" %}">
+            {% csrf_token %}
+            +</button>
+
+            <p>шт.* {{ cart.product.sell_price }} = {{ cart.products_price }} руб.</p>
+            </div>
+        {% else %}
+            <p>{{ cart.quantity }} шт.* {{ cart.product.sell_price }} = {{ cart.products_price }} руб.</p>
+        {% endif %}
+
+        {% if not order %}
+            <a href="{% url "cart:cart_remove" %}"
+            class="remove-from-cart"
+            data-cart-id="{{ cart.id }}">
+                {% csrf_token %}
+                <img src="{% static 'main/img/delete.svg' %}">
+            </a>
+        {% else %}
+        {% endif %}
+    </div>
 {% endfor %}
 {% if carts and not order %}
-    
     <div class="totalPrice"><span>Итого:</span> {{ carts.total_quantity }} товаров на сумму {{ carts.total_price }} руб.</div>
     <div id="downCart">
         <a class="placeAnOrder" href="{% url 'orders:create_order' %}";>Оформить заказ</a>
@@ -55,4 +54,3 @@
     <div class="cartEmpty">Корзина пуста <span class="smile">-_-</span><span class="new-smile">\_/</span></div>
     <a class="myOrders" href="{% url 'orders:order' %}";>Мои заказы</a>
 {% endif %}
-

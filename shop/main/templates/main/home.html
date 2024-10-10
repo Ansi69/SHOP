@@ -1,59 +1,6 @@
 {% extends "main/base.html" %}
 {% load static %}
 
-{% block cartBtn %}
-    <button onclick="showCart()" class="cartBtn">
-        <img src="{% static 'main/img/cart.svg' %}">
-    </button>
-    <span id="goods-in-cart-count">{{ carts.total_quantity }}</span>
-{% endblock  %}
-
-
-{% block loginBtn %}
-    <button onclick="showLogin()" class="loginBtn">
-    <img src="{% static 'main/img/profile.svg' %}">
-    </button>
-{% endblock  %}
-
-
-{% block cart %}
-    <form id="cartModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeCart()">×</span>
-            <h2>cart</h2>
-            <a href="{% url 'order' %}" style=color:black;>Оформить заказ</a>
-        </div>
-    </form>
-{% endblock  %}
-
-
-{% block login %}
-    <form method="post" id="loginModal" class="modal">
-        <div class="modal-content">
-            <div class="close" onclick="closeLogin()">×</div>
-            <div class="headName">Вход в аккаунт</div>
-            <div class="field-holdeer">
-                <input type="text" class="form-control"
-                value="{% if form.username.value %}{{ form.username.value }}{% endif %}" 
-                name="username" id="id_username" required>
-                <label for="id_username" class="form-label">Имя пользователя</label>
-            </div>
-            <div class="field-holdeer">
-                <input type="password" class="form-control" 
-                value="{% if form.password.value %}{{ form.password.value }}{% endif %}" 
-                name="password" id="id_password" required>
-                <label for="id_password" class="form-label">Пароль</label>
-            </div>
-            <button class="enterLogin">Войти</button>
-            {% csrf_token %}
-            {% if form.non_field_errors %}
-            <p>{{ form.non_field_errors }}</p>
-            {% endif %}
-            <div id="downRegistr">Нет аккаунта? <a href="{% url 'registration' %}";>Зарегистрироваться</a></div>
-        </div>
-    </form>
-{% endblock  %}
-
 {% block content %}
     main
 {% endblock  %}
