@@ -121,9 +121,10 @@ main{
 .content{
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: space-around;
     padding: 40px;
     gap: 5vh;
+    margin: 0px auto;
 }
 
 .product{
@@ -141,8 +142,8 @@ main{
 }
 
 .items{
-    width: 240px;
-    height: 400px;
+    width: 360px;
+    height: 500px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -190,14 +191,13 @@ footer{
     display: flex;
     flex-direction: column;
     background-color: #fefefe;
-    /*margin: 15% auto;*/ 
     padding: 20px;
     border: 1px solid #888;
     width: 300px;
     padding-top: 10px;
     position: absolute;
     right: 1%;
-    top: 110px;
+    top: 15%;
     border-radius: 25px;
 }
 
@@ -233,15 +233,24 @@ footer{
     text-align: center;
     font-size: 22px;
     color: #303030;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
-/* Надписи возле полей */
+
+.field-holdeer {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+
+/* Перемещающийся placeholder */
 
 .form-label {
-    font-size: 16px;
-    color: #303030; 
-    margin-bottom: 10px;
+    position: absolute;
+    top: 9px;
+    left: 8px;
+    color: #424242;
+    transition: 0.5s ease-in-out;
 }
 
 /* Поля ввода данных */
@@ -250,9 +259,22 @@ footer{
     padding: 6px;
     border: 3px solid black;
     border-radius: 30px;
-    margin-bottom: 10px;
+    outline: none;
 }
 
+/* Анимация перехода текста */
+.form-label, .form-control {
+    font-size: 1em;
+    width: 100%;
+    cursor: text;
+}
+
+.form-control:focus + .form-label,
+.form-control:valid + .form-label {
+    color: black;
+    top: -22px;
+    pointer-events: none;
+}
 
 /* Кнопка подтвержения в форме */
 
@@ -308,7 +330,7 @@ footer{
 .productArea {
     background-color: gray;
     border: 4px solid #292929;
-    border-radius: 40px 5px 40px 5px;
+    border-radius: 30px 5px 30px 5px;
     outline: 5px  #cfcccc;
     margin: 20px 0px;
     padding-left: 10px;
@@ -334,8 +356,6 @@ footer{
     letter-spacing: 0.1ex;
 }
 
-
-
 .totalPrice span {
     font-size: 20px;
     font-weight: 900;
@@ -343,16 +363,68 @@ footer{
 
 .totalPrice {
     font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.placeAnOrder, .myOrders {
+    color: black;
+    transition: 0.5s ease-in-out;
+}
+
+.placeAnOrder:hover,
+.myOrders:hover {
+    background: rgb(228, 227, 227);
+    border-radius: 10px;
+    font-size: 18px;
+}
+
+#downCart {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+/* Пустая корзина */
+.cartEmpty {
+    position: relative;
+    font-size: 20px;
+    letter-spacing: 0.1ex;
+    margin-bottom: 20px;
+}
+
+.smile {
+    font-size: 25px;
+    padding: 3px;
+    border: 3px solid black;
+    border-radius: 20px;
+}
+
+
+/* Ебейшее что может быть - смайлик */
+.new-smile {
+    font-size: 25px;
+    padding: 3px;
+    border: 3px solid red;
+    border-radius: 20px;
+}
+
+.new-smile {
+    display: none;
+}
+
+.cartEmpty:hover .smile {
+    display: none;
+}
+
+.cartEmpty:hover .new-smile {
+    display: inline;
 }
 
 
 
 
 
-
-
-
-/* Непонятная хуетень, но есть в конце файла base */
+/* Сообщение об удалении и добавлении товара из корзины, в конце файла base */
 .message{
     display: none; 
     color:white !important;

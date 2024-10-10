@@ -19,13 +19,17 @@
 </div>
 {% endfor %}
 {% if carts and not order %}
+    
     <div class="totalPrice"><span>Итого:</span> {{ carts.total_quantity }} товаров на сумму {{ carts.total_price }} руб.</div>
-    <a class="placeAnOrder" href="{% url 'orders:create_order' %}" style=color:red;>Оформить заказ</a>
-    <a class="myOrders" href="{% url 'orders:order' %}" style=color:red;>Мои заказы</a>
+    <div id="downCart">
+        <a class="placeAnOrder" href="{% url 'orders:create_order' %}";>Оформить заказ</a>
+        <span>|</span>
+        <a class="myOrders" href="{% url 'orders:order' %}";>Мои заказы</a>
+    </div>
 {% elif carts and order %}
     <div class="totalPrice">Итого: {{ carts.total_quantity }} товаров на сумму {{ carts.total_price }} руб.</div>
 {% else %}
-    <div>Корзина пуста-_-</div>
-    <a class="myOrders" href="{% url 'orders:order' %}" style=color:red;>Мои заказы</a>
+    <div class="cartEmpty">Корзина пуста <span class="smile">-_-</span><span class="new-smile">\_/</span></div>
+    <a class="myOrders" href="{% url 'orders:order' %}";>Мои заказы</a>
 {% endif %}
 
