@@ -6,7 +6,30 @@
 {% for cart in carts %}
 <div class="productArea">
     <div class="productName">{{ cart.product.product_name }}</div>
-    <div class="productCountAndPrice">{{ cart.quantity }} шт.* {{ cart.product.sell_price }} = {{ cart.products_price }} руб. </div>
+    
+    {% if not order %}
+        <div class="productCountAndPrice">
+
+        <button type="button" class="btn decrement"
+        data-cart-id="{{ cart.id }}"
+        data-cart-change-url="{% url "cart:cart_change" %}">
+        {% csrf_token %}
+        -</button>
+
+        <input type="text" class="number" value="{{ cart.quantity }}" readonly>
+        
+        <button type="button" class="btn increment"
+        data-cart-id="{{ cart.id }}"
+        data-cart-change-url="{% url "cart:cart_change" %}">
+        {% csrf_token %}
+        +</button>
+
+        <p>шт.* {{ cart.product.sell_price }} = {{ cart.products_price }} руб.</p>
+        </div>
+    {% else %}
+        <p>{{ cart.quantity }} шт.* {{ cart.product.sell_price }} = {{ cart.products_price }} руб.</p>
+    {% endif %}
+
     {% if not order %}
         <a href="{% url "cart:cart_remove" %}"
         class="remove-from-cart"

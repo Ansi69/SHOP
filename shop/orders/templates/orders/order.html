@@ -3,7 +3,7 @@
 
 {% block cartBtn %}
     <a class="cartBtn" onclick="showCart()">
-        <img src="{% static 'main/img/cart.svg' %}" width="30" height="30">
+        <img src="{% static 'main/img/cart.svg' %}">
     </a>
     <span id="goods-in-cart-count">{{ carts.total_quantity }}</span>
 {% endblock  %}
