@@ -1,25 +1,15 @@
+let modal = document.getElementById('loginModal');
+
 function showLogin() {
-    document.getElementById('loginModal').style.display = 'block';
+    modal.style.display = 'block';
 }
 
 function closeLogin() {
-    document.getElementById('loginModal').style.display = 'none';
-}
-
-function showRegister() {
-    document.getElementById('registerModal').style.display = 'block';
-    document.getElementById('loginModal').style.display = 'none';
-}
-
-function closeRegister() {
-    document.getElementById('registerModal').style.display = 'none';
+    modal.style.display = 'none';
 }
 
 window.onclick = function(event) {
-    if (event.target == loginModal) {
-        loginModal.style.display = "none";
-    }
-    if (event.target == registerModal) {
-        registerModal.style.display = "none";
+    if (event.target == modal) {
+        modal.style.display = "none";
     }
 }

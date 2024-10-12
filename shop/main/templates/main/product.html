@@ -16,13 +16,6 @@
                         <p>{{product.description}}</p>
                         <hr>
                     {% if product.quantity == 0 %}
-                        {% if product.discount %}
-                            <p><s>{{product.product_price}}</s>  $</p>
-                            <p><strong>{{ product.sell_price }}  $</strong></p>
-                            <p>Скидка:{{product.discount}}%</p>
-                        {% else %}
-                            <p>{{product.product_price}} $</p>
-                        {% endif %}
                         <p>Товара нет в наличии</p>    
                     {% else %}
                         {% if product.discount %}
@@ -38,7 +31,7 @@
                             <a href="{% url "cart:cart_add" %}"
                             class="add-to-cart"
                             data-product-id="{{ product.id }}"
-                            style=color:black;>
+                            style=color:white;>
                             {% csrf_token %}
                             Добавить в корзину</a>
                         {% endif %}

@@ -33,6 +33,8 @@ def home(request):
 
 def category(request, category_slug):
 
+    order_by = request.GET.get('order_by', None)
+
     if request.method == 'POST':
         form = UserLoginForm(data=request.POST)
         if form.is_valid():
@@ -47,8 +49,12 @@ def category(request, category_slug):
     
     if category_slug == 'all':
         product = products.objects.all()
+        if order_by and order_by != "default":
+            product = products.objects.all().order_by(order_by)
     else:
         product = products.objects.filter(category__slug=category_slug)
+        if order_by and order_by != "default":
+            product = products.objects.filter(category__slug=category_slug).order_by(order_by)
 
     categori = categories.objects.all()
     
