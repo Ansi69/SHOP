@@ -32,20 +32,28 @@
 
     <div class="content">
         {% for product in product %}
+        <div class="papa">
             <a href="{% url 'product' product.slug %}">
-                <div class="items">
+                <div class="detailed">Подробнее</div>
+                <div ><a href="{% url "cart:cart_add" %}"
+                    class="add-to-cart addCarting"
+                    data-product-id="{{ product.id }}";>
+                    {% csrf_token %}
+                    Добавить в корзину</a></div>
+                <div class="item">
                     <div class="product">
                         {% if product.img %}
                             <img src="{{ product.img.url }}">
                         {% else %}
                             <img src="{% static 'main/img/cart.svg' %}">
                         {% endif %}
-                            <p>{{product.product_name}}</p>
-                            <p>{{product.description}}</p>
-                            <p>{{product.product_price}} $</p>
+                            <div class="productName">{{product.product_name}}</div>
+                            <div class="productPrice">Цена: {{product.product_price}} р.</div>
+                            <div class="productDescription">{{product.description}}</div>
                     </div>
                 </div>
             </a>
+        </div>
         {% endfor %}
     </div>
 {% endblock  %}

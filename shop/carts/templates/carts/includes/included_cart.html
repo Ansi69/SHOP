@@ -4,27 +4,25 @@
 {% user_carts request as carts %}
 
 {% for cart in carts %}
-    <div class="productArea">
-        <div class="productName">{{ cart.product.product_name }}</div>
+    <div class="productAreaCart">
+        <div class="productNameCart">{{ cart.product.product_name }}</div>
         
         {% if not order %}
-            <div class="productCountAndPrice">
+            <div class="productCountAndPriceCart">
+                <button type="button" class="btn decrement"
+                data-cart-id="{{ cart.id }}"
+                data-cart-change-url="{% url "cart:cart_change" %}">
+                {% csrf_token %}
+                —</button>
 
-            <button type="button" class="btn decrement"
-            data-cart-id="{{ cart.id }}"
-            data-cart-change-url="{% url "cart:cart_change" %}">
-            {% csrf_token %}
-            -</button>
-
-            <input type="text" class="number" value="{{ cart.quantity }}" readonly>
-            
-            <button type="button" class="btn increment"
-            data-cart-id="{{ cart.id }}"
-            data-cart-change-url="{% url "cart:cart_change" %}">
-            {% csrf_token %}
-            +</button>
-
-            <p>шт.* {{ cart.product.sell_price }} = {{ cart.products_price }} руб.</p>
+                <input type="text" class="numberProductsCart" value="{{ cart.quantity }}" readonly>
+                
+                <button type="button" class="btn increment"
+                data-cart-id="{{ cart.id }}"
+                data-cart-change-url="{% url "cart:cart_change" %}">
+                {% csrf_token %}
+                +</button>
+                <span class="productPriceCart"> {{ cart.products_price }} р.</span>
             </div>
         {% else %}
             <p>{{ cart.quantity }} шт.* {{ cart.product.sell_price }} = {{ cart.products_price }} руб.</p>
@@ -42,15 +40,14 @@
     </div>
 {% endfor %}
 {% if carts and not order %}
-    <div class="totalPrice"><span>Итого:</span> {{ carts.total_quantity }} товаров на сумму {{ carts.total_price }} руб.</div>
+    <div class="totalPriceCart">Итого: {{ carts.total_price }}р.</div>
     <div id="downCart">
-        <a class="placeAnOrder" href="{% url 'orders:create_order' %}";>Оформить заказ</a>
-        <span>|</span>
-        <a class="myOrders" href="{% url 'orders:order' %}";>Мои заказы</a>
+        <div><a class="placeAnOrderCart" href="{% url 'orders:create_order' %}";>Оформить заказ</a></div>
+        <div><a class="myOrdersCart" href="{% url 'orders:order' %}";>Мои заказы</a></div>
     </div>
 {% elif carts and order %}
-    <div class="totalPrice">Итого: {{ carts.total_quantity }} товаров на сумму {{ carts.total_price }} руб.</div>
+    <div class="totalPriceCart">Итого: {{ carts.total_price }}р.</div>
 {% else %}
     <div class="cartEmpty">Корзина пуста <span class="smile">-_-</span><span class="new-smile">\_/</span></div>
-    <a class="myOrders" href="{% url 'orders:order' %}";>Мои заказы</a>
+    <a class="myOrdersCart" href="{% url 'orders:order' %}";>Мои заказы</a>
 {% endif %}
