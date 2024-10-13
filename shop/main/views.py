@@ -55,7 +55,7 @@ def category(request, category_slug):
         product = products.objects.filter(category__slug=category_slug)
         if order_by and order_by != "default":
             product = products.objects.filter(category__slug=category_slug).order_by(order_by)
-
+    
     categori = categories.objects.all()
     
     data = {'title': 'Category',

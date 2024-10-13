@@ -6,19 +6,19 @@
 <div id="container">
     <div id="dataEntry">
         <form action="{% url "orders:create_order" %}" method="post" id="create_order_form">
-            {% csrf_token %}
             <div id="fullNameAndPhone">
                 <h3 class="text-center">Личные данные</h3>
-                <div id="fullName">
+                {% comment %} <div id="fullName">
                     <label for="id_first_name" class="form-label order">ФИО</label>
                     <input type="text" class="form-control order" id="id_first_name"
-                        value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}"
-                        name="first_name" placeholder="Введите ФИО" required>
+                    value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}"
+                    name="first_name" placeholder="Введите ФИО" required>
                     {% if form.first_name.errors %}
-                        <div>{{form.first_name.errors}}</div>
+                    <div>{{form.first_name.errors}}</div>
                     {% endif %}
-                </div>
+                    </div> {% endcomment %}
                     
+                {% csrf_token %}
                 <div id="fullPhone">    
                     <label for="id_phone_number" class="form-label order">Телефон</label>
                     <input type="text" class="form-control order" id="id_phone_number" name="phone_number"
@@ -34,7 +34,7 @@
 
             <div id="delivery">
                 <h3 class="text-center">Доставка</h3>
-                <div class="mb-3 deliveryAdress" id="deliveryAddressField">
+                <div class="deliveryAdress" id="deliveryAddressField">
                     <label for="id_delivery_address" class="form-label order">Адрес
                     доставки</label>
                     <textarea class="form-control order" id="id_delivery_address"
@@ -62,16 +62,17 @@
                             <div>{{form.payment_on_get.errors}}</div>
                         {% endif %}
                     </div>
-            </div>
-            <button type="submit" class="btn btn-dark">Оформить заказ</button>
+                </div>
+            
+            <button type="submit">Оформить заказ</button>
         </form>
     </div>
 
     <div id="cart_items">
         <h3 class="text-center">Ваш заказ</h3>
-        <div id="content-order">
-        {% user_carts request as carts %}
-        {% include "carts/includes/included_cart.html" %}
+        <div id="cart-items">
+            {% user_carts request as carts %}
+            {% include "carts/includes/included_cart.html" %}
         </div>
     </div>
 </div>

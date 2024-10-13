@@ -88,7 +88,7 @@
                     <button class="enterLogin">Войти</button>
                     {% csrf_token %}
                     {% if form.non_field_errors %}
-                    <p>{{ form.non_field_errors }}</p>
+                    <p id="ErrorForm">{{ form.non_field_errors }}</p>
                     {% endif %}
                     <div id="downRegistr">Нет аккаунта? <a href="{% url 'registration' %}";>Зарегистрироваться</a></div>
                 </div>
@@ -96,7 +96,6 @@
         <script src="{% static 'main/js/jquery/jquery-3.7.1.min.js' %}"></script>
         <script src="{% static 'main/js/jquery-ajax.js' %}"></script>
         <script src="{% static 'main/js/main.js' %}"></script>
-        <script src="{% static 'main/js/cart.js' %}"></script>
         <script src="{% static 'main/js/filters.js' %}"></script>
     </header>
     <main>

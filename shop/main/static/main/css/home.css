@@ -476,7 +476,7 @@ main{
 
 
 .papa:hover .item{
-    box-shadow: 0px 0px 120px white;
+    box-shadow: 0px 0px 30px white;
     opacity: 0.4;
 }
 

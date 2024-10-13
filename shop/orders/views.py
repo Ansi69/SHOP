@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render
 from django.db import transaction
 from django.contrib import messages
 from django.urls import reverse
-from main.models import categories
+from main.models import categories, products
 from django.db.models import Prefetch
 
 from orders.forms import CreateOrderForm
@@ -25,7 +25,6 @@ def create_order(request):
                         order = Order.objects.create(
                             user=user,
                             phone_number=form.cleaned_data['phone_number'],
-                            requires_delivery=form.cleaned_data['requires_delivery'],
                             delivery_address=form.cleaned_data['delivery_address'],
                             payment_on_get=form.cleaned_data['payment_on_get'],
                         )
@@ -62,11 +61,13 @@ def create_order(request):
     else:
         form = CreateOrderForm()
 
+    product = products.objects.all()
     categori = categories.objects.all()
     context = {
         'title': 'Оформление заказа',
         'form': form,
         'order': True,
+        'product': product,
         'categories': categori
     }
     return render(request, 'orders/create_order.html', context=context)

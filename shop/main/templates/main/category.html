@@ -35,11 +35,16 @@
         <div class="papa">
             <a href="{% url 'product' product.slug %}">
                 <div class="detailed">Подробнее</div>
-                <div ><a href="{% url "cart:cart_add" %}"
-                    class="add-to-cart addCarting"
-                    data-product-id="{{ product.id }}";>
-                    {% csrf_token %}
-                    Добавить в корзину</a></div>
+                <div >
+                    {% if not user.is_authenticated %}     
+                    {% else %}
+                        <a href="{% url "cart:cart_add" %}"
+                        class="add-to-cart addCarting"
+                        data-product-id="{{ product.id }}">
+                        {% csrf_token %}
+                        Добавить в корзину</a>
+                    {% endif %}
+                </div >
                 <div class="item">
                     <div class="product">
                         {% if product.img %}

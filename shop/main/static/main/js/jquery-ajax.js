@@ -76,7 +76,7 @@ $(document).ready(function () {
     $(document).on("click", ".decrement", function () {
         var url = $(this).data("cart-change-url");
         var cartID = $(this).data("cart-id");
-        var $input = $(this).closest('.productCountAndPrice').find('.number');
+        var $input = $(this).closest('.productCountAndPriceCart').find('.numberProductsCart');
         var currentValue = parseInt($input.val());
         if (currentValue > 1) {
             $input.val(currentValue - 1);
@@ -87,7 +87,7 @@ $(document).ready(function () {
     $(document).on("click", ".increment", function () {
         var url = $(this).data("cart-change-url");
         var cartID = $(this).data("cart-id");
-        var $input = $(this).closest('.productCountAndPrice').find('.number');
+        var $input = $(this).closest('.productCountAndPriceCart').find('.numberProductsCart');
         var currentValue = parseInt($input.val());
 
         $input.val(currentValue + 1);
