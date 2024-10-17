@@ -28,6 +28,11 @@ body{
     flex-direction: column;
 }
 
+body::-webkit-scrollbar {
+    width: 0; /* Скрыть вертикальный ползунок */
+    height: 0; /* Скрыть горизонтальный ползунок */
+}
+
 
 /* Голова */
 .header{
@@ -140,7 +145,7 @@ a{
     background-color: #fefefe;
     padding: 20px;
     border: 1px solid #888;
-    width: 320px;
+    width: 350px;
     padding-top: 10px;
     position: absolute;
     right: 1%;
@@ -148,13 +153,14 @@ a{
     border-radius: 25px;
 }
 
-
-/* Я хуй знает, что ты понаделал, но это кривой костыль */
-#registerModal .modal-content {
-    top: 0px;
+#registerModal {
+    display: flex;
+    flex-direction: column;
+    background-color: #fefefe;
+    position: absolute;
+    left: 40%;
+    top: 20%;
 }
-
-
 
 /* Элементы формы */
 
@@ -162,10 +168,14 @@ a{
 /* Кнопка выхода из формы (крестик) */
 
 .close {
+    display: flex;
+    justify-content: center;
     color: #aaa;
     font-size: 28px;
     font-weight: bold;
-    text-align: right;
+    width: 30px;
+    height: 30px;
+    margin-left: 90%;
 }
 
 .close:hover,
@@ -281,7 +291,7 @@ a{
     padding-left: 10px;
     color: #121212;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -300,7 +310,7 @@ a{
 .productNameCart {
     font-size: 16px;
     overflow-wrap: break-word;
-    width: 70px;
+    width: 90px;
 }
 
 .productCountAndPriceCart {
@@ -311,7 +321,7 @@ a{
     text-align: start;
 }
 
-.decrement, .increment {
+.decrement, .increment, .delete {
     background: none;
     border: none;
     font-size: 23px;
@@ -328,6 +338,7 @@ a{
 }
 
 .productPriceCart {
+    white-space: nowrap;
     font-size: 16px;
     color: #121212;
 }
@@ -418,7 +429,7 @@ a{
 /* Тело */
 main{
     display: flex;
-    align-items: center;
+    flex-direction: column;
 }
 
 .content{
@@ -680,13 +691,6 @@ footer{
 }
 
 
-
-
-
-
-
-
-
 /* Сообщение об удалении и добавлении товара из корзины, в конце файла base */
 .message{
     color:white !important;
@@ -697,8 +701,202 @@ footer{
 
 
 
-/* фильтры */
-.filters{
-    display: none; /* это надо чтобы по дефолту фильтры были скрыты */
+/* фильтры и информация */
+
+.InfoText{
+    font-size: 30px;
     color: white;
+}
+
+.FiltersContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    height: 8vw;
+}
+
+.InfoContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    height: 3vw;
+}
+
+.Line{
+    height: 2px;
+    width: 100%;
+    background-color: white;
+}
+
+.filterButton{
+    background: white;
+    font-size: 18px;
+    letter-spacing: 0.1ex;
+    padding: 6px;
+    border: 3px solid black;
+    border-radius: 15px;
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+}
+
+.filterButton:hover {
+    color: white;
+    background: #303030;
+}
+
+
+/* вид страницы товара */
+
+.products{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10%;
+    padding-left: 10%;
+    padding-right: 30%;
+    width: 100%;
+}
+
+.ImgContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 700px;
+    height: 800px;
+}
+
+.productDescript{
+    display: flex;
+    flex-direction: column;
+    padding-top: 20%;
+    width: 300px;
+    height: 800px;
+}
+
+.productImg{
+    width: 100%;
+    height: auto;
+    max-width: 500px;
+    max-height: 500px;
+}
+
+.productTitle{
+    white-space: nowrap;
+    font-weight: bold;
+    font-size:50px;
+    color: white;
+}
+
+.productInf{
+    white-space: nowrap;
+    font-size:30px;
+    padding-top: 5%;
+    padding-bottom: 10%;
+    color: white;
+}
+
+.productDiscount{
+    white-space: nowrap;
+    font-size: 25px;
+    color: grey;
+}
+
+.productCost{
+    white-space: nowrap;
+    font-size: 15px;
+    padding-top: 5%;
+    padding-bottom: 10%;
+    color: white;
+}
+
+.line-container {
+    position: relative;
+    width: 250px;
+    height: 30px;
+    overflow: hidden;
+}
+
+.line-container::before {
+    content: '';
+    position: absolute;
+    bottom: 8px;
+    left: 2%;
+    height: 1px;
+    width: 40%;
+    background: white;
+    transform: rotate(-6deg);
+    transform-origin: bottom left;
+}
+
+
+.AddProduct{
+    white-space: nowrap;
+    align-self: center;
+    background: white;
+    color: black;
+    font-weight: bold;
+    font-size: 30px;
+    letter-spacing: 0.1ex;
+    padding: 8px;
+    border: 3px solid black;
+    border-radius: 15px;
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+}
+
+.AddProduct:hover {
+    color: white;
+    background: #303030;
+}
+
+
+
+
+.line {
+    position: absolute;
+    margin-top: 5px;
+    top: 19%;
+    width: 50%; /* Ширина линий */
+    height: 2px; /* Высота линий */
+    background-color: white; /* Цвет линий */
+    opacity: 0; /* Скрываем линии изначально */
+}
+
+#line1 {
+    left: 0; /* Первая линия слева */
+    transform: translateX(-100%); /* Изначально за пределами экрана */
+    animation: slide-in-left 1.5s forwards; /* Анимация */
+}
+
+#line2 {
+    right: 0; /* Вторая линия справа */
+    transform: translateX(100%); /* Изначально за пределами экрана */
+    animation: slide-in-right 1.5s forwards; /* Анимация с задержкой */
+}
+
+@keyframes slide-in-left {
+    0% {
+        transform: translateX(-100%);
+        opacity: 1; /* Линия видима */
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1; /* Линия видима */
+    }
+}
+
+@keyframes slide-in-right {
+    0% {
+        transform: translateX(100%);
+        opacity: 1; /* Линия видима */
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1; /* Линия видима */
+    }
 }

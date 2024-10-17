@@ -2,44 +2,43 @@
 {% load static %}
 
 {% block content %}
-    <div class="content">
-        <ul class="content__items">
-            <li class="items">
-                <div class="products">
-                    {% if product.img %}
-                        <img src="{{ product.img.url }}">
-                    {% else %}
-                        <img src="{% static 'main/img/cart.svg' %}">
-                    {% endif %}
-                        <p>{{product.product_name}}</p>
-                        <hr>
-                        <p>{{product.description}}</p>
-                        <hr>
-                    {% if product.quantity == 0 %}
-                        <p>Товара нет в наличии</p>    
-                    {% else %}
-                        {% if product.discount %}
-                            <p><s>{{product.product_price}}</s>  $</p>
-                            <p><strong>{{ product.sell_price }}  $</strong></p>
-                            <p>Скидка:{{product.discount}}%</p>
-                        {% else %}
-                            <p>{{product.product_price}} $</p>
-                        {% endif %}
+    <div class="products">
+        <div class="ImgContainer">
+            {% if product.img %}
+                <img src="{{ product.img.url }}" class="productImg">
+            {% else %}
+                <img src="{% static 'main/img/cart.svg' %}" class="productImg">
+            {% endif %}
+        </div>
+        <div class="productDescript">
+            <p class="productTitle">{{product.product_name}}</p>
+            <p class="productInf">{{product.description}}</p>
+            {% if product.quantity == 0 %}
+                <p class="productInf">Товара нет в наличии</p>    
+            {% else %}
+                {% if product.discount %}
+                    <div>
+                        <div class="line-container">
+                            <p class="productDiscount">{{ product.product_price }} руб.
+                            <sup class="productCost">-{{product.discount}}%</sup></p>
+                        </div>
+                    </div>
 
-                        {% if not user.is_authenticated %}     
-                        {% else %}
-                            <a href="{% url "cart:cart_add" %}"
-                            class="add-to-cart"
-                            data-product-id="{{ product.id }}"
-                            style=color:white;>
-                            {% csrf_token %}
-                            Добавить в корзину</a>
-                        {% endif %}
-                            
-                    {% endif %}
-                </div>
-            </li>
-        </ul>
+                    <p class="productInf">{{ product.sell_price }} руб.</p>
+                    
+                {% else %}
+                    <p class="productInf">{{product.product_price}} руб.</p>
+                {% endif %}
+                {% if not user.is_authenticated %}     
+                {% else %}
+                    <a href="{% url "cart:cart_add" %}"
+                    class="add-to-cart AddProduct"
+                    data-product-id="{{ product.id }}">
+                    {% csrf_token %}
+                    Добавить в корзину</a>
+                {% endif %}
+            {% endif %}
+        </div>
     </div>
 {% endblock  %}
 

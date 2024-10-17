@@ -57,11 +57,13 @@ def category(request, category_slug):
             product = products.objects.filter(category__slug=category_slug).order_by(order_by)
     
     categori = categories.objects.all()
+    categoriName = categories.objects.get(slug=category_slug)
     
     data = {'title': 'Category',
             'form': form,
             'categories': categori,
             'product': product,
+            'categoriName': categoriName
         }
     return render(request, 'main/category.html', data)
 

@@ -5,15 +5,30 @@
 
 {% for cart in carts %}
     <div class="productAreaCart">
+
+        {% if cart.product.img.url %}
+            <img src="{{ cart.product.img.url }}">
+        {% else %}
+            <img src="{% static 'main/img/cart.svg' %}">
+        {% endif %}
+        
         <div class="productNameCart">{{ cart.product.product_name }}</div>
         
         {% if not order %}
             <div class="productCountAndPriceCart">
-                <button type="button" class="btn decrement"
-                data-cart-id="{{ cart.id }}"
-                data-cart-change-url="{% url "cart:cart_change" %}">
-                {% csrf_token %}
-                —</button>
+                {% if cart.quantity == 1 %}
+                    <button type="button" class="btn delete"
+                    data-cart-id="{{ cart.id }}"
+                    data-cart-change-url="{% url "cart:cart_remove" %}">
+                    {% csrf_token %}
+                    —</button>
+                {% else %}
+                    <button type="button" class="btn decrement"
+                    data-cart-id="{{ cart.id }}"
+                    data-cart-change-url="{% url "cart:cart_change" %}">
+                    {% csrf_token %}
+                    —</button>
+                {% endif %}
                 
                 <input type="text" class="numberProductsCart" value="{{ cart.quantity }}" readonly>
                 
@@ -22,7 +37,7 @@
                 data-cart-change-url="{% url "cart:cart_change" %}">
                 {% csrf_token %}
                 +</button>
-                <span class="productPriceCart"> {{ cart.products_price }} р.</span>
+                <span class="productPriceCart"> {{ cart.products_price }} руб.</span>
             </div>
         {% else %}
             <p>{{ cart.quantity }} шт.* {{ cart.product.sell_price }} = {{ cart.products_price }} руб.</p>
@@ -40,7 +55,7 @@
     </div>
 {% endfor %}
 {% if carts and not order %}
-    <div class="totalPriceCart">Итого: {{ carts.total_price }}р.</div>
+    <div class="totalPriceCart">Итого: {{ carts.total_price }} руб.</div>
     <div id="downCart">
         <div><a class="placeAnOrderCart" href="{% url 'orders:create_order' %}";>Оформить заказ</a></div>
         <div><a class="myOrdersCart" href="{% url 'orders:order' %}";>Мои заказы</a></div>

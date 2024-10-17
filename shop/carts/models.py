@@ -14,8 +14,8 @@ class CartQueryset(models.QuerySet):
 
 class Cart(models.Model):
 
-    user = models.ForeignKey(to=User, on_delete=models.CASCADE, verbose_name='Пользователь')
-    product = models.ForeignKey(to=products, on_delete=models.CASCADE, verbose_name='Товар')
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE, verbose_name='Пользователь', default=0)
+    product = models.ForeignKey(to=products, on_delete=models.CASCADE, verbose_name='Товар', default=0)
     quantity = models.PositiveSmallIntegerField(default=0, verbose_name='Количество')
     created_timestamp = models.DateTimeField(auto_now_add=True, verbose_name='Дата добавления')
 

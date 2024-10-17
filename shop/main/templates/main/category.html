@@ -6,33 +6,32 @@
 {% endblock  %}
 
 {% block content %}
-
-    <div class="FiltersBtn">
-        <button id="filterButton">Фильтры</button>
-            <form action="" method="get" id="filters" class="filters">
-                <p>Сортировать:</p>
-                <div>
-                    <input type="radio" name="order_by" value="default"
-                    {% if not request.GET.order_by or request.GET.order_by == 'default' %}checked{% endif %}>
-                    <label>По умолчанию</label>
-                </div>
-                <div class="form-check text-white mx-3">
-                    <input type="radio" name="order_by" value="product_price" 
-                    {% if request.GET.order_by == 'product_price' %}checked{% endif %}>
-                    <label>От дешевых к дорогим</label>
-                </div>
-                <div class="form-check text-white mx-3">
-                    <input type="radio" name="order_by" value="-product_price"
-                    {% if request.GET.order_by == '-product_price' %}checked{% endif %}>
-                    <label>От дорогих к дешевым</label>
-                </div>
-                <button type="submit">Применить</button>
-            </form>
+    <div class="FiltersContainer">
+        <div>
+            <h2 class="InfoText">{{ categoriName }}</h2>
+        </div>
+        <div class="Line"></div>
+        <div class="FiltersBtn">
+            <form method="get">
+                    <button class="filterButton" name="order_by"
+                    value="-product_price" type="submit">От большей к меньшей</button>
+                    
+                    <button class="filterButton" name="order_by"
+                    value="default" type="submit">По умолчанию</button>
+                    
+                    <button class="filterButton" name="order_by"
+                    value="product_price" type="submit">От меньшей к большей</button>
+                    
+                </form>
+        </div>
     </div>
 
-    <div class="content">
+
+
+
+    <div class="content" id="SortingList">
         {% for product in product %}
-        <div class="papa">
+        <div class="papa" data-price="{{ product.product_price }}">
             <a href="{% url 'product' product.slug %}">
                 <div class="detailed">Подробнее</div>
                 <div >
