@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.contrib import auth
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -9,6 +9,9 @@ from orders.models import Order, OrderItem
 # Create your views here.
 
 def home(request):
+
+    back_url = request.path
+
     if request.method == 'POST':
         form = UserLoginForm(data=request.POST)
         if form.is_valid():
@@ -17,7 +20,7 @@ def home(request):
             user = auth.authenticate(username=username, password=password)
             if user:
                 auth.login(request, user)
-                return HttpResponseRedirect(reverse('home'))
+                return redirect(back_url)
     else:
         form = UserLoginForm()
 
@@ -34,7 +37,8 @@ def home(request):
 def category(request, category_slug):
 
     order_by = request.GET.get('order_by', None)
-
+    back_url = request.path
+    
     if request.method == 'POST':
         form = UserLoginForm(data=request.POST)
         if form.is_valid():
@@ -43,7 +47,7 @@ def category(request, category_slug):
             user = auth.authenticate(username=username, password=password)
             if user:
                 auth.login(request, user)
-                return HttpResponseRedirect(reverse('home'))
+                return redirect(back_url)
     else:
         form = UserLoginForm()
     
@@ -71,6 +75,8 @@ def category(request, category_slug):
 
 def product(request, product_slug):
 
+    back_url = request.path
+
     if request.method == 'POST':
         form = UserLoginForm(data=request.POST)
         if form.is_valid():
@@ -79,7 +85,7 @@ def product(request, product_slug):
             user = auth.authenticate(username=username, password=password)
             if user:
                 auth.login(request, user)
-                return HttpResponseRedirect(reverse('home'))
+                return redirect(back_url)
     else:
         form = UserLoginForm()
 
@@ -96,6 +102,8 @@ def product(request, product_slug):
 
 def faq(request):
 
+    back_url = request.path
+
     if request.method == 'POST':
         form = UserLoginForm(data=request.POST)
         if form.is_valid():
@@ -104,7 +112,7 @@ def faq(request):
             user = auth.authenticate(username=username, password=password)
             if user:
                 auth.login(request, user)
-                return HttpResponseRedirect(reverse('home'))
+                return redirect(back_url)
     else:
         form = UserLoginForm()
 

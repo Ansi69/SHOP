@@ -31,29 +31,17 @@ function closeLogin() {
 
 window.onclick = function(event) {
     if (event.target == loginModal) {
-        loginModal.style.display = "none";
-        showScroll()
+        closeLogin()
     }
     if (event.target == cart_items_container) {
-        cart_items_container.style.display = "none";
-        showScroll()
+        closeCart()
     }
 }
-
-
-// При загрузке страницы
-window.onload = function() {
-        document.getElementById('loginModal').style.display = 'none';
-        showScroll()
-    }
-;
-
 
 // При загрузке страницы
 window.onload = function() {
     if (document.getElementById('ErrorForm').style.display === 'none') {
         closeLogin()
-        showScroll()
     }
     else{
         showLogin();
