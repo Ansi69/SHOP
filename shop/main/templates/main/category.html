@@ -12,7 +12,7 @@
         </div>
         <div class="Line"></div>
         <div class="FiltersBtn">
-            <form method="get">
+            <form method="get" class="FiltersForm">
                     <button class="filterButton" name="order_by"
                     value="-product_price" type="submit">От большей к меньшей</button>
                     
@@ -25,9 +25,6 @@
                 </form>
         </div>
     </div>
-
-
-
 
     <div class="content" id="SortingList">
         {% for product in product %}

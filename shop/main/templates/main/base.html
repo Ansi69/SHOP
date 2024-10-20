@@ -9,10 +9,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
+    <link rel="icon" href="{% static 'main/img/icon.svg' %}" type="image/svg+xml">
     <link rel="stylesheet" href="{% static 'main/css/home.css' %}">
     {% block css %}{% endblock  %}
 </head>
 <body>
+    <div class="LogoBackground"></div>
     <header class="header">
         <div class="home">
             <div class="Logo">
@@ -42,7 +44,7 @@
                     <li class="options__item">
                         {% block loginBtn %}
                             <button onclick="showLogin()" class="loginBtn">
-                            <img src="{% static 'main/img/profile.svg' %}">
+                                <img src="{% static 'main/img/profile.svg' %}">
                             </button>
                         {% endblock  %}
                     </li>     
@@ -52,14 +54,18 @@
                             {% block cartBtn %}
                                 <button onclick="showCart()" class="cartBtn">
                                     <img src="{% static 'main/img/cart.svg' %}">
+                                    <span id="goods-in-cart-count">{{ carts.total_quantity }}</span>
                                 </button>
-                                <span id="goods-in-cart-count">{{ carts.total_quantity }}</span>
                             {% endblock  %}
                         </li>
                     {% endif %}
-                    <li class="options__item">
-                        <a href="{% url 'logout' %}"><img src="{% static 'main/img/exit.svg' %}"></a>
-                    </li>
+                    {% block profile %}
+                        <li class="options__item">
+                            <a href="{% url 'profile' %}">
+                                <img src="{% static 'main/img/profile.svg' %}">
+                            </a>
+                        </li>
+                    {% endblock  %}
                 {% endif %}
             </ul>
         </div>
@@ -90,9 +96,11 @@
                     </div>
                     <button class="enterLogin">Войти</button>
                     {% csrf_token %}
+
                     {% if form.non_field_errors %}
-                    <p id="ErrorForm">{{ form.non_field_errors }}</p>
+                        <p id="ErrorForm">{{ form.non_field_errors }}</p>
                     {% endif %}
+                    
                     <div id="downRegistr">Нет аккаунта? <a href="{% url 'registration' %}";>Зарегистрироваться</a></div>
                 </div>
             </form>

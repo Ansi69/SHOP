@@ -5,6 +5,7 @@ from django.urls import reverse
 from main.models import categories, products
 from main.forms import UserLoginForm, UserRegistrationForm
 from orders.models import Order, OrderItem
+from django.db.models import Prefetch
 
 # Create your views here.
 
@@ -145,3 +146,22 @@ def registration(request):
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect(reverse('home'))
+
+def profile(request):
+
+    orders = (
+        Order.objects.filter(user=request.user).prefetch_related(
+                Prefetch(
+                    "orderitem_set",
+                    queryset=OrderItem.objects.select_related("product"),
+                )
+            )
+            .order_by("-id")
+    )
+    categori = categories.objects.all()
+    context = {
+        'orders': orders,
+        'title': 'Личный кабинет',
+        'categories': categori
+    }
+    return render(request, 'main/profile.html', context=context)

@@ -5,44 +5,50 @@
 {% block loginBtn %}{% endblock  %}
 
 {% block content %}
-    <form method="post" id="registerModal">
-        <div class="modal-content">
-            {% csrf_token %}
+    <form method="post" id="registerModal" class="Regmodal">
+        <div class="Regmodal-content">
+
+            <div class="headName">Регистрация</div>
+
+            <div class="field-holdeer">
+                <input type="text" class="form-control login"
+                value="{% if form.username.value %}{{ form.username.value }}{% endif %}" 
+                name="username" id="id_username1" required
+                readonly onfocus="this.removeAttribute('readonly')">
+                <label for="id_username1" class="form-label login">Имя пользователя</label>
+            </div>
+
+            {% if form.username.errors %}
+                <div>{{ form.username.errors }}</div>
+            {% endif %}
+
+            <div class="field-holdeer">   
+                <input type="password" class="form-control login" id="id_password1"
+                    value="{% if form.password1.value %}{{ form.password1.value }}{% endif %}" 
+                    name="password1" required>
+                <label for="id_password1" class="form-label login">Пароль</label>
+            </div>
+
+            {% if form.password1.errors %}
+                <div>{{ form.password1.errors }}</div>
+            {% endif %}
+
+            <div class="field-holdeer">
+                <input type="password" class="form-control login" id="id_password2"
+                    value="{% if form.password2.value %}{{ form.password2.value }}{% endif %}" 
+                    name="password2" required>
+                <label for="id_password2" class="form-label login">Подтверждение пароля</label>
+            </div>
+            {% if form.password2.errors %}
+                <div>{{ form.password2.errors }}</div>
+            {% endif %}
 
             {% if form.non_field_errors %}
                 <p>{{ form.non_field_errors }}</p>
             {% endif %}
-
-            <div class="headName">Регистрация</div>
-            
-            <label for="id_username" class="form-label">Имя пользователя</label>
-            <input type="text" class="form-control" id="id_username"
-                value="{% if form.username.value %}{{ form.username.value }}{% endif %}" 
-                name="username" 
-                placeholder="Введите имя пользователя" required>
-                {% if form.username.errors %}
-                <div>{{ form.username.errors }}</div>
-                {% endif %}
-                
-            <label for="id_password1" class="form-label">Пароль</label>
-            <input type="password" class="form-control" id="id_password1"
-                value="{% if form.password1.value %}{{ form.password1.value }}{% endif %}" 
-                name="password1"
-                placeholder="Введите пароль" required>
-                {% if form.password1.errors %}
-                <div>{{ form.password1.errors }}</div>
-                {% endif %}
-                
-            <label for="id_password2" class="form-label">Подтверждение пароля</label>
-            <input type="password" class="form-control" id="id_password2"
-                value="{% if form.password2.value %}{{ form.password2.value }}{% endif %}" 
-                name="password2"
-                placeholder="Подтвердите пароль" required>
-                {% if form.password2.errors %}
-                <div>{{ form.password2.errors }}</div>
-                {% endif %}
                 
             <button class="enterLogin">Продолжить</button>
+            {% csrf_token %}
         </div>
     </form>
 {% endblock  %}

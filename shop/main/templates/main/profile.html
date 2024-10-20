@@ -1,0 +1,52 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block profile %}{% endblock  %}
+{% block content %}
+    <div class="ProfileContainer">
+        <div class="Orders">
+            {% if orders %}
+                {% for order in orders %}
+                    <div class="OrderId">
+                        <p>Заказ № {{ order.id }} - {{ order.created_timestamp }}</p>
+                        <p>Статус: <strong>{{order.status}}</strong></p>
+                    </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Товар</th>
+                                    <th>Количество</th>
+                                    <th>Цена</th>
+                                    <th>Общая стоимость</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in order.orderitem_set.all %}
+                                <tr>
+                                    <td>{{ item.product.product_name }}</td>
+                                    <td>{{ item.quantity }}</td>
+                                    <td>{{ item.price }}</td>
+                                    <td>{{ item.products_price }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                {% endfor %}
+            {% else %}
+                <p>У вас нет заказов :(</p>
+            {% endif %}
+        </div>
+        
+        <div class="MainProfile">
+            main
+        </div>
+
+        <div class="ProfileOptions">
+            <div class="options options__item">
+                <a href="{% url 'logout' %}">
+                    <img src="{% static 'main/img/exit.svg' %}">
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

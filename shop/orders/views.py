@@ -72,22 +72,3 @@ def create_order(request):
     }
     return render(request, 'orders/create_order.html', context=context)
 
-def order(request):
-
-    orders = (
-        Order.objects.filter(user=request.user)
-            .prefetch_related(
-                Prefetch(
-                    "orderitem_set",
-                    queryset=OrderItem.objects.select_related("product"),
-                )
-            )
-            .order_by("-id")
-    )
-    categori = categories.objects.all()
-    context = {
-        'orders': orders,
-        'title': 'Заказы',
-        'categories': categori
-    }
-    return render(request, 'orders/order.html', context=context)

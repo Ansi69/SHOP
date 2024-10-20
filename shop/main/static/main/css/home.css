@@ -1,4 +1,5 @@
 /* Настройки для всей страницы  */
+
 *
 {
     margin: 0;
@@ -8,8 +9,8 @@
     font-size: 16px;
 }
 
-
 /* Изменение цвета выделения текста */
+
 ::selection {
     background: #9C9EAF;
 }
@@ -19,6 +20,8 @@
 
 
 /* Размер страницы и цвет фона */
+
+
 body{
     width: 100%;
     height: 100%;
@@ -33,8 +36,8 @@ body::-webkit-scrollbar {
     height: 0; /* Скрыть горизонтальный ползунок */
 }
 
-
 /* Голова */
+
 .header{
     height: 6vw;
     background: linear-gradient(to left, #919191, #444444 70%);
@@ -65,14 +68,15 @@ body::-webkit-scrollbar {
     transition: transform .2s;
 }
 
-
 /* Увеличение иконки корзины и профиля при наведении */
+
 .options__item:hover{
     transform: scale(1.2);
+    cursor: pointer;
 }
 
-
 /* Вид списка в навигации */
+
 .menu__nav, .options__nav{
     list-style: none;
     display: flex;
@@ -89,7 +93,6 @@ a{
     letter-spacing: 0.1ex;
 }
 
-
 /* Адаптивность для изображений и текста в навигации */
 
 .home img, .options img {
@@ -100,8 +103,8 @@ a{
     font-size: calc(7px + 8 * (100vw - 320px) / 880);
 }
 
-
 /* линия под текстом при наведении в меню */
+
 .menu_item:after {
 	display: block;
     position: relative;
@@ -118,8 +121,6 @@ a{
 .menu_item:focus:after {
 	width: 100%;
 }
-
-
 
 /* Окно входа | регистрации */
 
@@ -139,7 +140,7 @@ a{
     background-color: rgba(0,0,0,0.4); 
 }
 
- .modal-content {
+.modal-content {
     display: flex;
     flex-direction: column;
     background-color: #fefefe;
@@ -153,19 +154,36 @@ a{
     border-radius: 25px;
 }
 
-#registerModal {
+.Regmodal {
+    position: fixed; 
+    z-index: 2; 
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    padding-bottom: 10%;
+}
+
+.Regmodal-content {
     display: flex;
     flex-direction: column;
-    background-color: #fefefe;
+    background-color: rgb(255, 255, 255);
+    padding: 50px;
+    border: 8px solid #b3b3b3;
+    width: 25%;
+    height: auto;
     position: absolute;
-    left: 40%;
-    top: 20%;
+    border-radius: 25px;
 }
+
 
 /* Элементы формы */
 
 
 /* Кнопка выхода из формы (крестик) */
+
 
 .close {
     display: flex;
@@ -185,7 +203,6 @@ a{
     cursor: pointer;
 }
 
-
 .headName {
     text-align: center;
     font-size: 2vw;
@@ -193,12 +210,11 @@ a{
     margin-bottom: 25px;
 }
 
-
 .field-holdeer {
     position: relative;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
+    margin-top: 10px;
 }
-
 
 /* Перемещающийся placeholder */
 
@@ -220,6 +236,7 @@ a{
 }
 
 /* Анимация перехода текста */
+
 .form-label.login, .form-control.login{
     font-size: 1em;
     width: 100%;
@@ -253,7 +270,6 @@ a{
     background: #303030;
 }
 
-
 #downRegistr {
     text-align: center;
     margin-top: 20px;
@@ -263,17 +279,17 @@ a{
     color: rgb(80, 75, 75);
 }
 
-
 /* Вывод ошибок при неправильных данных */
 
 .errorlist {
     list-style: none;
-    color: red;
-    margin: 15px 0px;
+    color: black;
+    margin: 10px 0px;
 }
 
 
 /* Корзина */
+
 
 .cartBtn{
     background: none;
@@ -281,8 +297,6 @@ a{
     padding: 0;
     cursor: pointer;
 }
-
-
 
 .productAreaCart {
     background-color: #D9D9D9;
@@ -305,7 +319,6 @@ a{
     width: 30px;
     height: 30px;
 }
-
 
 .productNameCart {
     font-size: 16px;
@@ -343,8 +356,6 @@ a{
     color: #121212;
 }
 
-
-
 .totalPriceCart {
     font-size: 22px;
     color: black;
@@ -354,7 +365,7 @@ a{
 }
 
 #downCart {
-    height: 80px;
+    height: 40px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -386,8 +397,8 @@ a{
     font-size: 20px;
 }
 
-
 /* Пустая корзина */
+
 .cartEmpty {
     position: relative;
     font-size: 20px;
@@ -402,8 +413,8 @@ a{
     border-radius: 20px;
 }
 
-
 /* Ебейшее что может быть - смайлик */
+
 .new-smile {
     font-size: 25px;
     padding: 3px;
@@ -424,9 +435,9 @@ a{
 }
 
 
-
-
 /* Тело */
+
+
 main{
     display: flex;
     flex-direction: column;
@@ -457,6 +468,7 @@ main{
 }
 
 /* Всплывающие кнопки при наводке на карточку */
+
 .detailed, .addCarting {
     width: 75%;
     background: white;
@@ -475,8 +487,6 @@ main{
     z-index: 1;
 }
 
-
-
 .addCarting {
    opacity: 0;
    font-size: 2.6vh;
@@ -485,18 +495,15 @@ main{
    left: 12%;
 }
 
-
 .papa:hover .item{
     box-shadow: 0px 0px 30px white;
     opacity: 0.4;
 }
 
-
 .papa:hover .detailed,
 .papa:hover .addCarting {
     opacity: 1;
 }
-
 
 .detailed:hover,
 .addCarting:hover {
@@ -504,8 +511,8 @@ main{
     background: #303030;
 }
 
-
 /* Элементы карточки */
+
 .product{
     width: 100%;
     height: 100%;
@@ -534,8 +541,6 @@ main{
     margin: 25px 0px;
     margin-left: 1vw;
 }
-
-
 
 
 /* Оформление заказа */
@@ -570,7 +575,6 @@ main{
     margin: 20px 0px;
 }
 
-
 /* Левая сторона */
 
 /* Личные даннные */
@@ -594,7 +598,6 @@ main{
     margin-bottom: 5px;
 }
 
-
 /* Доставка */
 
 .deliveryAdress {
@@ -610,11 +613,9 @@ main{
     height: 75px;
 }
 
-
 .form-check-inline {
     margin: 10px 0px;
 }
-
 
 #dataEntry button {
     align-self: center;
@@ -634,7 +635,6 @@ main{
     color: white;
     background: #303030;
 }
-
 
 /* Правая сторона */
 
@@ -664,7 +664,6 @@ main{
     padding-top: 20px;
 }
 
-
 #dataEntry .productNameCart {
     font-size: 16px;
     overflow-wrap: break-word;
@@ -676,10 +675,8 @@ main{
    justify-content: space-around;
 }
 
-
-
-
 /* футер */
+
 footer{
     background: linear-gradient(to right, #919191, #1e1e1e   70%);
     width: 100%;
@@ -690,12 +687,12 @@ footer{
     margin-top: auto;
 }
 
-
 /* Сообщение об удалении и добавлении товара из корзины, в конце файла base */
+
 .message{
     background-color: gray;
     padding-block: 8px;
-    border-radius: 10px;
+    border-radius: 15px;
     color:white !important;
     font-size: 24px;
     font-weight: bold;
@@ -712,6 +709,7 @@ footer{
 .InfoText{
     font-size: 30px;
     color: white;
+    cursor: pointer;
 }
 
 .FiltersContainer{
@@ -749,6 +747,10 @@ footer{
     cursor: pointer;
 }
 
+.FiltersForm{
+    cursor: default;
+}
+
 .filterButton:hover {
     color: white;
     background: #303030;
@@ -756,6 +758,7 @@ footer{
 
 
 /* вид страницы товара */
+
 
 .products{
     display: flex;
@@ -839,7 +842,6 @@ footer{
     transform-origin: bottom left;
 }
 
-
 .AddProduct{
     white-space: nowrap;
     align-self: center;
@@ -859,6 +861,7 @@ footer{
     background: #303030;
 }
 
+/* это скидка у товара я хз че за хуйня тут */
 
 [data-title] {
     position: relative;
@@ -867,65 +870,69 @@ footer{
     content: attr(data-title);
     position: absolute;
     left: 15%;
-    top: 3em; /* Положение подсказки */
+    top: 3em;
     opacity: 0;
     transition: 0.5s;
     pointer-events: none;
     background: black;
     color: #fff;
     border-radius: 15px;
-    padding: 0.5em; /* Поля вокруг текста */
+    padding: 0.5em;
   }
   [data-title]:hover::after {
     opacity: 1;
   }
 
 
+/* Линия на главном экране */
 
 
 .line {
     position: absolute;
     margin-top: 5px;
     top: 19%;
-    width: 50%; /* Ширина линий */
-    height: 2px; /* Высота линий */
-    background-color: white; /* Цвет линий */
-    opacity: 0; /* Скрываем линии изначально */
+    width: 50%;
+    height: 2px;
+    background-color: white;
+    opacity: 0;
 }
 
 #line1 {
-    left: 0; /* Первая линия слева */
-    transform: translateX(-100%); /* Изначально за пределами экрана */
-    animation: slide-in-left 1.5s forwards; /* Анимация */
+    left: 0;
+    transform: translateX(-100%);
+    animation: slide-in-left 1.5s forwards;
 }
 
 #line2 {
-    right: 0; /* Вторая линия справа */
-    transform: translateX(100%); /* Изначально за пределами экрана */
-    animation: slide-in-right 1.5s forwards; /* Анимация с задержкой */
+    right: 0;
+    transform: translateX(100%);
+    animation: slide-in-right 1.5s forwards;
 }
 
 @keyframes slide-in-left {
     0% {
         transform: translateX(-100%);
-        opacity: 1; /* Линия видима */
+        opacity: 1;
     }
     100% {
         transform: translateX(0);
-        opacity: 1; /* Линия видима */
+        opacity: 1;
     }
 }
 
 @keyframes slide-in-right {
     0% {
         transform: translateX(100%);
-        opacity: 1; /* Линия видима */
+        opacity: 1;
     }
     100% {
         transform: translateX(0);
-        opacity: 1; /* Линия видима */
+        opacity: 1;
     }
 }
+
+
+/* Лого */
 
 
 .Logo{
@@ -955,3 +962,39 @@ footer{
     padding-left: 115px;
     padding-top: 5px;
 }
+
+
+/* Профиль/личный кабинет */
+
+
+.ProfileContainer{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 1000 строчка wtf */

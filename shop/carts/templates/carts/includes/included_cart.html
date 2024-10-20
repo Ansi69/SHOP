@@ -58,11 +58,9 @@
     <div class="totalPriceCart">Итого: {{ carts.total_price }} руб.</div>
     <div id="downCart">
         <div><a class="placeAnOrderCart" href="{% url 'orders:create_order' %}";>Оформить заказ</a></div>
-        <div><a class="myOrdersCart" href="{% url 'orders:order' %}";>Мои заказы</a></div>
     </div>
 {% elif carts and order %}
-    <div class="totalPriceCart">Итого: {{ carts.total_price }}р.</div>
+    <div class="totalPriceCart">Итого: {{ carts.total_price }} руб.</div>
 {% else %}
     <div class="cartEmpty">Корзина пуста <span class="smile">-_-</span><span class="new-smile">\_/</span></div>
-    <a class="myOrdersCart" href="{% url 'orders:order' %}";>Мои заказы</a>
 {% endif %}
