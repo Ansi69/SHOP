@@ -20,14 +20,12 @@
                     <button type="button" class="btn delete"
                     data-cart-id="{{ cart.id }}"
                     data-cart-change-url="{% url "cart:cart_remove" %}">
-                    {% csrf_token %}
-                    —</button>
+                    {% csrf_token %}-</button>
                 {% else %}
                     <button type="button" class="btn decrement"
                     data-cart-id="{{ cart.id }}"
                     data-cart-change-url="{% url "cart:cart_change" %}">
-                    {% csrf_token %}
-                    —</button>
+                    {% csrf_token %}-</button>
                 {% endif %}
                 
                 <input type="text" class="numberProductsCart" value="{{ cart.quantity }}" readonly>

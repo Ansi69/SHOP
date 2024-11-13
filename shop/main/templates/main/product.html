@@ -10,13 +10,13 @@
                 <div class="sliderContainer">
                     <div class="slider">
                         <div class="slides">
-                            <div class="slide"><img src="{% static 'main/img/kartinki/kartinka1.png' %}" class="productImg"></div>
-                            <div class="slide"><img src="{% static 'main/img/kartinki/kartinka2.png' %}" class="productImg"></div>
-                            <div class="slide"><img src="{% static 'main/img/kartinki/kartinka3.png' %}" class="productImg"></div>
-                            <div class="slide"><img src="{% static 'main/img/kartinki/kartinka1.png' %}" class="productImg"></div>
-                            <div class="slide"><img src="{% static 'main/img/kartinki/kartinka3.png' %}" class="productImg"></div>
-
-
+                            <div class="slide"><img src="{{ product.img.url }}" class="productImg"></div>
+                            {% if product.img2 %}
+                                <div class="slide"><img src="{{ product.img2.url }}" class="productImg"></div>
+                                <div class="slide"><img src="{{ product.img3.url }}" class="productImg"></div>
+                                <div class="slide"><img src="{{ product.img4.url }}" class="productImg"></div>
+                                <div class="slide"><img src="{{ product.img5.url }}" class="productImg"></div>
+                            {% endif %}
                         </div>
                         <div class="arrow arrowLeft"><img src="{% static 'main/img/arrowSlider/arrowLeft.png' %}" class=""></div>
                         <div class="arrow arrowRight"><img src="{% static 'main/img/arrowSlider/arrowRight.png' %}" class=""></div>
@@ -87,3 +87,7 @@
     </div>
 {% endblock  %}
 
+
+{% block js %}
+    <script src="{% static 'main/js/product.js' %}"></script>
+{% endblock  %}}

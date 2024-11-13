@@ -72,7 +72,7 @@
             </div>
 
 
-        <a href="#" class="exit">Выйти из аккаунта</a>
+        <a href="{% url 'logout' %}" class="exit">Выйти из аккаунта</a>
 
         </div>
 
@@ -96,18 +96,16 @@
                         <td class="orderNumber">№{{ order.id }}
                             <div class="modalOrder">
                                 <h3 class="modalOrderTitle">Содержимое:</h3>
-                                <ul class="modalOrderUl"> 
-                                    <li>Футболка</li>
-                                    <li>Трусы топопые dfdfgg dfg</li>
-                                    <li>Мега гига кепка</li>
+                                <ul class="modalOrderUl">
+                                    {% for item in order.orderitem_set.all %}
+                                        <li>{{ item.product.product_name }}</li>
+                                    {% endfor %}
                                 </ul>
                             <div>
                         </td>
                         <td class="orderDate">{{ order.created_timestamp }}</td>
                         <td class="orderStatus">{{order.status}}</td>
-                        {% for item in order.orderitem_set.all %}
-                        <td class="orderPrice">{{ item.products_price }}</td>
-                        {% endfor %}
+                        <td class="orderPrice">{{ order.orderitem_set.total_price }}</td>
                     </tr>
 
                 {% endfor %}
@@ -146,12 +144,10 @@
                 </div>
             </div>
         </div>
-
-
     </div>
-
-
-
-
 {% endblock %}
+
+{% block js %}
+    <script src="{% static 'main/js/profile.js' %}"></script>
+{% endblock  %}}
 

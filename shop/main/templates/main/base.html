@@ -63,11 +63,11 @@
                         </li>
                     {% endif %}
                     {% block profile %}
-                        <li class="options__item">
-                            <a href="{% url 'profile' %}">
+                        <a href="{% url 'profile' %}">
+                            <li class="options__item">
                                 <img src="{% static 'main/img/profile.svg' %}">
-                            </a>
-                        </li>
+                            </li>
+                        </a>
                     {% endblock  %}
                 {% endif %}
             </ul>

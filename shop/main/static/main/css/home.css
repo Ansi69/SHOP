@@ -16,11 +16,6 @@
     background: #9C9EAF;
 }
 
-img {
-    pointer-events:none
-}
-
-
 /* Базовый файл */
 
 
@@ -611,6 +606,7 @@ main{
     align-self: center;
     position: relative;
     bottom: 20px;
+    pointer-events: none;
 }
 
 .productName,
@@ -966,6 +962,7 @@ main{
     justify-content: space-between;
     align-items: center;
     margin-bottom: 3%;
+    cursor: pointer;
 }
 
 .sizeProduct {

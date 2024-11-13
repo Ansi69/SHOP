@@ -29,5 +29,9 @@ class ProductsAdmin(admin.ModelAdmin):
         ('product_price', 'discount'),
         'quantity',
         'img',
+        'img2',
+        'img3',
+        'img4',
+        'img5',
         'slug'
     ]

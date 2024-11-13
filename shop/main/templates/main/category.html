@@ -31,29 +31,33 @@
         <div class="papa" data-price="{{ product.product_price }}">
             <a href="{% url 'product' product.slug %}">
                 <div class="detailed">Подробнее</div>
-                <div >
-                    {% if not user.is_authenticated %}     
-                    {% else %}
-                        <a href="{% url "cart:cart_add" %}"
-                        class="add-to-cart addCarting"
-                        data-product-id="{{ product.id }}">
-                        {% csrf_token %}
-                        Добавить в корзину</a>
-                    {% endif %}
-                </div >
-                <div class="item">
-                    <div class="product">
-                        {% if product.img %}
-                            <img src="{{ product.img.url }}">
-                        {% else %}
-                            <img src="{% static 'main/img/cart.svg' %}">
-                        {% endif %}
-                            <div class="productName">{{product.product_name}}</div>
-                            <div class="productPrice">Цена: {{product.product_price}} р.</div>
-                            <div class="productDescription">{{product.description}}</div>
-                    </div>
-                </div>
             </a>
+            <div>
+                {% if not user.is_authenticated %}     
+                {% else %}
+                    {% if product.quantity == 0 %}
+                    <div class="addCarting">Товара нет в наличии</div>
+                    {% else %}
+                    <a href="{% url "cart:cart_add" %}"
+                    class="add-to-cart addCarting"
+                    data-product-id="{{ product.id }}">
+                    {% csrf_token %}
+                    Добавить в корзину</a>
+                    {% endif %}
+                {% endif %}
+            </div>
+            <div class="item">
+                <div class="product">
+                    {% if product.img %}
+                        <img src="{{ product.img.url }}">
+                    {% else %}
+                        <img src="{% static 'main/img/cart.svg' %}">
+                    {% endif %}
+                        <div class="productName">{{product.product_name}}</div>
+                        <div class="productPrice">Цена: {{product.product_price}} р.</div>
+                        <div class="productDescription">{{product.description}}</div>
+                </div>
+            </div>
         </div>
         {% endfor %}
     </div>
