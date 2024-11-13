@@ -5,7 +5,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Microsoft Sans Serif';
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
     font-size: 16px;
 }
 
@@ -13,6 +14,10 @@
 
 ::selection {
     background: #9C9EAF;
+}
+
+img {
+    pointer-events:none
 }
 
 
@@ -51,6 +56,41 @@ body::-webkit-scrollbar {
     align-items: center;
     cursor: pointer;
 }
+
+
+/* Лого */
+
+
+.Logo{
+    padding-bottom: 45px;
+    padding-right: 200px;
+}
+
+.logoLeft{
+    position: absolute;
+    background-color: black;
+    color: white;
+    font-size: 30px;
+    font-weight: 700;
+    border-radius: 10px;
+    width: 110px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+.logoRight{
+    position: absolute;
+    color: white;
+    font-size: 30px;
+    font-weight: 700;
+    padding-left: 115px;
+    padding-top: 5px;
+}
+
+
+
 
 .menu{
     display: flex;
@@ -190,7 +230,7 @@ a{
     justify-content: center;
     color: #aaa;
     font-size: 28px;
-    font-weight: bold;
+    font-weight: 700;
     width: 30px;
     height: 30px;
     margin-left: 90%;
@@ -235,13 +275,13 @@ a{
     outline: none;
 }
 
-/* Анимация перехода текста */
-
 .form-label.login, .form-control.login{
     font-size: 1em;
     width: 100%;
     cursor: text;
 }
+
+/* Анимация перехода текста */
 
 .form-control:focus.login + .form-label.login,
 .form-control:valid.login + .form-label.login{
@@ -283,7 +323,7 @@ a{
 
 .errorlist {
     list-style: none;
-    color: black;
+    color: red;
     margin: 10px 0px;
 }
 
@@ -307,12 +347,6 @@ a{
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.productCountAndPriceCart {
-    margin: 10px 0px;
-    color: white;
-    letter-spacing: 0.1ex;
 }
 
 #cart_items img {
@@ -436,6 +470,55 @@ a{
 
 
 /* Тело */
+
+
+
+/* Линия на главном экране */
+
+
+.line {
+    position: absolute;
+    margin-top: 5px;
+    top: 19%;
+    width: 50%;
+    height: 2px;
+    background-color: white;
+    opacity: 0;
+}
+
+#line1 {
+    left: 0;
+    transform: translateX(-100%);
+    animation: slide-in-left 1.5s forwards;
+}
+
+#line2 {
+    right: 0;
+    transform: translateX(100%);
+    animation: slide-in-right 1.5s forwards;
+}
+
+@keyframes slide-in-left {
+    0% {
+        transform: translateX(-100%);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-in-right {
+    0% {
+        transform: translateX(100%);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
 
 
 main{
@@ -675,17 +758,7 @@ main{
    justify-content: space-around;
 }
 
-/* футер */
 
-footer{
-    background: linear-gradient(to right, #919191, #1e1e1e   70%);
-    width: 100%;
-    height: 4vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: auto;
-}
 
 /* Сообщение об удалении и добавлении товара из корзины, в конце файла base */
 
@@ -695,7 +768,7 @@ footer{
     border-radius: 15px;
     color:white !important;
     font-size: 24px;
-    font-weight: bold;
+    font-weight: 700;
     letter-spacing: 1px;
     position: fixed;
     z-index: 4;
@@ -757,67 +830,218 @@ footer{
 }
 
 
-/* вид страницы товара */
+/* Вид страницы товара */
 
 
 .products{
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 10%;
-    padding-left: 10%;
-    padding-right: 30%;
-    width: 100%;
 }
+
+
+/* Левая часть страницы (Изображение) */
+
 
 .ImgContainer{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 700px;
-    height: 800px;
+    width: 50vw;
+    height: 90vh;
+    color: white; 
+    position: relative;
 }
 
-.productDescript{
-    display: flex;
-    flex-direction: column;
-    padding-top: 20%;
-    width: 300px;
-    height: 800px;
+.ImgContainerBackground {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient( white , #1E1E1E 69% );
+    opacity: 0.3;
 }
 
 .productImg{
+    margin-top: 4vh;
     width: 100%;
-    height: auto;
-    max-width: 500px;
-    max-height: 500px;
+    height: 80%;
+    position: absolute;
+    z-index: 4;
+    top: 0px;
+}
+
+/* Слайдер фото */
+
+
+.sliderContainer {
+    width: 100%;
+    height: 100%;
+}
+
+.slider {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.slides {
+    display: flex;
+    transition: 0.5s ease-in-out;
+    height: 100%;
+}
+
+.slide {
+    min-width: 100%;
+    height: 100%;
+}
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.arrow img {
+    width: 3vw;
+    height: 6vh;
+}
+
+.arrow:hover {
+    background-color: #666666;
+    border-radius: 50px;
+    transition: 0.5s ease-in-out;
+}
+
+.arrowLeft {
+    left: 10%;
+}
+.arrowRight {
+    right: 10%;
+}
+
+.dots {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    top: -90px;
+}
+.dot {
+    width: 3vw;
+    height: 6vh;
+    border: 3px white solid;
+    border-radius: 50%;
+    margin: 0 15px;
+    cursor: pointer;
+}
+.activeDot {
+    background: radial-gradient(circle 0.9vw, white 100%, #1E1E1E);
+}
+
+
+/* Правая часть страницы (Описание) */
+
+.productDescript{
+    width: 34vw;
+    align-self: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 60px;
+    margin-left: 80px;
 }
 
 .productTitle{
-    white-space: nowrap;
-    font-weight: bold;
-    font-size:50px;
+    font-weight: 700;
+    font-size: calc(23px + 8 * (100vw - 320px) / 880);
     color: white;
 }
 
+.sizeProductContainer {
+    width: 60%;
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3%;
+}
+
+.sizeProduct {
+    display: inline-block;
+    text-align: center;
+    font-size: calc(17px + 8 * (100vw - 320px) / 880);
+    font-weight: 700;
+    color: black;
+    width: 16%;
+    height: 110%;
+    padding-bottom: 0px;
+    background-color: white;
+    margin-right: 7px;
+    border-radius: 10px;
+    transition: 0.2s ease-in-out;
+}
+
+@media (width > 1800px) {
+    .sizeProduct {
+        width: 13%;
+        height: 150%;
+    }
+}
+
+.activeSize {
+    transform: scale(1.1);
+    background-color: #6A6A6A;
+}
+
+.productCountContainer {
+    display: flex;
+    align-items: center;
+    color: white;
+    letter-spacing: 0.1ex;  
+}
+
+.numberProducts {
+    text-align: center;
+    width: 1.6vw;
+    height: 3.3vh;
+    font-size: calc(15px + 8 * (100vw - 320px) / 880);
+    border: none;
+    border-radius: 6px;
+    margin: 0px 20px;
+}
+
+.productCountDelete, .productCountIncrement {
+    color: white;
+    font-size: calc(30px + 8 * (100vw - 320px) / 880);
+    background: none;
+    border: none;
+   
+}
+
+.productCountDelete {
+    font-size: 28px;
+}
+
+
 .productInf{
-    white-space: nowrap;
-    font-size:30px;
+    font-size: calc(18px + 8 * (100vw - 320px) / 880);
+    font-weight: 300;
     padding-top: 5%;
-    padding-bottom: 10%;
+    padding-bottom: 7%;
     color: white;
 }
 
 .productDiscount{
     white-space: nowrap;
-    font-size: 25px;
+    font-size: calc(18px + 8 * (100vw - 320px) / 880);
     color: grey;
 }
 
 .productCost{
     white-space: nowrap;
-    font-size: 15px;
+    font-size: calc(5px + 8 * (100vw - 320px) / 880);
     padding-top: 5%;
     padding-bottom: 10%;
     color: white;
@@ -825,36 +1049,49 @@ footer{
 
 .line-container {
     position: relative;
-    width: 250px;
+    width: 60%;
     height: 30px;
-    overflow: hidden;
 }
 
 .line-container::before {
-    content: '';
-    position: absolute;
-    bottom: 8px;
-    left: 2%;
-    height: 1px;
-    width: 40%;
-    background: white;
-    transform: rotate(-6deg);
-    transform-origin: bottom left;
+	content: "";
+	border-bottom: 2px solid gray;
+	position: absolute;
+    bottom: 20%;
+	width: 9vw;
+	height: 50%;
+	transform: rotate(-8deg);
+}
+
+@media (width < 1750px) {
+    .line-container::before {
+        width: 11vw;
+        bottom: 40%;
+    }
+}
+
+@media (width < 1220px) {
+    .line-container::before {
+        width: 13vw;
+        bottom: 40%;
+    }
 }
 
 .AddProduct{
     white-space: nowrap;
     align-self: center;
+    text-align: center;
     background: white;
     color: black;
-    font-weight: bold;
-    font-size: 30px;
+    font-weight: 700;
+    font-size: 1.6vw;
     letter-spacing: 0.1ex;
-    padding: 8px;
+    padding: 12px 8px;
     border-radius: 15px;
     transition: 0.5s ease-in-out;
     cursor: pointer;
 }
+
 
 .AddProduct:hover {
     color: white;
@@ -884,93 +1121,283 @@ footer{
   }
 
 
-/* Линия на главном экране */
 
 
-.line {
-    position: absolute;
-    margin-top: 5px;
-    top: 19%;
-    width: 50%;
-    height: 2px;
-    background-color: white;
-    opacity: 0;
-}
-
-#line1 {
-    left: 0;
-    transform: translateX(-100%);
-    animation: slide-in-left 1.5s forwards;
-}
-
-#line2 {
-    right: 0;
-    transform: translateX(100%);
-    animation: slide-in-right 1.5s forwards;
-}
-
-@keyframes slide-in-left {
-    0% {
-        transform: translateX(-100%);
-        opacity: 1;
-    }
-    100% {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-@keyframes slide-in-right {
-    0% {
-        transform: translateX(100%);
-        opacity: 1;
-    }
-    100% {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-
-/* Лого */
-
-
-.Logo{
-    padding-bottom: 45px;
-    padding-right: 200px;
-}
-
-.logoLeft{
-    position: absolute;
-    background-color: black;
-    color: white;
-    font-size: 30px;
-    font-weight: bold;
-    border-radius: 10px;
-    width: 110px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center; 
-}
-
-.logoRight{
-    position: absolute;
-    color: white;
-    font-size: 30px;
-    font-weight: bold;
-    padding-left: 115px;
-    padding-top: 5px;
-}
 
 
 /* Профиль/личный кабинет */
 
 
-.ProfileContainer{
+.profileContainer{
     display: flex;
-    flex-direction: row;
-    width: 100%;
+    justify-content: center;
+    margin: 60px 0px;
+}
+
+
+/* Отступы блока Навигации */
+
+.profileNav {
+    margin: 0px 130px 0px 70px;
+}
+
+/* Заголовки блоков */
+
+.profileTitle {
+    color: white;
+    font-size: calc(16px + 8 * (100vw - 320px) / 880);
+    margin-bottom: 9px;
+}
+
+/* Блок Навигации */
+
+.profileNavContainer {
+    height: 25vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px 15px;
+}
+
+.profileNavContainer a {
+   font-size: calc(1vw + 0.6vh);
+   color: #090909;
+}
+
+.profileInf, .profileMyOrders, .profileAdditSett {
+    display: none;
+}
+
+/* Контейнеры Личныйх данных и Адреса доставки */
+
+.profileInfContainer, .profileDelivAdresContainer,
+.profileAddirSettContainer {
+    width: 40vw;   
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4vh;
+}
+
+/* Блок Личных данных */
+
+.infBlock {
+    width: 47%;
+    display: flex;
+    flex-direction: column;
+}
+
+.infTitle {
+    color: white;
+    font-size: calc(9px + 8 * (100vw - 320px) / 880);
+    font-weight: 300;
+    margin-bottom: 5px;
+}
+
+.infInput {
+    height: 4vh;
+    padding: 7px 6px;
+    border: none;
+    border-radius: 12px;
+}
+
+.infInput::placeholder {
+    font-size: calc(6px + 8 * (100vw - 320px) / 880);
+    font-weight: 300;
+    color: #6A6A6A;
+}
+
+.deliv.profileTitle {
+    margin: 25px 0px;
+}
+
+
+/* Кнопка выхода из аккаунта */
+
+.exit {
+    display: block;
+    color: white;
+    font-size: 2vw;
+    font-weight: 500;
+    background-color: #FF7474;
+    border-radius: 30px;
+    text-align: center;
+    margin-top: 40px;
+    padding: 8px;
+    letter-spacing: 1px;
+}
+
+.exit:hover {
+    transition: 0.3s ease-in-out;
+    background-color: red;
+}
+
+
+
+@media (width < 1223px)
+{
+   .infBlock {
+        width: 80%;
+   }
+
+   .exit {
+        width: 32vw;
+   }
+}
+
+
+
+/* Блок Заказов */
+
+.profileMyOrdersContainer {
+    width: 40vw;
+    background-color: white;
+    border-radius: 8px;
+    text-align: center;
+    border-collapse: separate;
+    border-spacing: 0 1em;
+}
+
+.myOrdersTitle {
+    font-size: calc(7px + 8 * (100vw - 320px) / 880);
+    font-weight: 700;
+    text-align: center;
+}
+
+.order {
+    padding-bottom: 15px;
+    position: relative;
+} 
+
+.order td {
+    font-size: calc(7px + 8 * (100vw - 320px) / 880);
+}
+
+.orderNumber {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
+
+/* Всплывающие окно в заказе */
+
+.modalOrder {
+    background: white;
+    position: absolute;
+    top: -15px;
+    left: 60px;
+    padding-left: 27px;
+    padding-right: 30px;
+    border: #000000 2px solid ;
+    border-radius: 10px;
+    text-align: start;
+    display: none;
+    z-index: 3;
+}
+
+.modalOrderTitle {
+    position: relative;
+    top: 0px;
+    left: -30px;
+    font-size: calc(7px + 8 * (100vw - 320px) / 880);
+    font-weight: 700;
+    margin: 10px;
+}
+
+.modalOrderUl {
+    list-style: decimal;
+}
+
+.modalOrderUl li {
+    margin-bottom: 10px;
+    font-size: calc(6px + 8 * (100vw - 320px) / 880);
+}
+
+
+/* Отображение всплывающего окна */
+.orderNumber:hover {
+    .modalOrder {
+        display: block;
+    }
+}
+
+
+
+
+/* Активный блок */
+
+.activeNav::before {
+    content: "—";
+}
+.activeNav {
+    font-weight: 700;
+}
+
+.activeTab {
+    display: block;
+}
+
+
+/* Блок дополнительных настроек */
+
+.profileAddirSettContainer {
+    display: block;
+}
+.blockSetts {
+    margin-bottom: 10px;
+}
+
+.titleBlockSetts {
+    font-size: calc(12px + 8 * (100vw - 320px) / 880);
+    text-align: center;
+    width: 11vw;
+    padding: 3px 15px;
+    background-color: white;
+    border-radius: 10px;
+    margin: 20px 0px;
+}
+
+.contentBlockSetts {
+    display: flex;
+    padding: 0px 5px;
+}
+
+.blockSetts:nth-child(2) .titleBlockSetts {
+    width: 17vw;
+}
+
+
+
+.itemBlockSetts {
+    display: flex;
+    align-items: center;
+    font-size: calc(10px + 8 * (100vw - 320px) / 880);
+    color: white;
+    margin-right: 45px;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.iconSetts {
+    width: 23px;
+    height: 23px;
+    padding: 3px;
+    border: white 1px solid;
+    border-radius: 50px;
+    margin-right: 5px;
+}
+
+
+
+.theme:hover {
+    transition: 0.4s ease-in-out;
+    transform: scale(1.07);
+}
+
+.activeTheme {
+    background-color: #666666;
 }
 
 
@@ -979,18 +1406,17 @@ footer{
 
 
 
+/* футер */
 
-
-
-
-
-
-
-
-
-
-
-
+footer{
+    background: linear-gradient(to right, #919191, #1e1e1e   70%);
+    width: 100%;
+    height: 4vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: auto;
+}
 
 
 

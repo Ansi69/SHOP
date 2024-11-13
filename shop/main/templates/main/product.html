@@ -3,31 +3,73 @@
 
 {% block content %}
     <div class="products">
+        
         <div class="ImgContainer">
+            <div class="ImgContainerBackground"></div>
             {% if product.img %}
-                <img src="{{ product.img.url }}" class="productImg">
+                <div class="sliderContainer">
+                    <div class="slider">
+                        <div class="slides">
+                            <div class="slide"><img src="{% static 'main/img/kartinki/kartinka1.png' %}" class="productImg"></div>
+                            <div class="slide"><img src="{% static 'main/img/kartinki/kartinka2.png' %}" class="productImg"></div>
+                            <div class="slide"><img src="{% static 'main/img/kartinki/kartinka3.png' %}" class="productImg"></div>
+                            <div class="slide"><img src="{% static 'main/img/kartinki/kartinka1.png' %}" class="productImg"></div>
+                            <div class="slide"><img src="{% static 'main/img/kartinki/kartinka3.png' %}" class="productImg"></div>
+
+
+                        </div>
+                        <div class="arrow arrowLeft"><img src="{% static 'main/img/arrowSlider/arrowLeft.png' %}" class=""></div>
+                        <div class="arrow arrowRight"><img src="{% static 'main/img/arrowSlider/arrowRight.png' %}" class=""></div>
+                    </div>
+                    <div class="dots">
+                        <div class="dot activeDot" data-index="0"></div>
+                    </div>
+                </div>
+
             {% else %}
                 <img src="{% static 'main/img/cart.svg' %}" class="productImg">
             {% endif %}
         </div>
+
         <div class="productDescript">
-            <p class="productTitle">{{product.product_name}}</p>
-            <p class="productInf">{{product.description}}</p>
+            <div class="productTitle">{{product.product_name}}</div>
+            <div class="productInf">{{product.description}}</div>
             {% if product.quantity == 0 %}
-                <p class="productInf">Товара нет в наличии</p>    
+                <div class="productInf">Товара нет в наличии</div>    
             {% else %}
+
+            <div class="sizeProductContainer">
+                <div class="size sizeProduct activeSize">XS</div>
+                <div class="size sizeProduct">S</div>
+                <div class="size sizeProduct">M</div>
+                <div class="size sizeProduct">L</div>
+                <div class="size sizeProduct">XL</div>
+            </div>
+
+            <div class="productCountContainer">
+                
+                <button type="button" class="btn productCountDelete" data-cart-id="355" data-cart-change-url="/cart/cart_remove/">
+                <input type="hidden" name="csrfmiddlewaretoken" value="gCWlcsP6V4ymqYjPABDi261Ukev3qPnz1ofAM37znNRlMPyPUaSwZsbaqoSOiKTw">
+                —</button>
+            
+                <input type="text" class="numberProducts" value="1" readonly="">
+            
+                <button type="button" class="btn productCountIncrement" data-cart-id="355" data-cart-change-url="/cart/cart_change/">
+                <input type="hidden" name="csrfmiddlewaretoken" value="gCWlcsP6V4ymqYjPABDi261Ukev3qPnz1ofAM37znNRlMPyPUaSwZsbaqoSOiKTw">
+                +</button>
+            
+            </div>
+
                 {% if product.discount %}
-                    <div>
-                        <div class="line-container">
-                            <p class="productDiscount">{{ product.product_price }} руб.
-                            <sup class="productCost">-{{product.discount}}%</sup></p>
-                        </div>
+                    <div class="line-container">
+                        <div class="productDiscount">{{ product.product_price }} руб.
+                        <sup class="productCost">-{{product.discount}}%</sup></div>
                     </div>
 
-                    <p class="productInf">{{ product.sell_price }} руб.</p>
-                    
+                    <div class="productInf">{{ product.sell_price }} руб.</div>
+
                 {% else %}
-                    <p class="productInf">{{product.product_price}} руб.</p>
+                    <div class="productInf">{{product.product_price}} руб.</div>
                 {% endif %}
                 {% if not user.is_authenticated %}        
                     <abbr data-title="Необходимо войти в аккаунт">

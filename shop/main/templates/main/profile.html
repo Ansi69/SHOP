@@ -3,50 +3,155 @@
 
 {% block profile %}{% endblock  %}
 {% block content %}
-    <div class="ProfileContainer">
-        <div class="Orders">
-            {% if orders %}
-                {% for order in orders %}
-                    <div class="OrderId">
-                        <p>Заказ № {{ order.id }} - {{ order.created_timestamp }}</p>
-                        <p>Статус: <strong>{{order.status}}</strong></p>
-                    </div>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Товар</th>
-                                    <th>Количество</th>
-                                    <th>Цена</th>
-                                    <th>Общая стоимость</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for item in order.orderitem_set.all %}
-                                <tr>
-                                    <td>{{ item.product.product_name }}</td>
-                                    <td>{{ item.quantity }}</td>
-                                    <td>{{ item.price }}</td>
-                                    <td>{{ item.products_price }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                {% endfor %}
-            {% else %}
-                <p>У вас нет заказов :(</p>
-            {% endif %}
-        </div>
-        
-        <div class="MainProfile">
-            main
+    <div class="profileContainer">
+
+        <div class="profileNav">
+
+            <div class="profileTitle">Навигация</div>
+            <div class="profileNavContainer">
+                <a href="#" class="nav navPersnInf activeNav">Персональные данные</a>
+                <a href="#" class="nav navMyOrders">Мои заказы</a>
+                <a href="#" class="nav navAdditSett">Дополнительные <br>настройки</a>
+            </div>
+
         </div>
 
-        <div class="ProfileOptions">
-            <div class="options options__item">
-                <a href="{% url 'logout' %}">
-                    <img src="{% static 'main/img/exit.svg' %}">
-                </a>
+
+        <div class="tab profileInf activeTab">
+            <div class="profileTitle">Данные пользователя</div>
+            <div class="profileInfContainer">
+                <div class="infBlock">
+                    <label for="id_secondName" class="infTitle">Фамилия</label>
+                    <input type="text" class="infInput" id="id_secondName" required placeholder="Введите текст">
+                </div>
+                <div class="infBlock">
+                    <label for="id_firstName" class="infTitle">Имя</label>
+                    <input type="text" class="infInput" id="id_firstdName" required placeholder="Введите текст">
+                </div>
+                <div class="infBlock">
+                    <label for="id_lastName" class="infTitle">Отчество</label>
+                    <input type="text" class="infInput" id="id_lastName" required placeholder="Введите текст">
+                </div>
+                <div class="infBlock">
+                    <label for="id_phone" class="infTitle">Телефон</label>
+                    <input type="text" class="infInput" id="id_phone" required placeholder="Введите текст">
+                </div>
+                <div class="infBlock">
+                    <label for="id_email" class="infTitle">Email</label>
+                    <input type="text" class="infInput" id="id_email" required placeholder="Введите текст">
+                </div>
+                <div class="infBlock">
+                    <label for="id_password" class="infTitle">Пароль</label>
+                    <input type="text" class="infInput" id="id_password" required placeholder="Введите текст">
+                </div>
+
+            </div>
+
+            
+                
+            <div class="profileDelivAdres">
+                <div class="deliv profileTitle">Адрес доставки</div>
+                <div class="profileDelivAdresContainer">
+                    <div class="infBlock">
+                        <label for="id_region" class="infTitle">Облать/Край/Регион</label>
+                        <input type="text" class="infInput" id="id_region" required placeholder="Введите текст">
+                    </div>
+                    <div class="infBlock">
+                        <label for="id_sity" class="infTitle">Город</label>
+                        <input type="text" class="infInput" id="id_sity" required placeholder="Введите текст">
+                    </div>
+                    <div class="infBlock">
+                        <label for="id_streetHouseApartment" class="infTitle">Улица,дом,квартира</label>
+                        <input type="text" class="infInput" id="id_streetHouseApartment" required placeholder="Введите текст">
+                    </div>
+                    <div class="infBlock">
+                        <label for="id_postalCode" class="infTitle">Почтовый индекс</label>
+                        <input type="text" class="infInput" id="id_postalCode" required placeholder="Введите текст">
+                    </div>
+                </div>
+            </div>
+
+
+        <a href="#" class="exit">Выйти из аккаунта</a>
+
+        </div>
+
+        <div class="tab profileMyOrders">
+
+            <div class="profileTitle">Мои заказы</div>
+            <table class="profileMyOrdersContainer">
+                <thead>
+                    <tr class="myOrdersTitleContainer">
+                        <th class="myOrdersTitle">Заказ</th>
+                        <th class="myOrdersTitle">Дата заказа</th>
+                        <th class="myOrdersTitle">Статус</th>
+                        <th class="myOrdersTitle">Стоимость</th>
+                    </tr>
+                </thead>
+                <tbody class="bucketOrdersContainer">
+                {% if orders %}
+                {% for order in orders %}
+
+                    <tr class="order">
+                        <td class="orderNumber">№{{ order.id }}
+                            <div class="modalOrder">
+                                <h3 class="modalOrderTitle">Содержимое:</h3>
+                                <ul class="modalOrderUl"> 
+                                    <li>Футболка</li>
+                                    <li>Трусы топопые dfdfgg dfg</li>
+                                    <li>Мега гига кепка</li>
+                                </ul>
+                            <div>
+                        </td>
+                        <td class="orderDate">{{ order.created_timestamp }}</td>
+                        <td class="orderStatus">{{order.status}}</td>
+                        {% for item in order.orderitem_set.all %}
+                        <td class="orderPrice">{{ item.products_price }}</td>
+                        {% endfor %}
+                    </tr>
+
+                {% endfor %}
+                {% else %}
+                    <td colspan="4">У вас нет заказов :(</td>
+                {% endif %}
+                   
+                </tbody>
+            </table>
+        </div>
+
+
+        <div class="tab profileAdditSett">
+            <div class="profileTitle">Дополнительные настройки</div>
+            <div class="profileAddirSettContainer">
+                <div class="blockSetts">
+                    <div class="titleBlockSetts">Язык</div>
+                    <div class="contentBlockSetts">
+                        <div class="itemBlockSetts"><img class="iconSetts" src="{% static 'main/img/icon setts/icon_russ_lan.png' %}" alt="русский">Русскийㅤ</div>
+                        <div class="itemBlockSetts"><img class="iconSetts" src="{% static 'main/img/icon setts/icon_eng_lan.png' %}" alt="английский">Английскийㅤ</div>
+                    </div>
+                </div>
+                <div class="blockSetts">
+                    <div class="titleBlockSetts">Тема сайта</div>
+                    <div class="contentBlockSetts">
+                        <div class="itemBlockSetts theme activeTheme"><img class="iconSetts" src="{% static 'main/img/icon setts/icon_dark_theme.png' %}" alt="темная тема">Темнаяㅤ</div>
+                        <div class="itemBlockSetts theme lightTheme"><img class="iconSetts" src="{% static 'main/img/icon setts/icon_light_theme.png' %}" alt="светлая тема">Светлаяㅤ</div>
+                    </div>
+                </div>
+                <div class="blockSetts">
+                    <div class="titleBlockSetts">Валюта</div>
+                    <div class="contentBlockSetts">
+                        <div class="itemBlockSetts"><img class="iconSetts" src="{% static 'main/img/icon setts/icon_ruble.png' %}" alt="рубли">Рублиㅤ</div>
+                        <div class="itemBlockSetts"><img class="iconSetts" src="{% static 'main/img/icon setts/icon_dollar.png' %}" alt="доллары">Долларыㅤ</div>
+                    </div>
+                </div>
             </div>
         </div>
+
+
     </div>
+
+
+
+
 {% endblock %}
+
