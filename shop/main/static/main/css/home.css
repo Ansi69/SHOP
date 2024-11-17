@@ -31,6 +31,15 @@ body{
     flex-direction: column;
 }
 
+body.light {
+    
+}
+
+body.dark {
+    background-color: black;
+    color: black;
+}
+
 body::-webkit-scrollbar {
     width: 0; /* Скрыть вертикальный ползунок */
     height: 0; /* Скрыть горизонтальный ползунок */
@@ -622,17 +631,19 @@ main{
 }
 
 
+
+
 /* Оформление заказа */
 
 
 #container {
     color: white;
-    width: 100%;
-    height: 100%;
-    background: #090909;
-    margin: 3vh 6vw;
-    border-radius: 10px;
-    min-height: 70vh;
+}
+
+#create_order_form{
+    display: flex;
+    flex-direction: row;
+    padding-left: 5%;
 }
 
 #dataEntry {
@@ -641,15 +652,14 @@ main{
     display: flex;
     justify-content: space-around;
     align-items: center;
+    padding-right: 100px;
 }
 
 /* Заголовки */
 
 .text-center {
-    width: 100%;
     font-size: 4.8vh;
     font-weight: 100;
-    letter-spacing: 0.1em;
     text-align: center;
     margin: 20px 0px;
 }
@@ -661,8 +671,8 @@ main{
 #fullNameAndPhone, #delivery {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
     align-items: flex-start;
+    padding-left: 140px;
 }
 
 #fullName, #fullPhone {
@@ -670,27 +680,18 @@ main{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+}
+
+.form-control.order {
+    padding: 10px;
 }
 
 .form-label.order {
-    margin-bottom: 5px;
+    padding: 5px;
 }
 
 /* Доставка */
-
-.deliveryAdress {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    margin-bottom: 20px;
-}
-
-.deliveryAdress textarea {
-    resize: none;
-    height: 75px;
-}
 
 .form-check-inline {
     margin: 10px 0px;
@@ -698,11 +699,10 @@ main{
 
 #dataEntry button {
     align-self: center;
-    width: 90%;
+    width: 100%;
     background: white;
-    font-size: 23px;
-    letter-spacing: 0.2ex;
-    padding: 6px;
+    font-size: 28px;
+    padding: 10px;
     margin: 15px 0px;
     border: 3px solid black;
     border-radius: 30px;
@@ -718,10 +718,11 @@ main{
 /* Правая сторона */
 
 #dataEntry #cart_items {
-    align-self: start;
     background: white;
+    padding: 15px;
+    border-radius: 30px;
     color: black;
-    width: 634px;
+    width: 30%;
 }
 
 #dataEntry .totalPriceCart {
@@ -731,9 +732,12 @@ main{
 
 #dataEntry #cart_items .text-center {
     color: white;
-    background: #090909;
+    border-radius: 30px;
+    background: #1E1E1E;
+    justify-self: center;
+    width: 80%;
     margin: 0px;
-    padding: 20px 0px 30px 0px;
+    padding: 10px 0px 20px 0px;
 }
 
 #dataEntry #content-order {
@@ -751,7 +755,10 @@ main{
 
 #dataEntry #content-order .productAreaCart {
     width: 100%;
-   justify-content: space-around;
+    justify-content: space-between;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 
@@ -1141,6 +1148,8 @@ main{
 /* Заголовки блоков */
 
 .profileTitle {
+    display: flex;
+    justify-content: center;
     color: white;
     font-size: calc(16px + 8 * (100vw - 320px) / 880);
     margin-bottom: 9px;
@@ -1149,7 +1158,7 @@ main{
 /* Блок Навигации */
 
 .profileNavContainer {
-    height: 25vh;
+    height: 30vh;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -1163,7 +1172,7 @@ main{
    color: #090909;
 }
 
-.profileInf, .profileMyOrders, .profileAdditSett {
+.profileInf, .profileMyOrders, .profileAdditSett, .profilePasswrd{
     display: none;
 }
 
@@ -1174,6 +1183,13 @@ main{
     width: 40vw;   
     display: flex;
     flex-wrap: wrap;
+    gap: 4vh;
+}
+
+.profilePasswrdSettContainer{
+    width: 40vw;   
+    display: flex;
+    flex-direction: column;
     gap: 4vh;
 }
 
@@ -1210,14 +1226,14 @@ main{
 }
 
 
-/* Кнопка выхода из аккаунта */
+/* Кнопка сохранения данных */
 
-.exit {
+.save {
     display: block;
     color: white;
     font-size: 2vw;
     font-weight: 500;
-    background-color: #FF7474;
+    background-color: rgba(106, 106, 245, 0.87);
     border-radius: 30px;
     text-align: center;
     margin-top: 40px;
@@ -1225,12 +1241,26 @@ main{
     letter-spacing: 1px;
 }
 
-.exit:hover {
+.save:hover {
     transition: 0.3s ease-in-out;
-    background-color: red;
+    background-color: rgb(42, 42, 250);
 }
 
+/* Кнопка выхода из аккаунта */
 
+.exit {
+    color: white;
+    font-size: 2vw;
+    font-weight: 500;
+    border-radius: 30px;
+    letter-spacing: 1px;
+    padding: 8px;
+}
+
+.exit:hover {
+    transition: 0.3s ease-in-out;
+    background-color: rgb(204, 77, 77);
+}
 
 @media (width < 1223px)
 {

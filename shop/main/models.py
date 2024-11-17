@@ -39,6 +39,13 @@ class products(models.Model):
             return round(self.product_price - self.product_price*self.discount/100)
 
         return self.product_price
+    
+    def usd_price(self):
+        if self.discount:
+            return round(float(self.product_price) * 0.01 - float(self.product_price) * 0.01 * float(self.discount)/100, 2)
+        
+        return round(float(self.product_price) * 0.01, 2)
+
        
     class Meta:
         db_table = 'products'

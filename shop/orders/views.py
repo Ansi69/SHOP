@@ -25,7 +25,10 @@ def create_order(request):
                         order = Order.objects.create(
                             user=user,
                             phone_number=form.cleaned_data['phone_number'],
-                            delivery_address=form.cleaned_data['delivery_address'],
+                            region=form.cleaned_data['region'],
+                            city=form.cleaned_data['city'],
+                            street=form.cleaned_data['street'],
+                            postcode=form.cleaned_data['postcode'],
                             payment_on_get=form.cleaned_data['payment_on_get'],
                         )
                         # Создать заказанные товары

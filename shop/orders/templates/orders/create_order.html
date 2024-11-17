@@ -8,15 +8,33 @@
         <form action="{% url "orders:create_order" %}" method="post" id="create_order_form">
             <div id="fullNameAndPhone">
                 <h3 class="text-center">Личные данные</h3>
-                {% comment %} <div id="fullName">
-                    <label for="id_first_name" class="form-label order">ФИО</label>
+                <div id="fullName">
+                    <label for="id_first_name" class="form-label order">Имя</label>
                     <input type="text" class="form-control order" id="id_first_name"
                     value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}"
-                    name="first_name" placeholder="Введите ФИО" required>
+                    name="first_name" placeholder="Введите имя" required>
                     {% if form.first_name.errors %}
                     <div>{{form.first_name.errors}}</div>
                     {% endif %}
-                    </div> {% endcomment %}
+                </div>
+                <div id="fullName">
+                    <label for="id_first_name" class="form-label order">Фамилия</label>
+                    <input type="text" class="form-control order" id="id_first_name"
+                    value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}"
+                    name="first_name" placeholder="Введите фамилию" required>
+                    {% if form.first_name.errors %}
+                    <div>{{form.first_name.errors}}</div>
+                    {% endif %}
+                </div>
+                <div id="fullName">
+                    <label for="id_first_name" class="form-label order">Почта</label>
+                    <input type="text" class="form-control order" id="id_first_name"
+                    value="{% if form.first_name.value %}{{ form.first_name.value }}{% endif %}"
+                    name="first_name" placeholder="Введите почту" required>
+                    {% if form.first_name.errors %}
+                    <div>{{form.first_name.errors}}</div>
+                    {% endif %}
+                </div>
                     
                 {% csrf_token %}
                 <div id="fullPhone">    
@@ -34,14 +52,44 @@
 
             <div id="delivery">
                 <h3 class="text-center">Доставка</h3>
-                <div class="deliveryAdress" id="deliveryAddressField">
-                    <label for="id_delivery_address" class="form-label order">Адрес
-                    доставки</label>
-                    <textarea class="form-control order" id="id_delivery_address"
-                        value="{% if form.delivery_address.value %}{{ form.delivery_address.value }}{% endif %}"
-                        name="delivery_address" rows="2"></textarea>
-                    {% if form.delivery_address.errors %}
-                        <div>{{form.delivery_address.errors}}</div>
+
+                <div id="fullName">
+                    <label for="id_region" class="form-label order">Облать/Край/Регион</label>
+                    <input type="text" class="form-control order" id="id_region"
+                    value="{% if form.region.value %}{{ form.region.value }}{% endif %}"
+                    name="region" placeholder="Введите облать/край/регион" required>
+                    {% if form.region.errors %}
+                    <div>{{form.region.errors}}</div>
+                    {% endif %}
+                </div>
+
+                <div id="fullName">
+                    <label for="id_city" class="form-label order">Город</label>
+                    <input type="text" class="form-control order" id="id_city"
+                    value="{% if form.city.value %}{{ form.city.value }}{% endif %}"
+                    name="city" placeholder="Введите город" required>
+                    {% if form.city.errors %}
+                    <div>{{form.city.errors}}</div>
+                    {% endif %}
+                </div>
+
+                <div id="fullName">
+                    <label for="id_street" class="form-label order">Улица, дом, квартира</label>
+                    <input type="text" class="form-control order" id="id_street"
+                    value="{% if form.street.value %}{{ form.street.value }}{% endif %}"
+                    name="street" placeholder="Введите улицу/дом/квартиру" required>
+                    {% if form.street.errors %}
+                    <div>{{form.street.errors}}</div>
+                    {% endif %}
+                </div>
+
+                <div id="fullName">
+                    <label for="id_postcode" class="form-label order">Почтовый индекс</label>
+                    <input type="text" class="form-control order" id="id_postcode"
+                    value="{% if form.postcode.value %}{{ form.postcode.value }}{% endif %}"
+                    name="postcode" placeholder="Введите почтовый индекс" required>
+                    {% if form.postcode.errors %}
+                    <div>{{form.postcode.errors}}</div>
                     {% endif %}
                 </div>
 

@@ -46,20 +46,6 @@
                 <div class="size sizeProduct">XL</div>
             </div>
 
-            <div class="productCountContainer">
-                
-                <button type="button" class="btn productCountDelete" data-cart-id="355" data-cart-change-url="/cart/cart_remove/">
-                <input type="hidden" name="csrfmiddlewaretoken" value="gCWlcsP6V4ymqYjPABDi261Ukev3qPnz1ofAM37znNRlMPyPUaSwZsbaqoSOiKTw">
-                —</button>
-            
-                <input type="text" class="numberProducts" value="1" readonly="">
-            
-                <button type="button" class="btn productCountIncrement" data-cart-id="355" data-cart-change-url="/cart/cart_change/">
-                <input type="hidden" name="csrfmiddlewaretoken" value="gCWlcsP6V4ymqYjPABDi261Ukev3qPnz1ofAM37znNRlMPyPUaSwZsbaqoSOiKTw">
-                +</button>
-            
-            </div>
-
                 {% if product.discount %}
                     <div class="line-container">
                         <div class="productDiscount">{{ product.product_price }} руб.

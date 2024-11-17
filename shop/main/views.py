@@ -3,9 +3,11 @@ from django.contrib import auth
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from main.models import categories, products
-from main.forms import UserLoginForm, UserRegistrationForm
+from main.forms import UserLoginForm, UserRegistrationForm, CustomPasswordChangeForm
 from orders.models import Order, OrderItem
 from django.db.models import Prefetch
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import update_session_auth_hash
 
 # Create your views here.
 
@@ -147,7 +149,17 @@ def logout(request):
     auth.logout(request)
     return HttpResponseRedirect(reverse('home'))
 
+@login_required
 def profile(request):
+
+    if request.method == 'POST':
+        form = CustomPasswordChangeForm(user=request.user, data=request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            return HttpResponseRedirect(reverse('profile'))
+    else:
+        form = CustomPasswordChangeForm(user=request.user)
 
     orders = (
         Order.objects.filter(user=request.user).prefetch_related(
@@ -161,6 +173,7 @@ def profile(request):
     categori = categories.objects.all()
     context = {
         'orders': orders,
+        'form': form,
         'title': 'Личный кабинет',
         'categories': categori
     }

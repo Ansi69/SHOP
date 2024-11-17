@@ -11,7 +11,9 @@
             <div class="profileNavContainer">
                 <a href="#" class="nav navPersnInf activeNav">Персональные данные</a>
                 <a href="#" class="nav navMyOrders">Мои заказы</a>
+                <a href="#" class="nav navPasswrd">Смена пароля</a>
                 <a href="#" class="nav navAdditSett">Дополнительные <br>настройки</a>
+                <a href="{% url 'logout' %}" class="nav exit">Выход из аккаунта</a>
             </div>
 
         </div>
@@ -36,18 +38,8 @@
                     <label for="id_phone" class="infTitle">Телефон</label>
                     <input type="text" class="infInput" id="id_phone" required placeholder="Введите текст">
                 </div>
-                <div class="infBlock">
-                    <label for="id_email" class="infTitle">Email</label>
-                    <input type="text" class="infInput" id="id_email" required placeholder="Введите текст">
-                </div>
-                <div class="infBlock">
-                    <label for="id_password" class="infTitle">Пароль</label>
-                    <input type="text" class="infInput" id="id_password" required placeholder="Введите текст">
-                </div>
-
             </div>
 
-            
                 
             <div class="profileDelivAdres">
                 <div class="deliv profileTitle">Адрес доставки</div>
@@ -72,7 +64,7 @@
             </div>
 
 
-        <a href="{% url 'logout' %}" class="exit">Выйти из аккаунта</a>
+        <a href="#" class="save">Сохранить</a>
 
         </div>
 
@@ -117,6 +109,44 @@
             </table>
         </div>
 
+        <div class="tab profilePasswrd">
+            <div class="profileTitle">Смена пароля</div>
+            <div class="profilePasswrdSettContainer">
+                <form method="post" id="loginModal">
+                    <div class="infBlock">
+                        <label for="id_old_password" class="infTitle">Старый пароль</label>
+                        <input type="password" class="infInput" 
+                        name="old_password" id="id_old_password" required>
+                    </div>
+                    <div class="infBlock">
+                        <label for="id_new_password1" class="infTitle">Новый пароль</label>
+                        <input type="password" class="infInput"  
+                        name="new_password1" id="id_new_password1" required>
+                    </div>
+                    <div class="infBlock">
+                        <label for="id_new_password2" class="infTitle">Подтвердите пароль</label>
+                        <input type="password" class="infInput" 
+                        name="new_password2" id="id_new_password2" required>
+                    </div>
+                    <button type="submit" class="save">Сохранить</button>
+                    {% csrf_token %}
+
+                    {% if form.errors %}
+                    <ul class="errorlist nonfield">
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                        {% for error in form.non_field_errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+
 
         <div class="tab profileAdditSett">
             <div class="profileTitle">Дополнительные настройки</div>
@@ -131,8 +161,8 @@
                 <div class="blockSetts">
                     <div class="titleBlockSetts">Тема сайта</div>
                     <div class="contentBlockSetts">
-                        <div class="itemBlockSetts theme activeTheme"><img class="iconSetts" src="{% static 'main/img/icon setts/icon_dark_theme.png' %}" alt="темная тема">Темнаяㅤ</div>
-                        <div class="itemBlockSetts theme lightTheme"><img class="iconSetts" src="{% static 'main/img/icon setts/icon_light_theme.png' %}" alt="светлая тема">Светлаяㅤ</div>
+                        <div class="itemBlockSetts" id="lightButton"><img class="iconSetts" src="{% static 'main/img/icon setts/icon_light_theme.png' %}" alt="светлая тема">Светлаяㅤ</div>
+                        <div class="itemBlockSetts" id="darkButton"><img class="iconSetts" src="{% static 'main/img/icon setts/icon_dark_theme.png' %}" alt="темная тема">Темнаяㅤ</div>
                     </div>
                 </div>
                 <div class="blockSetts">
