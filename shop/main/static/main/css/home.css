@@ -655,15 +655,6 @@ main{
     padding-right: 100px;
 }
 
-/* Заголовки */
-
-.text-center {
-    font-size: 4.8vh;
-    font-weight: 100;
-    text-align: center;
-    margin: 20px 0px;
-}
-
 /* Левая сторона */
 
 /* Личные даннные */
@@ -1148,12 +1139,34 @@ main{
 /* Заголовки блоков */
 
 .profileTitle {
-    display: flex;
-    justify-content: center;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
     color: white;
     font-size: calc(16px + 8 * (100vw - 320px) / 880);
     margin-bottom: 9px;
 }
+
+.orderTitle {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    color: white;
+    font-size: calc(16px + 8 * (100vw - 320px) / 880);
+    margin-bottom: 9px;
+    margin: 20px 0px;
+}
+
+.orderTitle2 {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    color: black;
+    font-size: calc(16px + 8 * (100vw - 320px) / 880);
+    margin-bottom: 9px;
+    margin: 20px 0px;
+}
+
 
 /* Блок Навигации */
 
@@ -1201,6 +1214,13 @@ main{
     flex-direction: column;
 }
 
+.ordBlock {
+    width: 105% !important;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+}
+
 .infTitle {
     color: white;
     font-size: calc(9px + 8 * (100vw - 320px) / 880);
@@ -1221,14 +1241,16 @@ main{
     color: #6A6A6A;
 }
 
-.deliv.profileTitle {
-    margin: 25px 0px;
-}
-
 
 /* Кнопка сохранения данных */
 
 .save {
+    width: 100%;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+	line-height: 1;
+    letter-spacing: 0.1ex;
     display: block;
     color: white;
     font-size: 2vw;
@@ -1238,7 +1260,6 @@ main{
     text-align: center;
     margin-top: 40px;
     padding: 8px;
-    letter-spacing: 1px;
 }
 
 .save:hover {

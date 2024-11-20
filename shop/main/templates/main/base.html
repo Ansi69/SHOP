@@ -79,7 +79,7 @@
                     </div>
             </div>
         </form>
-            <form method="post" id="loginModal" class="modal">
+            <form action="{% url 'login' %}" method="post" id="loginModal" class="modal">
                 <div class="modal-content">
                     <div class="close" onclick="closeLogin()">×</div>
                     <div class="headName">Вход в аккаунт</div>
@@ -102,7 +102,55 @@
                         <p id="ErrorForm">{{ form.non_field_errors }}</p>
                     {% endif %}
                     
-                    <div id="downRegistr">Нет аккаунта? <a href="{% url 'registration' %}";>Зарегистрироваться</a></div>
+                    <div id="downRegistr">Нет аккаунта?
+                        <a onclick="showReg()" class="loginBtn">Зарегистрироваться</a>
+                    </div>
+                </div>
+            </form>
+
+            <form action="{% url 'registration' %}" method="post" id="registerModal" class="modal">
+                <div class="modal-content">
+                    <div class="close" onclick="closeReg()">×</div>
+                    <div class="headName">Регистрация</div>
+                    <div class="field-holdeer">
+                        <input type="text" class="form-control login"
+                        name="username" id="id_username1" required
+                        readonly onfocus="this.removeAttribute('readonly')">
+                        <label for="id_username1" class="form-label login">Имя пользователя</label>
+                    </div>
+        
+                    {% if form.username.errors %}
+                        <p id="ErrorForm2">{{ form.username.errors }}</p>
+                    {% endif %}
+        
+                    <div class="field-holdeer">   
+                        <input type="password" class="form-control login" id="id_password1" 
+                            name="password1" required>
+                        <label for="id_password1" class="form-label login">Пароль</label>
+                    </div>
+        
+                    {% if form.password1.errors %}
+                        <p id="ErrorForm2">{{ form.password1.errors }}</p>
+                    {% endif %}
+        
+                    <div class="field-holdeer">
+                        <input type="password" class="form-control login" id="id_password2"
+                            name="password2" required>
+                        <label for="id_password2" class="form-label login">Подтверждение пароля</label>
+                    </div>
+                    {% if form.password2.errors %}
+                        <p id="ErrorForm2">{{ form.password2.errors }}</p>
+                    {% endif %}
+        
+                    {% if form.non_field_errors %}
+                        <p id="ErrorForm2">{{ form.non_field_errors }}</p>
+                    {% endif %}
+                        
+                    <button class="enterLogin">Продолжить</button>
+                    {% csrf_token %}
+                    <div id="downRegistr">Есть аккаунт?
+                        <a onclick="showLogin()" class="loginBtn">Войти</a>
+                    </div>
                 </div>
             </form>
         <script src="{% static 'main/js/jquery/jquery-3.7.1.min.js' %}"></script>

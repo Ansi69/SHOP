@@ -21,7 +21,19 @@ function closeCart() {
 
 function showLogin() {
     document.getElementById('loginModal').style.display = 'block';
+    document.getElementById('registerModal').style.display = 'none';
     hideScroll()
+}
+
+function showReg() {
+    document.getElementById('loginModal').style.display = 'none';
+    document.getElementById('registerModal').style.display = 'block';
+    hideScroll()
+}
+
+function closeReg() {
+    document.getElementById('registerModal').style.display = 'none';
+    showScroll()
 }
 
 function closeLogin() {
@@ -33,12 +45,14 @@ window.onclick = function(event) {
     if (event.target == loginModal) {
         closeLogin()
     }
+    if (event.target == registerModal) {
+        closeReg()
+    }
     if (event.target == cart_items_container) {
         closeCart()
     }
 }
 
-// При загрузке страницы
 window.onload = function() {
     if (document.getElementById('ErrorForm').style.display === 'none') {
         closeLogin()

@@ -56,6 +56,10 @@ class products(models.Model):
 class User(AbstractUser):
     image = models.ImageField('Аватар', upload_to='images', blank=True, null=True)
     phone_number = models.CharField(max_length=10, blank=True, null=True)
+    region = models.CharField(max_length=100, null=True, blank=True, verbose_name="Область/край/регион")
+    city = models.CharField(max_length=100, null=True, blank=True, verbose_name="Город")
+    street = models.CharField(max_length=100, null=True, blank=True, verbose_name="Улица/дом/квартира")
+    postcode = models.CharField(max_length=100, null=True, blank=True, verbose_name="Почтовый индекс")
 
     def __str__(self):
         return self.username

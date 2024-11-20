@@ -1,6 +1,12 @@
 $(document).ready(function () {
     var successMessage = $("#jq-notification");
 
+    setTimeout(function(){
+        for (var i = 0; i < successMessage.length; i++) {
+            successMessage.fadeOut(400);
+        }
+    }, 3000);
+
     $(document).on("click", ".add-to-cart", function (e) {
         e.preventDefault();
 
