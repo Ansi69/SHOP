@@ -13,7 +13,7 @@
                 <a href="#" class="nav navMyOrders">Мои заказы</a>
                 <a href="#" class="nav navPasswrd">Смена пароля</a>
                 <a href="#" class="nav navAdditSett">Дополнительные <br>настройки</a>
-                <a href="{% url 'logout' %}" class="nav exit">Выход из аккаунта</a>
+                <a href="{% url 'logout' %}" class="exit">Выход из аккаунта</a>
             </div>
 
         </div>
@@ -27,24 +27,28 @@
                 <div class="infBlock">
                     <label for="id_first_name" class="infTitle">Имя</label>
                     <input type="text" class="infInput" 
+                    value="{% if request.user.first_name %}{{ request.user.first_name }}{% endif %}"
                     name="first_name" id="id_first_name" required placeholder="Введите имя">
                 </div>
 
                 <div class="infBlock">
                     <label for="id_last_name" class="infTitle">Фамилия</label>
                     <input type="text" class="infInput"  
+                    value="{% if request.user.last_name %}{{ request.user.last_name }}{% endif %}"
                     name="last_name" id="id_last_name" required placeholder="Введите фамилию">
                 </div>
 
                 <div class="infBlock">
                     <label for="id_email" class="infTitle">Почта</label>
                     <input type="text" class="infInput" 
+                    value="{% if request.user.email %}{{ request.user.email }}{% endif %}"
                     name="email" id="id_email" required placeholder="Введите почту">
                 </div>
 
                 <div class="infBlock">
                     <label for="id_phone_number" class="infTitle">Телефон</label>
                     <input type="text" class="infInput" 
+                    value="{% if request.user.phone_number %}{{ request.user.phone_number }}{% endif %}"
                     name="phone_number" id="id_phone_number" required placeholder="Введите телефон">
                 </div>
 
@@ -55,24 +59,28 @@
                     <div class="infBlock">
                         <label for="id_region" class="infTitle">Облать/Край/Регион</label>
                         <input type="text" class="infInput" 
+                        value="{% if request.user.region %}{{ request.user.region }}{% endif %}"
                         name="region" id="id_region" required placeholder="Введите Облать/Край/Регион">
                     </div>
 
                     <div class="infBlock">
                         <label for="id_city" class="infTitle">Город</label>
                         <input type="text" class="infInput" 
+                        value="{% if request.user.city %}{{ request.user.city }}{% endif %}"
                         name="city" id="id_city" required placeholder="Введите город">
                     </div>
 
                     <div class="infBlock">
                         <label for="id_street" class="infTitle">Улица, дом, квартира</label>
                         <input type="text" class="infInput" 
+                        value="{% if request.user.street %}{{ request.user.street }}{% endif %}"
                         name="street" id="id_street" required placeholder="Введите улицу/дом/квартиру">
                     </div>
 
                     <div class="infBlock">
                         <label for="id_postcode" class="infTitle">Почтовый индекс</label>
                         <input type="text" class="infInput" 
+                        value="{% if request.user.postcode %}{{ request.user.postcode }}{% endif %}"
                         name="postcode" id="id_postcode" required placeholder="Введите почтовый индекс">
                     </div>
 
@@ -187,8 +195,8 @@
                 <div class="blockSetts">
                     <div class="titleBlockSetts">Тема сайта</div>
                     <div class="contentBlockSetts">
-                        <div class="itemBlockSetts" id="lightButton"><img class="iconSetts" src="{% static 'main/img/icon setts/icon_light_theme.png' %}" alt="светлая тема">Светлаяㅤ</div>
-                        <div class="itemBlockSetts" id="darkButton"><img class="iconSetts" src="{% static 'main/img/icon setts/icon_dark_theme.png' %}" alt="темная тема">Темнаяㅤ</div>
+                        <div class="itemBlockSetts theme lightTheme" id="lightButton"><img class="iconSetts" src="{% static 'main/img/icon setts/icon_light_theme.png' %}" alt="светлая тема">Светлаяㅤ</div>
+                        <div class="itemBlockSetts theme darkTheme activeTheme" id="darkButton"><img class="iconSetts" src="{% static 'main/img/icon setts/icon_dark_theme.png' %}" alt="темная тема">Темнаяㅤ</div>
                     </div>
                 </div>
                 <div class="blockSetts">
