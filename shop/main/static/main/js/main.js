@@ -53,11 +53,45 @@ window.onclick = function(event) {
     }
 }
 
-window.onload = function() {
-    if (document.getElementById('ErrorForm').style.display === 'none') {
-        closeLogin()
-    }
-    else{
-        showLogin();
-    }
+
+// Отображение форм, при наличии в них ошибок
+
+window.onload = function() { 
+
+    // Поиск элемента с ошибкой
+    const logError = document.getElementById('ErrorForm'); 
+    const regError = document.getElementById('ErrorForm2'); 
+
+    // Проверяем, нужно ли закрыть эти ебанные формы
+    const loginClosed = sessionStorage.getItem('loginClosed') === 'true';
+    const regClosed = sessionStorage.getItem('regClosed') === 'true';
+
+    // Форма с Входом
+    if (logError === null || loginClosed) { 
+        closeLogin(); 
+    } else { 
+        showLogin(); 
+        sessionStorage.setItem('loginClosed', 'true');
+    } 
+
+    // Форма с Регистрацией
+    if (regError === null || regClosed) { 
+        closeReg(); 
+    } else { 
+        showReg();
+        sessionStorage.setItem('regClosed', 'true'); 
+    } 
+
+    // Отслеживание события отправки формы
+    document.getElementById('loginModal').addEventListener('submit', function() {
+        sessionStorage.setItem('loginClosed', 'false');
+    });
+
+    document.getElementById('registerModal').addEventListener('submit', function() {
+        sessionStorage.setItem('regClosed', 'false');
+    });
+
+
+
 };
+

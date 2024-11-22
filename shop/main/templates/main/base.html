@@ -17,13 +17,11 @@
 <body class="light">
     <div class="LogoBackground"></div>
     <header class="header">
-        <div class="home">
-            <div class="Logo">
-                <a href="{% url 'home' %}">
-                    <p class="logoLeft">MEGA</p>
-                    <p class="logoRight">SHOP</p>
-                </a>
-            </div>
+        <div class="Logo">
+            <a href="{% url 'home' %}">
+                <p class="logoLeft">MEGA</p>
+                <p class="logoRight">SHOP</p>
+            </a>
         </div>
         <div class="menu">
             <div class="menu1">
@@ -118,9 +116,11 @@
                         readonly onfocus="this.removeAttribute('readonly')">
                         <label for="id_username1" class="form-label login">Имя пользователя</label>
                     </div>
-        
-                    {% if form.username.errors %}
-                        <p id="ErrorForm2">{{ form.username.errors }}</p>
+                    {% if user.is_authenticated %}
+                    {% else %}
+                        {% if formReg.username.errors %}
+                            <p id="ErrorForm2">{{ formReg.username.errors }}</p>
+                        {% endif %}
                     {% endif %}
         
                     <div class="field-holdeer">   
@@ -128,9 +128,12 @@
                             name="password1" required>
                         <label for="id_password1" class="form-label login">Пароль</label>
                     </div>
-        
-                    {% if form.password1.errors %}
-                        <p id="ErrorForm2">{{ form.password1.errors }}</p>
+
+                    {% if user.is_authenticated %}
+                    {% else %}
+                        {% if formReg.password1.errors %}
+                            <p id="ErrorForm2">{{ formReg.password1.errors }}</p>
+                        {% endif %}
                     {% endif %}
         
                     <div class="field-holdeer">
@@ -138,12 +141,19 @@
                             name="password2" required>
                         <label for="id_password2" class="form-label login">Подтверждение пароля</label>
                     </div>
-                    {% if form.password2.errors %}
-                        <p id="ErrorForm2">{{ form.password2.errors }}</p>
+                    
+                    {% if user.is_authenticated %}
+                    {% else %}
+                        {% if formReg.password2.errors %}
+                            <p id="ErrorForm2">{{ formReg.password2.errors }}</p>
+                        {% endif %}
                     {% endif %}
-        
-                    {% if form.non_field_errors %}
-                        <p id="ErrorForm2">{{ form.non_field_errors }}</p>
+
+                    {% if user.is_authenticated %}
+                    {% else %}
+                    {% if formReg.non_field_errors %}
+                        <p id="ErrorForm2">{{ formReg.non_field_errors }}</p>
+                    {% endif %}
                     {% endif %}
                         
                     <button class="enterLogin">Продолжить</button>

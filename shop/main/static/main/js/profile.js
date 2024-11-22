@@ -44,4 +44,33 @@ window.onload = function() {
         }
       })
     });
+
+
+
+
+    // Отображение выбранной темы
+
+    let themes = document.querySelectorAll('.theme');
+
+    // Если тема у пользователя была выбрана светлая
+    if(localStorage.getItem('theme') == 'light') {
+        document.querySelector(".theme.activeTheme").classList.remove('activeTheme');
+        document.querySelector(".theme.lightTheme").classList.add('activeTheme');
+        }
+    
+    themes.forEach(theme => {
+        theme.addEventListener('click', function () {
+            document.querySelector(".theme.activeTheme").classList.remove('activeTheme');
+            this.classList.add('activeTheme');
+        })
+    });
+
+
 };   
+
+
+
+
+
+
+

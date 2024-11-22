@@ -72,20 +72,20 @@ def registration(request):
 
     categori = categories.objects.all()
     goods = products.objects.all()
-    form = UserRegistrationForm(data=request.POST)
+    formReg = UserRegistrationForm(data=request.POST)
     url = request.META.get('HTTP_REFERER')
 
     if request.method == 'POST':
-        form = UserRegistrationForm(data=request.POST)
-        if form.is_valid():
-            form.save()
-            user = form.instance
+        formReg = UserRegistrationForm(data=request.POST)
+        if formReg.is_valid():
+            formReg.save()
+            user = formReg.instance
             auth.login(request, user)
             return redirect(url)
         
     data = {'title': 'MegaShop',
             'categories': categori,
-            'form': form,
+            'formReg': formReg,
             'goods': goods,
             }
     return render(request, 'main/home.html', data)
