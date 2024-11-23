@@ -1,16 +1,23 @@
 from django.shortcuts import redirect, render
 from django.contrib import auth
 from django.db import transaction
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from main.models import categories, products
-from main.forms import UserLoginForm, UserRegistrationForm, CustomPasswordChangeForm, UserInfoForm
+from main.forms import UserLoginForm, UserRegistrationForm, CustomPasswordChangeForm, UserInfoForm, PasswordResetForm
 from orders.models import Order, OrderItem
 from main.models import User
 from django.contrib import messages
 from django.db.models import Prefetch
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.http import urlsafe_base64_encode
+from django.utils.encoding import force_bytes
+from django.template.loader import render_to_string
+from django.contrib.sites.shortcuts import get_current_site
+from django.core.mail import send_mail
+from shop import settings
 
 # Create your views here.
 
@@ -200,3 +207,49 @@ def userInfo(request):
             'form': form,
             }
     return render(request, 'main/profile.html', data)
+
+def passwordReset(request):
+
+    categori = categories.objects.all()
+    goods = products.objects.all()
+    password_reset_form = UserLoginForm(data=request.POST)
+    url = request.META.get('HTTP_REFERER')
+
+    if request.method == 'POST':
+        password_reset_form = PasswordResetForm(request.POST)
+        if password_reset_form.is_valid():
+            mail = password_reset_form.cleaned_data['email']
+            try:
+                user = User.objects.get(email=mail)
+            except:
+                user = False
+            if user:
+                subject = 'Запрошен сброс пароля'
+                email_template_name = 'main/password_reset_email.html'
+                cont = {
+                    'email': user.email,
+                    'domain': '127.0.0.1:8000',
+                    'site_name': 'MEGA SHOP',
+                    'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                    'user': user,
+                    'token': default_token_generator.make_token(user),
+                    'protocol': 'http',
+                }
+                from_email = settings.EMAIL_HOST_USER
+                msg_html = render_to_string(email_template_name, cont)
+                try:
+                    send_mail(subject, 'ссылка', from_email, [user.email], fail_silently=False, html_message=msg_html)
+                    messages.success(request, 'Письмо с инструкциями отправлено на почту!')
+                except:
+                    return HttpResponse('Обнаружен недопустимый заголовок!')
+                return redirect('password_reset_done')
+            
+    data = {'title': 'MegaShop',
+            'categories': categori,
+            'password_reset_form': password_reset_form,
+            'goods': goods,
+            }
+    return render(request, 'main/home.html', data)
+
+
+

@@ -1509,9 +1509,23 @@ main{
     background-color: #666666;
 }
 
-
-
-
+/* форма для сброса пароля */
+.ResetModal{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    align-self: center;
+    width: 25%;
+    margin-top: 100px;
+    padding-top: 100px;
+    height: 500px;
+    flex-direction: column;
+    background-color: #fefefe;
+    padding: 20px;
+    border: 4px solid #888;
+    border-radius: 25px;
+}
 
 
 /* футер */
