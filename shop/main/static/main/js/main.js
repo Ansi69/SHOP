@@ -41,6 +41,24 @@ function closeLogin() {
     showScroll()
 }
 
+function showReset() {
+    document.getElementById('loginModal').style.display = 'none';
+    document.getElementById('resetModal').style.display = 'block';
+    hideScroll()
+}
+
+function closeReset() {
+    document.getElementById('resetModal').style.display = 'none';
+    showScroll()
+}
+
+function backReset() {
+    document.getElementById('resetModal').style.display = 'none';
+    document.getElementById('loginModal').style.display = 'block';
+    showScroll()
+}
+
+
 window.onclick = function(event) {
     if (event.target == loginModal) {
         closeLogin()
@@ -51,6 +69,9 @@ window.onclick = function(event) {
     if (event.target == cart_items_container) {
         closeCart()
     }
+    if (event.target == resetModal) {
+        closeReset()
+    }
 }
 
 
@@ -60,11 +81,13 @@ window.onload = function() {
 
     // Поиск элемента с ошибкой
     const logError = document.getElementById('ErrorForm'); 
-    const regError = document.getElementById('ErrorForm2'); 
+    const regError = document.getElementById('ErrorForm2');
+    const resetError = document.getElementById('ErrorForm3');
 
     // Проверяем, нужно ли закрыть эти ебанные формы
     const loginClosed = sessionStorage.getItem('loginClosed') === 'true';
     const regClosed = sessionStorage.getItem('regClosed') === 'true';
+    const resetClosed = sessionStorage.getItem('resetClosed') === 'true';
 
     // Форма с Входом
     if (logError === null || loginClosed) { 
@@ -82,6 +105,14 @@ window.onload = function() {
         sessionStorage.setItem('regClosed', 'true'); 
     } 
 
+    // Форма со сбросом пароля
+    if (resetError === null || resetClosed) { 
+        closeReset(); 
+    } else { 
+        showReset();
+        sessionStorage.setItem('resetClosed', 'true'); 
+    } 
+
     // Отслеживание события отправки формы
     document.getElementById('loginModal').addEventListener('submit', function() {
         sessionStorage.setItem('loginClosed', 'false');
@@ -89,6 +120,10 @@ window.onload = function() {
 
     document.getElementById('registerModal').addEventListener('submit', function() {
         sessionStorage.setItem('regClosed', 'false');
+    });
+
+    document.getElementById('resetModal').addEventListener('submit', function() {
+        sessionStorage.setItem('resetClosed', 'false');
     });
 
 

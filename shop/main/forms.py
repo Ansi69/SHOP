@@ -44,3 +44,15 @@ class UserInfoForm(forms.ModelForm):
             "phone_number",
             "region", "city", "street", "postcode",
         )
+
+class PasswordResetForm(forms.ModelForm):
+
+    class Meta:
+        model = User
+        fields = ("email",)
+    email = forms.CharField()
+
+class PasswordResetConfirmForm(forms.ModelForm):
+
+    new_password1 = forms.CharField()
+    new_password2 = forms.CharField()

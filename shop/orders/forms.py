@@ -3,8 +3,8 @@ from django import forms
 
 class CreateOrderForm(forms.Form):
 
-    # first_name = forms.CharField()
-    # last_name = forms.CharField()
+    first_name = forms.CharField()
+    email = forms.CharField()
     phone_number = forms.CharField()
     region = forms.CharField()
     city = forms.CharField()

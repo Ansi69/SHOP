@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.urls import reverse
 from main.models import categories, products
 from django.db.models import Prefetch
+from orders.email import send_html_email
 
 from orders.forms import CreateOrderForm
 from carts.models import Cart
@@ -57,6 +58,13 @@ def create_order(request):
                         cart_items.delete()
 
                         messages.success(request, 'Заказ оформлен!')
+                        subject = form.cleaned_data['first_name']
+                        to_email = form.cleaned_data['email']
+                        num = order.id
+                        region=form.cleaned_data['region']
+                        city=form.cleaned_data['city']
+                        street=form.cleaned_data['street']
+                        send_html_email(subject, to_email, num, region, city, street)
                         return HttpResponseRedirect(reverse('home'))
             except ValidationError as e:
                 messages.success(request, str(e))

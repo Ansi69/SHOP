@@ -31,9 +31,11 @@
                         <a href="{% url 'category' category.slug %}" >{{category.name}}</a>
                     </li>
                     {% endfor %}
-                    <li class="menu_item">
-                        <a href="{% url 'faq' %}">FAQ</a>
-                    </li>
+                    {% block faq %}
+                        <li class="menu_item">
+                            <a href="{% url 'faq' %}">FAQ</a>
+                        </li>
+                    {% endblock faq %}
                 </ul>
             </div>
         </div>
@@ -99,7 +101,11 @@
                     {% if form.non_field_errors %}
                         <p id="ErrorForm">{{ form.non_field_errors }}</p>
                     {% endif %}
-                    
+
+                    <div id="downRegistr">
+                        <a onclick="showReset()" class="loginBtn">Забыли пароль?</a>
+                    </div>
+
                     <div id="downRegistr">Нет аккаунта?
                         <a onclick="showReg()" class="loginBtn">Зарегистрироваться</a>
                     </div>
@@ -160,6 +166,39 @@
                     {% csrf_token %}
                     <div id="downRegistr">Есть аккаунт?
                         <a onclick="showLogin()" class="loginBtn">Войти</a>
+                    </div>
+                </div>
+            </form>
+
+            <form action="{% url 'password_reset' %}" method="post" id="resetModal" class="modal">
+                <div class="modal-content">
+                    <div class="close" onclick="closeReset()">×</div>
+                    <div class="headName">Введите почту</div>
+                    <div class="field-holdeer">
+                        <input type="text" class="form-control login" 
+                        value="{% if password_reset_form.email.value %}{{ password_reset_form.email.value }}{% endif %}" 
+                        name="email" id="id_email" required>
+                        <label for="id_email" class="form-label login">Почта</label>
+                    </div>
+                    {% if user.is_authenticated %}
+                    {% else %}
+                        {% if password_reset_form.email.errors %}
+                            <p id="ErrorForm3">{{ password_reset_form.email.errors }}</p>
+                        {% endif %}
+                    {% endif %}
+        
+
+                    {% if user.is_authenticated %}
+                    {% else %}
+                    {% if password_reset_form.non_field_errors %}
+                        <p id="ErrorForm3">{{ password_reset_form.non_field_errors }}</p>
+                    {% endif %}
+                    {% endif %}
+                        
+                    <button class="enterLogin">Отправить</button>
+                    {% csrf_token %}
+                    <div id="downRegistr">
+                        <a onclick="backReset()" class="loginBtn">Назад</a>
                     </div>
                 </div>
             </form>
