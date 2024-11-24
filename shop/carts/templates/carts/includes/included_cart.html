@@ -38,7 +38,7 @@
                 <span class="productPriceCart"> {{ cart.products_price }} руб.</span>
             </div>
         {% else %}
-            <p>{{ cart.quantity }} шт.* {{ cart.product.sell_price }} = {{ cart.products_price }} руб.</p>
+            <div class="productPriceCart">{{ cart.quantity }} шт.* {{ cart.product.sell_price }} = {{ cart.products_price }} руб.</div>
         {% endif %}
 
         {% if not order %}

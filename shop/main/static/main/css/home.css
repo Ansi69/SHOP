@@ -24,7 +24,7 @@ body{
     width: 100%;
     height: 100%;
     background-color: #1E1E1E;
-    min-height: 100vh;
+
     display: flex;
     flex-direction: column;
 }
@@ -48,19 +48,56 @@ body.light {
         color: #333;
     }
 
-    .theme:hover {
-        transform: scale(1.07);
-        background-color: #aeabab;
-    }
     
     .activeTheme {
         color: whitesmoke;
         background-color: #666666;
     }
 
+    .InfoText {
+        color: black;
+    }
 
+    .item {
+        background: linear-gradient( #ffffff, #eee4da 100%);
+    }
     
+    .productTitle, .productInf, .productCost {
+        color: black;
+    }
 
+    .ImgContainerBackground {
+        display: none;
+    }
+
+    .arrow {
+        background-color: #000000;
+        border-radius: 50px;
+    }
+
+    .arrow:hover {
+        background-color: #7e858d;
+    }
+
+    .dot {
+        border-color: black;
+    }
+    .activeDot {
+        background: radial-gradient(circle 0.9vw, #1E1E1E 100%, #eee4da);
+    }
+
+    .orderTitle {
+        color: #333;
+    }
+
+    .form-label.order, .form-check-label {
+        color: #333;
+    }
+
+    .message{
+        background-color: rgb(172, 170, 170);
+        color: black;
+    }
 
 
 }
@@ -175,6 +212,12 @@ a{
     font-size: calc(7px + 8 * (100vw - 320px) / 880);
 }
 
+@media (width < 1200px) {
+    .menu_item a{
+        font-size: calc(5px + 8 * (100vw - 320px) / 880);
+    }
+}
+
 /* линия под текстом при наведении в меню */
 
 .menu_item:after {
@@ -218,7 +261,7 @@ a{
     background-color: #fefefe;
     padding: 20px;
     border: 1px solid #888;
-    width: 25vw;
+    width: 29vw;
     padding-top: 10px;
     position: absolute;
     right: 3%;
@@ -226,9 +269,15 @@ a{
     border-radius: 25px;
 }
 
+@media (width < 1300px) {
+    .modal-content {
+        width: 32vw;
+    }
+}
+
 @media (width > 1560px) {
     .modal-content {
-        width: 18vw;
+        width: 26vw;
     }
 }
 
@@ -262,7 +311,7 @@ a{
 
 .close {
     display: flex;
-    justify-content: end;
+    align-self: flex-end;
     color: #aaa;
     font-size: calc(30px + 8 * (100vw - 320px) / 880);
     font-weight: 700;
@@ -277,9 +326,9 @@ a{
 
 .headName {
     text-align: center;
-    font-size: 1.8vw;
+    font-size: calc(23px + 8 * (100vw - 320px) / 880);
     color: #303030;
-    margin-bottom: 25px;
+    margin-bottom: 5%;
 }
 
 .field-holdeer {
@@ -385,6 +434,10 @@ a{
     margin: 10px 0px;
 }
 
+.errorlist li {
+    font-size: calc(5px + 8 * (100vw - 320px) / 880);
+}
+
 /* Корзина */
 
 .cartBtn{
@@ -405,49 +458,81 @@ a{
     align-items: center;
 }
 
+
 #cart_items img {
-    width: 30px;
-    height: 30px;
+    width: 3.3vw;
+    height: 6vh;
+}
+
+#cart_items img:nth-child(2) {
+    width: 2.2vw;
+    height: 4vh;
 }
 
 .productNameCart {
-    font-size: 16px;
+    font-size: calc(7px + 8 * (100vw - 320px) / 880);
     overflow-wrap: break-word;
-    width: 90px;
 }
+
+@media (width < 1240px) {
+    .productNameCart {
+        font-size: calc(5px + 8 * (100vw - 320px) / 880);
+    }
+}
+
 
 .productCountAndPriceCart {
     margin: 10px 0px;
     margin-left: 10px;
     color: white;
     letter-spacing: 0.1ex;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     text-align: start;
 }
 
 .decrement, .increment, .delete {
     background: none;
     border: none;
-    font-size: 23px;
+    font-size: calc(20px + 8 * (100vw - 320px) / 880);
     cursor: pointer;
     align-self: center;
 }
 
+.increment {
+    font-size: calc(14px + 8 * (100vw - 320px) / 880);
+}
+
+@media (width < 1240px) {
+    .decrement, .delete {
+        font-size: calc(15px + 8 * (100vw - 320px) / 880);
+    }
+
+    .increment {
+        font-size: calc(10px + 8 * (100vw - 320px) / 880); 
+    }
+}
+
 .numberProductsCart {
-    width: 21px;
+    width: 20%;
+    height: 100%;
     border: none;
     border-radius: 5px;
     text-align: center;
     margin: 0px 5px;
+    font-size: calc(7px + 8 * (100vw - 320px) / 880);
 }
 
 .productPriceCart {
     white-space: nowrap;
-    font-size: 16px;
+    font-size: calc(5px + 8 * (100vw - 320px) / 880);
     color: #121212;
+    margin-left: 10px;
 }
 
 .totalPriceCart {
-    font-size: 22px;
+    font-size: calc(16px + 8 * (100vw - 320px) / 880);
     color: black;
     font-weight: 600;
     margin-bottom: 20px;
@@ -465,7 +550,7 @@ a{
 .placeAnOrderCart, .myOrdersCart {
     width: 75%;
     background: white;
-    font-size: 18px;
+    font-size: calc(11px + 8 * (100vw - 320px) / 880);
     letter-spacing: 0.2ex;
     padding: 6px;
     border: 3px solid black;
@@ -484,7 +569,7 @@ a{
 .myOrdersCart:hover {
     color: white;
     background: #303030;
-    font-size: 20px;
+    font-size: calc(13px + 8 * (100vw - 320px) / 880);
 }
 
 /* Пустая корзина */
@@ -737,11 +822,24 @@ main{
     margin: 10px 0px;
 }
 
+#payMethod {
+    color: white;
+}
+
+.form-label.order, .form-check-label {
+    font-size: calc(9px + 8 * (100vw - 320px) / 880);
+}
+
+.form-check-input {
+    width: 1.5vw;
+    height: 2vh;
+}
+
 #dataEntry button {
     align-self: center;
-    width: 100%;
+    width: 150%;
     background: white;
-    font-size: 28px;
+    font-size: calc(18px + 8 * (100vw - 320px) / 880);
     padding: 10px;
     margin: 15px 0px;
     border: 3px solid black;
@@ -790,6 +888,7 @@ main{
     width: 100%;
     justify-content: space-between;
     padding: 5px 10px;
+    font-size: 30px;
 }
 
 
@@ -799,8 +898,8 @@ main{
     background-color: gray;
     padding-block: 8px;
     border-radius: 15px;
-    color:white !important;
-    font-size: 24px;
+    color:white;
+    font-size: calc(15px + 8 * (100vw - 320px) / 880);
     font-weight: 700;
     letter-spacing: 1px;
     position: fixed;
@@ -813,7 +912,7 @@ main{
 /* фильтры и информация */
 
 .InfoText{
-    font-size: 30px;
+    font-size: calc(22px + 8 * (100vw - 320px) / 880);
     color: white;
     cursor: pointer;
 }
@@ -844,7 +943,7 @@ main{
 
 .filterButton{
     background: white;
-    font-size: 18px;
+    font-size: calc(8px + 8 * (100vw - 320px) / 880);
     letter-spacing: 0.1ex;
     padding: 6px;
     border: 3px solid black;
@@ -934,6 +1033,13 @@ main{
 .arrow img {
     width: 3vw;
     height: 6vh;
+}
+
+@media (width < 1220px) {
+    .arrow img {
+        width: 3.7vw;
+        height: 6vh;
+    } 
 }
 
 .arrow:hover {
@@ -1293,6 +1399,7 @@ main{
     padding: 7px 6px;
     border: none;
     border-radius: 12px;
+    font-size: calc(7px + 8 * (100vw - 320px) / 880);
 }
 
 .infInput::placeholder {
@@ -1501,8 +1608,7 @@ main{
 }
 
 .theme:hover {
-    transform: scale(1.07);
-    background-color: #373636;
+    transform: scale(1.1);
 }
 
 .activeTheme {

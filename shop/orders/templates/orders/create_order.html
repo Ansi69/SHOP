@@ -3,7 +3,7 @@
 {% load carts_tags %}
 
 {% block content %}
-<div id="container">
+
     <div id="dataEntry">
         <form action="{% url "orders:create_order" %}" method="post" id="create_order_form">
             <div id="fullNameAndPhone">
@@ -91,14 +91,16 @@
             
             <button type="submit">Оформить заказ</button>
         </form>
+        </div>
+
+        <div id="cart_items">
+            <h3 class="orderTitle2">Ваш заказ</h3>
+            <div id="content-order">
+                {% user_carts request as carts %}
+                {% include "carts/includes/included_cart.html" %}
+            </div>
+        </div>
+
     </div>
 
-    <div id="cart_items">
-        <h3 class="orderTitle2">Ваш заказ</h3>
-        <div id="content-order">
-            {% user_carts request as carts %}
-            {% include "carts/includes/included_cart.html" %}
-        </div>
-    </div>
-</div>
 {% endblock  %}

@@ -88,7 +88,7 @@
                 <button type="submit" class="save">Сохранить</button>
                 {% csrf_token %}
                 {% if form.email.errors %}
-                <ul class="errorlist nonfield">
+                <ul class="errorlist nonfield" id="ErrorForm4">
                     {% for field in form %}
                         {% for error in field.errors %}
                             <li>{{ error }}</li>
@@ -146,7 +146,7 @@
         <div class="tab profilePasswrd">
             <div class="profileTitle">Смена пароля</div>
             <div class="profilePasswrdSettContainer">
-                <form action="{% url 'сhangePass' %}" method="post" id="loginModal">
+                <form action="{% url 'сhangePass' %}" method="post" id="passChangeModal">
                     <div class="infBlock">
                         <label for="id_old_password" class="infTitle">Старый пароль</label>
                         <input type="password" class="infInput" 
@@ -166,7 +166,7 @@
                     {% csrf_token %}
 
                     {% if form.errors %}
-                    <ul class="errorlist nonfield">
+                    <ul class="errorlist nonfield" id="ErrorForm5">
                         {% for field in form %}
                             {% for error in field.errors %}
                                 <li>{{ error }}</li>

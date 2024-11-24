@@ -66,6 +66,47 @@ window.onload = function() {
     });
 
 
+
+    //Отображение вкладки со сменой пароля, при наличии в ней ошибки
+
+    // Поиск элемента с ошибкой
+    const passChangeError = document.getElementById('ErrorForm5');
+
+    // Проверяем, нужно ли закрыть эти ебанную вкладку
+    const passChangeClosed = sessionStorage.getItem('passChangeClosed') === 'true';
+
+
+    // Вкладка со сменой пароля
+    if (passChangeError === null || passChangeClosed) { 
+
+    } else {
+        document.querySelector(".nav.activeNav").classList.remove('activeNav');
+        document.querySelector(".nav.navPasswrd").classList.add('activeNav');
+
+        document.querySelector(".tab.activeTab").classList.remove('activeTab');
+        document.querySelector(".profilePasswrd").classList.add('activeTab');
+        
+        sessionStorage.setItem('passChangeClosed', 'true');
+    }
+
+    // Отслеживание события отправки формы
+    document.getElementById('passChangeModal').addEventListener('submit', function() {
+        sessionStorage.setItem('passChangeClosed', 'false');
+    });
+
+
+
+    // Убрать внизу ошибку с - Обязательными полями
+    const firstLi = document.querySelector('#ErrorForm5 li')
+    if(firstLi.innerHTML == 'Обязательное поле.') {
+        passChangeError.style.display = "none";
+    }
+
+
+
+
+
+
 };   
 
 
