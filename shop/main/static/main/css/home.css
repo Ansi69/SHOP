@@ -18,13 +18,16 @@
 
 /* Базовый файл */
 
+
+
+
 /* Размер страницы и цвет фона */
 
 body{
     width: 100%;
     height: 100%;
+    min-height: 100vh;
     background-color: #1E1E1E;
-
     display: flex;
     flex-direction: column;
 }
@@ -49,7 +52,7 @@ body.light {
     }
 
     
-    .activeTheme {
+    .activeTheme, .activeCurrency {
         color: whitesmoke;
         background-color: #666666;
     }
@@ -98,6 +101,7 @@ body.light {
         background-color: rgb(172, 170, 170);
         color: black;
     }
+
 
 
 }
@@ -837,7 +841,7 @@ main{
 
 #dataEntry button {
     align-self: center;
-    width: 150%;
+    width: 100%;
     background: white;
     font-size: calc(18px + 8 * (100vw - 320px) / 880);
     padding: 10px;
@@ -1179,6 +1183,7 @@ main{
     color: white;
 }
 
+
 .productDiscount{
     white-space: nowrap;
     font-size: calc(18px + 8 * (100vw - 320px) / 880);
@@ -1197,9 +1202,10 @@ main{
     position: relative;
     width: 60%;
     height: 30px;
+    
 }
 
-.line-container::before {
+/* .line-container::before {
     content: "";
     border-bottom: 2px solid gray;
     position: absolute;
@@ -1207,7 +1213,9 @@ main{
     width: 9vw;
     height: 50%;
     transform: rotate(-8deg);
-}
+} */
+
+
 
 @media (width < 1750px) {
     .line-container::before {
@@ -1412,6 +1420,26 @@ main{
     margin: 25px 0px;
 }
 
+
+
+/* Способ оплаты */
+.ordBlock2 {
+    width: 52% ;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
+}
+
+.cartInf{
+    padding-top: 30px;
+}
+
+.cartInf2{
+    display: flex;
+    justify-content: space-around;
+    gap: 5%;
+}
+
 /* Кнопка сохранения данных */
 
 .save {
@@ -1607,11 +1635,11 @@ main{
     }
 }
 
-.theme:hover {
+.theme:hover, .currency:hover {
     transform: scale(1.1);
 }
 
-.activeTheme {
+.activeTheme, .activeCurrency {
     background-color: #666666;
 }
 
@@ -1636,6 +1664,8 @@ main{
 /* футер */
 
 footer{
+    position: relative;
+    bottom: 0;
     background: linear-gradient(to right, #919191, #1e1e1e   70%);
     width: 100%;
     height: 4vw;
@@ -1650,4 +1680,7 @@ footer{
 
 
 /* 1000 строчка wtf */
+
+
+
 

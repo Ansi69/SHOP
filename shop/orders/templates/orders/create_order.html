@@ -71,21 +71,27 @@
                 </div>
 
                 <div id="payMethod">
-                    <label class="form-label order">Способ оплаты</label>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="payment_on_get"
-                        id="id_payment_on_get" value="0" checked>
-                        <label class="form-check-label" for="id_payment_on_get">Оплата
-                            картой</label>
+                    <label class="form-label order">
+                        <input type="radio" name="payment_method" value="cash" checked onclick="togglePaymentFields()"> Оплата при получении
+                    </label>
+                
+                    <label class="form-label order">
+                        <input type="radio" name="payment_method" value="card" onclick="togglePaymentFields()"> Оплата по карте
+                    </label>
+                </div>
+
+            
+                <div class="cartInf" id="card-fields" style="display: none;">
+                    <div class="ordBlock">
+                        <input type="text" class="infInput" placeholder="Номер карты">
                     </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="payment_on_get"
-                        id="id_payment_on_get" value="1">
-                        <label class="form-check-label" for="id_payment_on_get">Наличными/картой
-                            при получении</label>
-                        {% if form.payment_on_get.errors %}
-                            <div>{{form.payment_on_get.errors}}</div>
-                        {% endif %}
+                    <div class="cartInf2">
+                        <div class="ordBlock2">
+                            <input type="text" class="infInput" placeholder="mm/yy">
+                        </div>
+                        <div class="ordBlock2">
+                            <input type="text" class="infInput" placeholder="cvv2/cvc2">
+                        </div>
                     </div>
                 </div>
             

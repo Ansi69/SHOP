@@ -131,7 +131,9 @@
                         </td>
                         <td class="orderDate">{{ order.created_timestamp }}</td>
                         <td class="orderStatus">{{order.status}}</td>
-                        <td class="orderPrice">{{ order.orderitem_set.total_price }}</td>
+                        <td class="orderPrice" 
+                        data-currency-rub="{{ order.orderitem_set.total_price }} р."
+                        data-currency-usd="{{ order.orderitem_set.total_usd_price }} $"></td>
                     </tr>
 
                 {% endfor %}
@@ -202,8 +204,8 @@
                 <div class="blockSetts">
                     <div class="titleBlockSetts">Валюта</div>
                     <div class="contentBlockSetts">
-                        <div class="itemBlockSetts"><img class="iconSetts" src="{% static 'main/img/icon setts/icon_ruble.png' %}" alt="рубли">Рублиㅤ</div>
-                        <div class="itemBlockSetts"><img class="iconSetts" src="{% static 'main/img/icon setts/icon_dollar.png' %}" alt="доллары">Долларыㅤ</div>
+                        <div class="itemBlockSetts currency rubCurrency activeCurrency" id="rubButton"><img class="iconSetts" src="{% static 'main/img/icon setts/icon_ruble.png' %}" alt="рубли">Рублиㅤ</div>
+                        <div class="itemBlockSetts currency usdCurrency" id="usdButton"><img class="iconSetts" src="{% static 'main/img/icon setts/icon_dollar.png' %}" alt="доллары">Долларыㅤ</div>
                     </div>
                 </div>
             </div>

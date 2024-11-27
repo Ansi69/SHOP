@@ -1,4 +1,17 @@
 $(document).ready(function () {
+
+    // Обновление значений валюты в корзине, при взаимодействии с элементом влияющим на корзину
+    function updateCurrencyCart() {
+        const savedCurrency = localStorage.getItem('currency');
+        const currencyElements = document.querySelectorAll(`[data-currency-${savedCurrency}]`);
+
+        currencyElements.forEach(function (item) {
+            const currenValue =  item.getAttribute(`data-currency-${savedCurrency}`)
+            item.innerHTML = currenValue
+        })
+    }
+
+
     var successMessage = $("#jq-notification");
 
     setTimeout(function(){
@@ -31,15 +44,23 @@ $(document).ready(function () {
                 }, 3000);
 
                 cartCount++;
+                console.log(cartCount);
+
                 goodsInCartCount.text(cartCount);
+                console.log(goodsInCartCount.text(cartCount));
+
                 var cartItemsContainer = $("#cart_items");
                 cartItemsContainer.html(data.cart_items_html);
+
+                updateCurrencyCart();
 
             },
             error: function (data) {
                 console.log("Ошибка при добавлении товара в корзину");
             },
         });
+
+
     });
 
     // Ловим событие клика по кнопке удалить товар из корзины
@@ -70,6 +91,8 @@ $(document).ready(function () {
                 goodsInCartCount.text(cartCount);
                 var cartItemsContainer = $("#cart_items");
                 cartItemsContainer.html(data.cart_items_html);
+
+                updateCurrencyCart();
             },
 
             error: function (data) {
@@ -134,15 +157,19 @@ $(document).ready(function () {
 
                 var goodsInCartCount = $("#goods-in-cart-count");
                 var cartCount = parseInt(goodsInCartCount.text() || 0);
-                if (penis == 0) {
+                if (penis === 0) {
                     cartCount += change;
                 }
                 else {
                     cartCount -= change;
                 }
                 goodsInCartCount.text(cartCount);
+                
+
                 var cartItemsContainer = $("#cart_items");
                 cartItemsContainer.html(data.cart_items_html);
+
+                updateCurrencyCart();
 
             },
             error: function (data) {
@@ -150,6 +177,22 @@ $(document).ready(function () {
             },
         });
     }
+
+    
+    // Смена валюты при клике на кнопки
+    const rubButton = document.getElementById('rubButton');
+    const usdButton = document.getElementById('usdButton');
+
+    rubButton.addEventListener('click', () => {
+        updateCurrencyCart();
+    });
+
+    usdButton.addEventListener('click', () => {
+        updateCurrencyCart();
+    });
+
+
+
 
 $("input[name='requires_delivery']").change(function () {
     var selectedValue = $(this).val();

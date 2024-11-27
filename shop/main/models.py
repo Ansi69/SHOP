@@ -40,11 +40,17 @@ class products(models.Model):
 
         return self.product_price
     
-    def usd_price(self):
+
+    def usd_price(self):        
+        return round(float(self.product_price) * 0.01, 2)
+
+    def usd_sell_price(self):
         if self.discount:
             return round(float(self.product_price) * 0.01 - float(self.product_price) * 0.01 * float(self.discount)/100, 2)
         
         return round(float(self.product_price) * 0.01, 2)
+    
+
 
        
     class Meta:

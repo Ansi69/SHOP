@@ -1,6 +1,6 @@
 window.onload = function() {
-// Слайдер
-    
+
+    // Слайдер
     
     function nodesToArray (nodes, skip = 0) {
         return Array.prototype.slice.call(nodes,skip)

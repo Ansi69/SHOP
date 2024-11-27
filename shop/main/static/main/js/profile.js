@@ -67,6 +67,26 @@ window.onload = function() {
 
 
 
+
+        // Отображение выбранной валюты
+
+        let currencys = document.querySelectorAll('.currency');
+
+        // Если тема у пользователя была выбрана светлая
+        if(localStorage.getItem('currency') == 'usd') {
+            document.querySelector(".currency.activeCurrency").classList.remove('activeCurrency');
+            document.querySelector(".currency.usdCurrency").classList.add('activeCurrency');
+            }
+        
+        currencys.forEach(currency => {
+            currency.addEventListener('click', function () {
+                document.querySelector(".currency.activeCurrency").classList.remove('activeCurrency');
+                this.classList.add('activeCurrency');
+            })
+        });
+
+
+
     //Отображение вкладки со сменой пароля, при наличии в ней ошибки
 
     // Поиск элемента с ошибкой

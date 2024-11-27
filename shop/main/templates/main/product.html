@@ -48,14 +48,21 @@
 
                 {% if product.discount %}
                     <div class="line-container">
-                        <div class="productDiscount">{{ product.product_price }} руб.
-                        <sup class="productCost">-{{product.discount}}%</sup></div>
+                        <div class="productDiscount" 
+                        data-currency-rub="{{ product.product_price }} руб. <sup class='productCost'>-{{product.discount}}%</sup>"
+                        data-currency-usd="{{ product.usd_price }} $ <sup class='productCost'>-{{product.discount}}%</sup>">
+                        </div>
                     </div>
 
-                    <div class="productInf">{{ product.sell_price }} руб.</div>
+                    <div class="productInf " 
+                    data-currency-rub="{{ product.sell_price }} руб." 
+                    data-currency-usd="{{ product.usd_sell_price }} $"></div>
 
                 {% else %}
-                    <div class="productInf">{{product.product_price}} руб.</div>
+                    <div class="productInf" 
+                    data-currency-rub="{{product.product_price}} руб."
+                    data-currency-usd="{{product.usd_price}} $">
+                    </div>
                 {% endif %}
                 {% if not user.is_authenticated %}        
                     <abbr data-title="Необходимо войти в аккаунт">

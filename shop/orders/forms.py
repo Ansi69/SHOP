@@ -10,12 +10,7 @@ class CreateOrderForm(forms.Form):
     city = forms.CharField()
     street = forms.CharField()
     postcode = forms.CharField()
-    payment_on_get = forms.ChoiceField(
-        choices=[
-            ("0", 'False'),
-            ("1", 'True'),
-            ],
-        )
+    
     
 def clean_phone_number(self):
        data = self.cleaned_data['phone_number']

@@ -9,6 +9,9 @@ class OrderitemQueryset(models.QuerySet):
     def total_price(self):
         return sum(cart.products_price() for cart in self)
     
+    def total_usd_price(self):
+        return round(float(sum(cart.products_price() for cart in self)) * 0.01, 2)
+
     def total_quantity(self):
         if self:
             return sum(cart.quantity for cart in self)

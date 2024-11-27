@@ -35,10 +35,16 @@
                 data-cart-change-url="{% url "cart:cart_change" %}">
                 {% csrf_token %}
                 +</button>
-                <span class="productPriceCart"> {{ cart.products_price }} руб.</span>
+                <span class="productPriceCart" 
+                data-currency-rub=" {{ cart.products_price }} руб."
+                data-currency-usd=" {{ cart.products_usd_price }} $">
+                </span>
             </div>
         {% else %}
-            <div class="productPriceCart">{{ cart.quantity }} шт.* {{ cart.product.sell_price }} = {{ cart.products_price }} руб.</div>
+            <div class="productPriceCart" 
+            data-currency-rub="{{ cart.quantity }} шт.* {{ cart.product.sell_price }} = {{ cart.products_price }} руб."
+            data-currency-usd="{{ cart.quantity }} шт.* {{ cart.product.usd_sell_price }} = {{ cart.products_usd_price }} $">
+        </div>
         {% endif %}
 
         {% if not order %}
@@ -53,12 +59,18 @@
     </div>
 {% endfor %}
 {% if carts and not order %}
-    <div class="totalPriceCart">Итого: {{ carts.total_price }} руб.</div>
+    <div class="totalPriceCart" 
+    data-currency-rub="Итого: {{ carts.total_price }} руб."
+    data-currency-usd="Итого: {{ carts.total_usd_price }} $">
+    </div>
     <div id="downCart">
         <div><a class="placeAnOrderCart" href="{% url 'orders:create_order' %}";>Оформить заказ</a></div>
     </div>
 {% elif carts and order %}
-    <div class="totalPriceCart">Итого: {{ carts.total_price }} руб.</div>
+    <div class="totalPriceCart" 
+    data-currency-rub="Итого: {{ carts.total_price }} руб."
+    data-currency-usd="Итого: {{ carts.total_usd_price }} $">
+    </div>
 {% else %}
     <div class="cartEmpty">Корзина пуста <span class="smile">-_-</span><span class="new-smile">\_/</span></div>
 {% endif %}

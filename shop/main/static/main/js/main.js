@@ -128,5 +128,20 @@ window.onload = function() {
 
 
 
+
+
 };
 
+
+
+
+function togglePaymentFields() {
+    const paymentMethod = document.querySelector('input[name="payment_method"]:checked').value;
+    const cardFields = document.getElementById('card-fields');
+
+    if (paymentMethod === 'card') {
+        cardFields.style.display = 'block'; // Показываем поля для ввода данных карты
+    } else {
+        cardFields.style.display = 'none'; // Скрываем поля для ввода данных карты
+    }
+}

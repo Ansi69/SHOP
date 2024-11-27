@@ -6,6 +6,9 @@ class CartQueryset(models.QuerySet):
     def total_price(self):
         return sum(cart.products_price() for cart in self)
     
+    def total_usd_price(self):
+        return round(sum(cart.products_usd_price() for cart in self), 2)
+    
     def total_quantity(self):
         if self:
             return sum(cart.quantity for cart in self)
@@ -29,6 +32,9 @@ class Cart(models.Model):
 
     def products_price(self):
         return round(self.product.sell_price() * self.quantity, 2)
+    
+    def products_usd_price(self):
+        return round(self.product.usd_sell_price() * self.quantity, 2)
 
     def __str__(self):
         return f'Корзина {self.user.username} | Товар {self.product.product_name} | Количество {self.quantity}'

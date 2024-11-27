@@ -30,7 +30,6 @@ def create_order(request):
                             city=form.cleaned_data['city'],
                             street=form.cleaned_data['street'],
                             postcode=form.cleaned_data['postcode'],
-                            payment_on_get=form.cleaned_data['payment_on_get'],
                         )
                         # Создать заказанные товары
                         for cart_item in cart_items:
@@ -64,8 +63,7 @@ def create_order(request):
                         region=form.cleaned_data['region']
                         city=form.cleaned_data['city']
                         street=form.cleaned_data['street']
-                        send_html_email(subject, to_email, num, region, city, street)
-                        return HttpResponseRedirect(reverse('home'))
+                        return HttpResponseRedirect(reverse('home'),send_html_email(subject, to_email, num, region, city, street))
             except ValidationError as e:
                 messages.success(request, str(e))
                 return redirect('orders:create_order')

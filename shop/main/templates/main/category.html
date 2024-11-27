@@ -54,7 +54,17 @@
                         <img src="{% static 'main/img/cart.svg' %}">
                     {% endif %}
                         <div class="productName">{{product.product_name}}</div>
-                        <div class="productPrice">Цена: {{product.product_price}} р.</div>
+                        {% if product.discount %}
+                            <div class="productPrice" 
+                            data-currency-rub="Цена: {{product.sell_price}} р."
+                            data-currency-usd="Цена: {{product.usd_sell_price}} $">
+                            </div>
+                        {% else %}
+                            <div class="productPrice" 
+                            data-currency-rub="Цена: {{product.product_price}} р."
+                            data-currency-usd="Цена: {{product.usd_price}} $">
+                            </div>
+                        {% endif %}
                         <div class="productDescription">{{product.description}}</div>
                 </div>
             </div>

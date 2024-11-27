@@ -1,3 +1,4 @@
+// Смена темы
 document.addEventListener('DOMContentLoaded', () => {
 
     const lightButton = document.getElementById('lightButton');
@@ -10,11 +11,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-        setTheme(savedTheme);
-    } else {
-        setTheme('light');
+
+    switch (savedTheme) {
+        case 'light':
+            setTheme('light');
+        break;
+        case 'dark':
+            setTheme('dark');
+        break;
     }
+
 
     lightButton.addEventListener('click', () => {
         setTheme('light');
