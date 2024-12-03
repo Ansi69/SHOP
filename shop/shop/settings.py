@@ -1,13 +1,8 @@
+import os
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-l@ol9+obncle)4t#zori2=6po2vm&yb3ukjyd0m37iffa)ss6w'
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-ALLOWED_HOSTS = []
-# Application definition
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -55,19 +50,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'shop.wsgi.application'
 
-# Database
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'shop',
-        'USER': 'root',
-        'PASSWORD': 'QWERTy123',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
-    }
-}
-
-
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -95,11 +77,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = 'static/'
-
-STATICFILES_DIRS = [
-    BASE_DIR / "main/static",
-]
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = 'media/'
 
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -114,3 +92,8 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'tttttt15945@gmail.com'
 EMAIL_HOST_PASSWORD = 'qyww lwpy oswp xlcf'
+
+try:
+    from shop.local_settings import *
+except ImportError:
+    from shop.prod_settings import * 

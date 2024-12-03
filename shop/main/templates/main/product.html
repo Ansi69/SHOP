@@ -13,8 +13,14 @@
                             <div class="slide"><img src="{{ product.img.url }}" class="productImg"></div>
                             {% if product.img2 %}
                                 <div class="slide"><img src="{{ product.img2.url }}" class="productImg"></div>
+                            {% endif %}
+                            {% if product.img3 %}
                                 <div class="slide"><img src="{{ product.img3.url }}" class="productImg"></div>
+                            {% endif %}
+                            {% if product.img4 %}
                                 <div class="slide"><img src="{{ product.img4.url }}" class="productImg"></div>
+                            {% endif %}
+                            {% if product.img5 %}
                                 <div class="slide"><img src="{{ product.img5.url }}" class="productImg"></div>
                             {% endif %}
                         </div>
@@ -37,14 +43,6 @@
             {% if product.quantity == 0 %}
                 <div class="productInf">Товара нет в наличии</div>    
             {% else %}
-
-            <div class="sizeProductContainer">
-                <div class="size sizeProduct activeSize">XS</div>
-                <div class="size sizeProduct">S</div>
-                <div class="size sizeProduct">M</div>
-                <div class="size sizeProduct">L</div>
-                <div class="size sizeProduct">XL</div>
-            </div>
 
                 {% if product.discount %}
                     <div class="line-container">

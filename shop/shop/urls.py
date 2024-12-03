@@ -4,10 +4,10 @@ from main import views
 from django.conf import settings
 from django.conf.urls.static import static
 from shop import settings
-from django.contrib.auth.views import PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
+from django.contrib.auth.views import PasswordResetConfirmView
     
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('MEGAadmin/', admin.site.urls),
     path('', views.home, name='home'),
     path('faq', views.faq, name='faq'),
     path('registration', views.registration, name='registration'),
